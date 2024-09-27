@@ -1,14 +1,15 @@
-import { useState } from 'react'
 import './App.css'
-import TestComponent from './TestComponent'
+import { Route, Router, Routes, MainPage, AdminPage } from './routes/page.js'
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-    <h1>test</h1>
-    <TestComponent/>
+    <Router>
+      <Routes>
+        <Route path='/' element={<MainPage />}/>
+        <Route path='/admin' element={<AdminPage />}/>
+      </Routes>
+    </Router>
     </>
   )
 }
