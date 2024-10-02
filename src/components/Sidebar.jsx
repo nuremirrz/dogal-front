@@ -1,38 +1,60 @@
-// Sidebar.jsx
-import React from 'react';
-import { Box, VStack, Button } from '@chakra-ui/react';
+// src/components/Sidebar.jsx
+import { Box, VStack, Text, Link, IconButton, Drawer, DrawerContent, useDisclosure } from "@chakra-ui/react";
+import { HamburgerIcon } from "@chakra-ui/icons";
+import { useState } from "react";
 
-const Sidebar = ({ onSelect }) => {
-    return (
-        <Box
-            as="nav"
-            width={{ base: '100%', md: '150px' }}
-            height="100vh"
-            bg="green.200"
-            color="white"
-            position={{ base: 'relative', md: 'fixed' }}
-            display="flex"
-            flexDirection="column"
-            alignItems="center"
-            paddingTop="1rem"
-        >
-            <VStack spacing={4}>
-                <Button
-                    width="100%"
-                    color='black'
-                    onClick={() => onSelect('products')}
-                >
-                    Products
-                </Button>
-                <Button                    
-                    width="100%"
-                    onClick={() => onSelect('employees')}
-                >
-                    Employees
-                </Button>
+const Sidebar = () => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [display, changeDisplay] = useState('none');
+
+  return (
+    <>
+      {/* Button for small screens */}
+      <IconButton
+        aria-label="Open Menu"
+        icon={<HamburgerIcon />}
+        size="lg"
+        m="4"
+        display={{ base: "block", md: "none" }}
+        onClick={onOpen}
+      />
+
+      {/* Sidebar for larger screens */}
+      <Box
+        as="nav"
+        bg="gray.800"
+        color="white"
+        w={{ base: "full", md: "250px" }}
+        pos="fixed"
+        h="full"
+        p="4"
+        display={{ base: "none", md: "block" }}
+        zIndex="2"
+      >
+        <VStack spacing="4" align="stretch">
+          <Text fontSize="lg" fontWeight="bold">Dashboard</Text>
+          <Link href="#" _hover={{ textDecoration: 'none', bg: 'gray.700' }} p="2" borderRadius="md">Overview</Link>
+          <Link href="#" _hover={{ textDecoration: 'none', bg: 'gray.700' }} p="2" borderRadius="md">Products</Link>
+          <Link href="#" _hover={{ textDecoration: 'none', bg: 'gray.700' }} p="2" borderRadius="md">Employees</Link>
+          <Link href="#" _hover={{ textDecoration: 'none', bg: 'gray.700' }} p="2" borderRadius="md">Settings</Link>
+        </VStack>
+      </Box>
+
+      {/* Sidebar for small screens */}
+      <Drawer placement="left" onClose={onClose} isOpen={isOpen}>
+        <DrawerContent>
+          <Box bg="gray.800" color="white" w="full" h="full" p="4">
+            <VStack spacing="4" align="stretch">
+              <Text fontSize="lg" fontWeight="bold">Dashboard</Text>
+              <Link href="#" _hover={{ textDecoration: 'none', bg: 'gray.700' }} p="2" borderRadius="md" onClick={onClose}>Overview</Link>
+              <Link href="#" _hover={{ textDecoration: 'none', bg: 'gray.700' }} p="2" borderRadius="md" onClick={onClose}>Products</Link>
+              <Link href="#" _hover={{ textDecoration: 'none', bg: 'gray.700' }} p="2" borderRadius="md" onClick={onClose}>Employees</Link>
             </VStack>
-        </Box>
-    );
+          </Box>
+        </DrawerContent>
+      </Drawer>
+    </>
+  );
 };
 
 export default Sidebar;
