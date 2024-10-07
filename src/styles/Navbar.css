@@ -1,0 +1,66 @@
+/* Основные стили навигационной панели */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 60px;
+    color: white;
+}
+
+/* Стили для ссылок */
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+}
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.logo img {
+    height: 48px;
+    /* mix-blend-mode: multiply; */
+}
+.nav-links li a {
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+}
+
+/* Эффект при наведении */
+.nav-links li a:hover {
+    color: black; 
+    transition: color 0.4s;
+    /* text-decoration: underline; */
+}
+
+/* Адаптивные стили для планшетов */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none; /* Скрыть ссылки для планшетов */
+    }
+
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* Адаптивные стили для мобильных устройств */
+@media (max-width: 480px) {
+    .nav-links {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        gap: 10px;
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+    .logo {
+        margin: 20px auto;
+    }
+}
