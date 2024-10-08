@@ -30,6 +30,17 @@ h1, h2, h3, h4, h5, h6 {
     color: #fff;
 }
 /* carousel end */
+/* map cusmomization start */
+.leaflet-container {
+    margin: 0 auto;
+    padding-left: 0;
+    height: 500px !important;
+    border: 2px solid #b9b3b3;
+}
+.map__container{
+    margin: 40px;
+}  
+/* map cusmomization end */
 /* Адаптивные стили */
 @media (max-width: 768px) {
     .container {

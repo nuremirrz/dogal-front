@@ -3,7 +3,7 @@ import '../styles/Navbar.css'; // Импортируем CSS стили
 import logo from '../assets/logo.png'
 const Navbar = () => {
     return (
-        <nav className="navbar bg-green-600">
+        <nav className="navbar bg-green-600 border-2" style={{borderColor: '#217c1f'}}>
             <div className="logo">
               <img src={logo} alt="logo" />
             </div>

@@ -1,0 +1,9 @@
+.footer {
+    padding: 20px 50px;
+    color: #FFFFFF;
+}
+
+.footer .ant-btn-primary {
+    background-color: #ff6b00; /* Оранжевый цвет для кнопки */
+    border-color: #ff6b00; /* Оранжевый цвет для границы кнопки */
+}
