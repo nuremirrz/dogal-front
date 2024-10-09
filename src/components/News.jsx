@@ -21,7 +21,7 @@ const News = () => {
     return (
         <>
             <h2 className='text-3xl text-center m-8 font-semibold'>Новости</h2>
-            <Carousel autoplay autoplaySpeed={3000} draggable>
+            <Carousel autoplay autoplaySpeed={3000} draggable className="w-full">
                 {news.map(item => (
                     <Card
                         key={item._id}

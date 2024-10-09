@@ -3,6 +3,21 @@
 @tailwind components;
 @tailwind utilities;
 
+/* fonts start */
+@font-face {
+  font-family: 'Revuen'; 
+  src: url('./assets/fonts/REVUEN.TTF') format('truetype'); 
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Revuen';
+  src: url('./assets/fonts/REVUEN.TTF') format('truetype'); 
+  font-weight: 700;
+  font-style: normal;
+}
+/* fonts end */
 /* Сброс стилей для всех элементов */
 * {
   margin: 0;

@@ -34,6 +34,9 @@ export default {
           950: '#1f1300',
         },
       },
+      fontFamily: {
+        custom: ['Revuen', 'sans-serif'], // Добавьте кастомный шрифт
+      },
     },
   },
   plugins: [],

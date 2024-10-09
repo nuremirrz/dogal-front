@@ -11,7 +11,7 @@ const MyFooter = () => {
         <Footer className="footer border-2 border-orange-600" style={{ backgroundColor: '#ff6b00', color: '#FFFFFF' }}>
             <Row justify="space-between" align="middle" style={{ padding: '20px 0' }}>
                 <Col span={8}>
-                    <Text className='text-4xl text-bold text-zinc-50' strong>DOGAL</Text>
+                    <Text className='text-4xl text-bold text-zinc-50 font-custom' strong>DOĞAL</Text>
                 </Col>
                 <Col span={8} style={{ textAlign: 'center' }}>
                     <FacebookOutlined className='size-8' style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
