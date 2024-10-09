@@ -6,6 +6,7 @@ import MainMap from '../components/MainMap'
 import MyFooter from '../components/MyFooter'
 import About from '../components/About'
 import News from '../components/News'
+import Sertificate from '../components/Sertificate'
 
 const MainPage = () => {
 
@@ -20,13 +21,7 @@ const MainPage = () => {
       </Carousel>
       <About/>
       <News/>
-      <h2 className='text-3xl text-center font-semibold'>Сертификаты</h2>
-      <Carousel autoplay autoplaySpeed={3000} draggable>
-        <div><img src={sliderLogo} alt="sliderLogo" /></div>
-        <div><img src={sliderLogo} alt="sliderLogo" /></div>
-        <div><img src={sliderLogo} alt="sliderLogo" /></div>
-        <div><img src={sliderLogo} alt="sliderLogo" /></div>
-      </Carousel>
+      <Sertificate/>
       <MainMap/>
       <MyFooter/>
     </>
