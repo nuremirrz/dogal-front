@@ -11,8 +11,13 @@ const locations = [
 const MainMap = () => {
   return (
     <div className='map__container'>
-      <h2 className='text-3xl text-center font-semibold m-8'>Наши Адреса</h2>
-      <MapContainer center={[42.44898219069362, 77.12837773897982]} zoom={7} style={{ height: '100vh', width: '100%' }}>
+      <h2 className='text-4xl text-center m-8 font-semibold'>
+        <span 
+          className='text-green-50 px-5 italic font-custom bg-green-600' 
+          style={{clipPath: 'polygon(5% 0, 100% 0, 95% 100%, 0 100%)'}}>Наши Адреса
+        </span>
+      </h2>
+      <MapContainer center={[42.44898219069362, 77.12837773897982]} zoom={7} style={{ height: '100vh', width: '80%' }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

@@ -1,8 +1,14 @@
 import React from 'react'
+import Navbar from '../components/Navbar'
+import TechSupport from '../components/TechSupport'
 
 const TechSupportPage = () => {
   return (
-    <div>TechSupportPage</div>
+    <>
+    <Navbar/>
+    <h1>Tech Support Page</h1>
+    <TechSupport/>
+    </>
   )
 }
 

@@ -37,6 +37,15 @@ export default {
       fontFamily: {
         custom: ['Revuen', 'sans-serif'], // Добавьте кастомный шрифт
       },
+      spacing: {
+        'text-indent-1': '0.25rem',
+        'text-indent-2': '0.5rem',
+        'text-indent-3': '0.75rem',
+        'text-indent-4': '1rem',
+        'text-indent-5': '1.25rem',
+        'text-indent-6': '1.5rem',
+        'text-indent-8': '2rem',
+      },
     },
   },
   plugins: [],

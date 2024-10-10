@@ -4,17 +4,20 @@ import { Route, Router, Routes, MainPage, AdminPage, ContactPage, TechSupportPag
 function App() {
   return (
     <>
-    <Router>
-      <Routes>
-        <Route path='/' element={<MainPage />}/>
-        <Route path='/admin' element={<AdminPage />}/>
-        <Route path='/products' element={<ProductsPage />}/>
-        <Route path='/tech-sup' element={<TechSupportPage />}/>
-        <Route path="/tech-sup/:slug" element={<ErrorPage />} />
-        <Route path='/contact' element={<ContactPage />}/>
-        <Route path='*' element={<ErrorPage />}/>
-      </Routes>
-    </Router>
+      <Router>
+        <Routes>
+          <Route path='/' element={<MainPage />} />
+          <Route path='/admin' element={<AdminPage />} />
+          <Route path='/products' element={<ProductsPage />} />
+          <Route path="/tech-sup/kyrgyzstan/:slug" element={<TechSupportPage />} />
+          {/* <Route path="/tech-sup/kazakhstan" element={<TechSupportPage />} />
+          <Route path="/tech-sup/russia" element={<TechSupportPage />} /> */}
+          <Route path="/tech-sup/kazakhstan" element={<TechSupportPage country="kazakhstan" />} /> {/* Для Казахстана */}
+          <Route path="/tech-sup/russia" element={<TechSupportPage country="russia" />} /> {/* Для России */}
+          <Route path='/contact' element={<ContactPage />} />
+          <Route path='*' element={<ErrorPage />} />
+        </Routes>
+      </Router>
     </>
   )
 }
