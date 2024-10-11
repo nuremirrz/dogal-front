@@ -46,24 +46,41 @@
 }
 
 /* Адаптивные стили для планшетов */
+@media (min-width: 769px) {
+    .menu-icon{
+        display: none;
+    }
+}
 @media (max-width: 768px) {
     .nav-links {
         display: none; /* Скрыть ссылки для планшетов */
+        flex-direction: column; /* Вертикальное расположение для бургер-меню */
+        width: 100%; /* Ширина на весь экран */
+        background-color: #217c1f; /* Цвет фона для бургер-меню */
+        position: absolute; /* Абсолютное позиционирование */
+        top: 60px; /* Расположение под навигацией */
+        left: 0; /* Прикрепление к левому краю */
+    }
+
+    .nav-links.active {
+        display: flex; /* Отображение меню при открытии */
+    }
+
+    .menu-icon {
+        display: block; /* Отображение иконки бургер-меню */
+        cursor: pointer; /* Курсор для интерактивности */
     }
 
     .navbar {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: column; /* Вертикальное расположение для планшетов */
+        align-items: flex-start; /* Выравнивание по левому краю */
     }
 }
 
 /* Адаптивные стили для мобильных устройств */
 @media (max-width: 480px) {
     .nav-links {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        gap: 10px;
+        gap: 10px; /* Уменьшение промежутков между пунктами меню */
     }
 
     .nav-links li {

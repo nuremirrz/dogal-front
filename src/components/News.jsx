@@ -28,9 +28,9 @@ const News = () => {
 
     return (
         <>
-            <h2 className='text-4xl text-center m-8 font-semibold'>
+            <h2 className='text-4xl text-center m-8 font-semibold max-[360px]:text-2xl max-[360px]:mb-6'>
                 <span
-                    className='text-green-50 px-5 italic font-custom bg-green-600'
+                    className='text-green-50 px-5 italic font-custom bg-green-600 max-[360px]:px-4'
                     style={{ clipPath: 'polygon(5% 0, 100% 0, 95% 100%, 0 100%)' }}
                 >
                     Новости
@@ -43,11 +43,11 @@ const News = () => {
                 loop={true}
                 slidesPerView={1}
                 onSwiper={(swiper) => console.log(swiper)}
-                className="w-3/4 m-auto my-14"
+                className="w-3/4 m-auto my-14 max-[360px]:my-8"
             >
                 {news.map(item => (
                     <SwiperSlide key={item._id}>
-                        <div className="h-auto grid grid-cols-2">
+                        <div className="h-auto grid grid-cols-2 max-[360px]:grid-cols-1">
                             <div className="flex items-center">
                                 <img
                                     alt="example"
@@ -56,9 +56,9 @@ const News = () => {
                                     className="h-full w-full object-cover"
                                 />
                             </div>
-                            <div className="flex flex-col justify-center p-4">
-                                <h3 className="text-2xl text-center font-bold">{item.title}</h3>
-                                <p className="mt-2 pl-4 text-gray-700">&nbsp;&nbsp;&nbsp;&nbsp;{item.content}</p>
+                            <div className="flex flex-col justify-center p-4 max-[360px]:p-2">
+                                <h3 className="text-2xl text-center font-bold max-[360px]:text-xl">{item.title}</h3>
+                                <p className="mt-2 pl-4 text-gray-700 max-[360px]:text-sm max-[360px]:pl-0 ">&nbsp;&nbsp;&nbsp;&nbsp;{item.content}</p>
                             </div>
                         </div>
                     </SwiperSlide>

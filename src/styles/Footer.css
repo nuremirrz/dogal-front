@@ -2,8 +2,20 @@
     padding: 20px 50px;
     color: #FFFFFF;
 }
-
 .footer .ant-btn-primary {
     background-color: #ff6b00; /* Оранжевый цвет для кнопки */
     border-color: #ff6b00; /* Оранжевый цвет для границы кнопки */
+}
+
+@media (max-width: 360px) {
+    .footer {
+        padding: 10px;
+        color: #FFFFFF;
+    }
+    .size-8{
+        font-size: 16px !important;        
+    }
+    .footer__input{
+        width: 112px!important;
+    }
 }

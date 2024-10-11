@@ -47,3 +47,12 @@ h1, h2, h3, h4, h5, h6 {
         padding: 10px; /* Уменьшение отступов на мобильных устройствах */
     }
 }
+
+@media (max-width: 360px) {
+    .leaflet-container {
+        margin: 0 auto!important;
+        padding-left: 0;
+        height: 200px !important;
+        border: 2px solid #b9b3b3;
+    }
+}

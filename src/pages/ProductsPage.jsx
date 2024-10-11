@@ -1,10 +1,8 @@
 import React from 'react'
-import TechSupport from '../components/TechSupport'
 
 const ProductsPage = () => {
   return (
-    // <div>ProductsPage</div>
-    <TechSupport/>
+    <div>ProductsPage</div>
   )
 }
 
