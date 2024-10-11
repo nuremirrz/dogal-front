@@ -4,9 +4,13 @@ import staffData from '../data/staffData'; // Импортируйте ваши 
 
 const TechSupport = () => {
     const { slug } = useParams(); // Получаем slug из URL
-    const staff = slug ? staffData[slug] : staffData; // Получаем данные для выбранной области или страны
+    const staff = staffData[slug]; // Получаем данные для выбранной области или страны
 
-    if (!staff) {
+    console.log('Current slug:', slug); // Отладочное сообщение
+    console.log('Staff data:', staff); // Отладочное сообщение
+
+    // Проверяем, является ли staff массивом
+    if (!Array.isArray(staff)) {
         return <h2>Сотрудники не найдены</h2>; // Обработка ошибки
     }
 

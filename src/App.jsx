@@ -10,10 +10,8 @@ function App() {
           <Route path='/admin' element={<AdminPage />} />
           <Route path='/products' element={<ProductsPage />} />
           <Route path="/tech-sup/kyrgyzstan/:slug" element={<TechSupportPage />} />
-          {/* <Route path="/tech-sup/kazakhstan" element={<TechSupportPage />} />
-          <Route path="/tech-sup/russia" element={<TechSupportPage />} /> */}
-          <Route path="/tech-sup/kazakhstan" element={<TechSupportPage country="kazakhstan" />} /> {/* Для Казахстана */}
-          <Route path="/tech-sup/russia" element={<TechSupportPage country="russia" />} /> {/* Для России */}
+          <Route path="/tech-sup/kazakhstan/:slug" element={<TechSupportPage />} />
+          <Route path="/tech-sup/russia/:slug" element={<TechSupportPage />} />           
           <Route path='/contact' element={<ContactPage />} />
           <Route path='*' element={<ErrorPage />} />
         </Routes>

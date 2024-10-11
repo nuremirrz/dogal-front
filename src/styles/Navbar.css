@@ -34,6 +34,16 @@
     transition: color 0.4s;
     /* text-decoration: underline; */
 }
+/* В вашем файле CSS (например, Navbar.css) */
+.logo a {
+    text-decoration: none; /* Убирает нижнее подчеркивание */
+    color: white; /* Цвет текста */
+}
+
+.logo a:hover {
+    text-decoration: none; /* Убирает нижнее подчеркивание при наведении */
+    color: white; /* Цвет текста при наведении */
+}
 
 /* Адаптивные стили для планшетов */
 @media (max-width: 768px) {

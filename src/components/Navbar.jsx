@@ -40,15 +40,31 @@ const items = [
                 label: <Link to="/tech-sup/kyrgyzstan/batken">Баткенская область</Link>, // Переход на Баткенскую область
             },
         ],
-    },
+    },    
     {
         key: '2',
-        label: <Link to="/tech-sup/kazakhstan">Казахстан</Link>,       
+        type: 'group',
+        label: 'Казахстан',
+        children: [
+          {
+            key: '2-1',
+            label: <Link to="/tech-sup/kazakhstan/kazakhstan">Казахстан</Link>, 
+          },
+          
+        ],
     },
     {
         key: '3',
-        label: <Link to="/tech-sup/russia">Россия</Link>,        
-    },
+        type: 'group',
+        label: 'Россия',
+        children: [
+          {
+            key: '3-1',
+            label: <Link to="/tech-sup/russia/russia">Россия</Link>, 
+          },
+          
+        ],
+    },    
 ];
 
 // Создаем меню для выпадающего списка
@@ -60,7 +76,7 @@ const Navbar = () => {
     return (
         <nav className="navbar bg-green-600 border-2" style={{ borderColor: '#217c1f' }}>
             <div className="logo">
-                <h1 className='ml-4 text-3xl text-bold text-white font-custom'>DOĞAL</h1>
+                <h1 className='ml-4 text-3xl text-bold text-white font-custom'><Link className='text-white' to="/">DOĞAL</Link></h1>
             </div>
             <ul className="nav-links">
                 <li><Link to="/">Главное</Link></li>
