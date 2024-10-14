@@ -1,0 +1,60 @@
+/* Общие стили */
+.about-container {
+  display: flex;
+  justify-content: center;
+  padding: 20px;
+}
+
+.about-card {
+  display: flex;
+  flex-direction: column; /* Для мобильных устройств: изображение над текстом */
+  max-width: 90%;
+  margin-top: 24px;
+  background-color: #f9f9f9;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.about-card:hover {
+  transform: translateY(-5px); /* Небольшой эффект при наведении */
+}
+
+.about-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+.about-content {
+  padding: 20px;
+}
+
+.about-header {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.about-text {
+  color: #555;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Стили для больших экранов */
+@media (min-width: 768px) {
+  .about-card {
+    flex-direction: row; /* Изображение и текст в строку */
+  }
+
+  .about-image {
+    width: 40%; /* Изображение занимает 40% ширины */
+  }
+
+  .about-content {
+    width: 60%; /* Контент занимает оставшиеся 60% */
+  }
+}

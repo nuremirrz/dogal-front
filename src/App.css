@@ -48,11 +48,15 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 
-@media (max-width: 360px) {
+@media (max-width: 480px) {
     .leaflet-container {
         margin: 0 auto!important;
+        width: 100%;
         padding-left: 0;
         height: 200px !important;
         border: 2px solid #b9b3b3;
     }
+    .map__container{
+        margin: 10px 10px 20px 10px;
+    } 
 }

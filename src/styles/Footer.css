@@ -1,21 +1,70 @@
 .footer {
     padding: 20px 50px;
     color: #FFFFFF;
-}
-.footer .ant-btn-primary {
-    background-color: #ff6b00; /* Оранжевый цвет для кнопки */
-    border-color: #ff6b00; /* Оранжевый цвет для границы кнопки */
+    display: flex;
+    justify-content: space-between;
 }
 
-@media (max-width: 360px) {
+.footer__links .anticon {
+    font-size: 24px;
+    transition: color 0.3s, transform 0.3s; /* Плавный переход цвета и масштаба */
+}
+
+.footer__links .anticon:hover {
+    color: #e2e2e2; /* Цвет при наведении */
+    transform: scale(1.2); /* Увеличение размера иконки при наведении */
+}
+
+/* Эффект для кнопки подписки */
+.footer__btn {
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Плавный переход для фона, масштаба и тени */
+}
+
+.footer__btn:hover {
+    background-color: #ff9f00; /* Изменение цвета кнопки при наведении */
+    border-color: #ff9f00; /* Смена цвета границы */
+    /* transform: translateY(-10px); Легкий подъем кнопки при наведении */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Добавление тени при наведении */
+}
+
+.footer__input:hover {
+    border-color: #ff9f00; /* Смена цвета границы */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+/* Адаптивные стили для планшетов */
+@media (max-width: 768px) {
+    .footer {
+        padding: 15px 30px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+    .footer__form {
+        justify-content: center;
+    }
+    .footer__links .anticon {
+        font-size: 20px; /* Уменьшение размера иконок на планшетах */
+    }
+}
+
+/* Адаптивные стили для мобильных устройств */
+@media (max-width: 480px) {
     .footer {
         padding: 10px;
-        color: #FFFFFF;
     }
-    .size-8{
-        font-size: 16px !important;        
+    .footer__links {
+        margin-top: 10px;
     }
-    .footer__input{
-        width: 112px!important;
+    .footer__input {
+        width: 150px !important; /* Уменьшение ширины поля ввода на мобильных устройствах */
+    }
+    .footer__links .anticon {
+        font-size: 18px !important; /* Уменьшение размера иконок на мобильных устройствах */
+    }
+}
+
+@media (max-width: 1280px) {
+    .footer__btn, .footer__input {
+        margin: 5px;
     }
 }

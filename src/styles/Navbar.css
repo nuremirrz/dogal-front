@@ -5,6 +5,8 @@
     align-items: center;
     padding: 10px 60px;
     color: white;
+    position: relative;
+    z-index: 10;
 }
 
 /* Стили для ссылок */
@@ -12,81 +14,90 @@
     list-style: none;
     display: flex;
     gap: 40px;
+    transition: all 0.3s ease;
 }
-.logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.logo img {
-    height: 48px;
-    /* mix-blend-mode: multiply; */
-}
+
 .nav-links li a {
     text-decoration: none;
     color: white;
-    font-weight: 500;
+    font-weight: 600;
 }
 
 /* Эффект при наведении */
 .nav-links li a:hover {
-    color: black; 
+    color: black;
     transition: color 0.4s;
-    /* text-decoration: underline; */
 }
-/* В вашем файле CSS (например, Navbar.css) */
+
 .logo a {
-    text-decoration: none; /* Убирает нижнее подчеркивание */
-    color: white; /* Цвет текста */
+    text-decoration: none;
+    color: white;
 }
 
 .logo a:hover {
-    text-decoration: none; /* Убирает нижнее подчеркивание при наведении */
-    color: white; /* Цвет текста при наведении */
+    text-decoration: none;
+    color: white;
 }
-
-/* Адаптивные стили для планшетов */
-@media (min-width: 769px) {
-    .menu-icon{
-        display: none;
-    }
+.menu-icon {
+    display: none;
 }
+/* Адаптивные стили для планшетов и мобильных устройств */
 @media (max-width: 768px) {
     .nav-links {
-        display: none; /* Скрыть ссылки для планшетов */
-        flex-direction: column; /* Вертикальное расположение для бургер-меню */
-        width: 100%; /* Ширина на весь экран */
-        background-color: #217c1f; /* Цвет фона для бургер-меню */
-        position: absolute; /* Абсолютное позиционирование */
-        top: 60px; /* Расположение под навигацией */
-        left: 0; /* Прикрепление к левому краю */
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.2); /* Полупрозрачный белый фон */
+        backdrop-filter: blur(50px); /* Размытие фона */
+        position: absolute;
+        top: 40px;
+        left: 0;
+        padding: 20px 0;
+        z-index: 5;
+        border-radius: 10px; /* Закругленные углы для меню */
+        border: 2px solid #217c1f;
     }
 
     .nav-links.active {
-        display: flex; /* Отображение меню при открытии */
+        display: flex; /* Показать меню при открытии */
     }
 
+    .nav-links li {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .nav-links li a {
+        width: 90%; /* Занимать 90% ширины экрана на мобильных устройствах */
+        margin: 0 auto;
+        font-weight: bold;
+        color:#fff;
+    }
     .menu-icon {
-        display: block; /* Отображение иконки бургер-меню */
-        cursor: pointer; /* Курсор для интерактивности */
+        display: block;
+        cursor: pointer;
     }
 
     .navbar {
-        flex-direction: column; /* Вертикальное расположение для планшетов */
-        align-items: flex-start; /* Выравнивание по левому краю */
+        padding: 10px 20px;
+    }
+
+    .logo {
+        flex: 1;
     }
 }
 
 /* Адаптивные стили для мобильных устройств */
 @media (max-width: 480px) {
     .nav-links {
-        gap: 10px; /* Уменьшение промежутков между пунктами меню */
+        gap: 10px;
     }
 
     .nav-links li {
         width: 100%;
         text-align: center;
     }
+
     .logo {
         margin: 20px auto;
     }
