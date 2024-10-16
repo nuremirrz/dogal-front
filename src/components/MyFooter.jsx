@@ -12,7 +12,7 @@ const MyFooter = () => {
             <Row justify="space-between" align="middle" style={{ padding: '20px 0', width: '100%'  }}>
                 {/* Логотип и название компании */}
                 <Col xs={24} sm={12} md={8} className="text-center md:text-left">
-                    <Text className='text-4xl font-bold text-zinc-50 font-custom max-[480px]:text-2xl' strong>DOĞAL</Text>
+                    <Text className='text-3xl font-bold text-zinc-50 font-custom max-[480px]:text-2xl' strong>DOĞAL</Text>
                 </Col>
 
                 {/* Социальные сети */}

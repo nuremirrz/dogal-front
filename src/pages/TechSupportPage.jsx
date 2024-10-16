@@ -1,13 +1,14 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
 import TechSupport from '../components/TechSupport'
+import MyFooter from '../components/MyFooter'
 
 const TechSupportPage = () => {
   return (
     <>
     <Navbar/>
-    <h1>Tech Support Page</h1>
     <TechSupport/>
+    <MyFooter/>
     </>
   )
 }
