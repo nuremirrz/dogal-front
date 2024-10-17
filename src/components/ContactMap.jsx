@@ -13,16 +13,10 @@ const locations = [
   { id: 8, name: 'Жамансариева, 188', position: [42.49193893507034, 78.38799058420163] },
 ];
 
-const MainMap = () => {
+const ContactMap = () => {
   return (
-    <div className='map__container'>
-      <h2 className='text-4xl text-center m-8 font-semibold max-[480px]:text-2xl max-[480px]:mb-6'>
-        <span 
-          className='text-green-50 px-5 italic font-custom bg-green-600 max-[480px]:px-4' 
-          style={{clipPath: 'polygon(5% 0, 100% 0, 95% 100%, 0 100%)'}}>Наши Адреса
-        </span>
-      </h2>
-      <MapContainer center={[42.44898219069362, 77.12837773897982]} zoom={7} className='max-[480px]:mx-0' style={{ height: '100vh', width: '90%' }}>
+    <div className='contact-map__container'>      
+      <MapContainer center={[42.44898219069362, 77.12837773897982]} zoom={7} >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -37,4 +31,4 @@ const MainMap = () => {
   );
 };
 
-export default MainMap;
+export default ContactMap;
