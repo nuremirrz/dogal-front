@@ -15,7 +15,7 @@ const EmployeeManager = () => {
     };
     fetchEmployees();
   }, []);
-
+//cor
   // Обработка изменения полей
   const handleChange = (e) => {
     const { name, value } = e.target;
