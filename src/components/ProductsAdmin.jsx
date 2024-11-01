@@ -96,7 +96,7 @@ const ProductsAdmin = () => {
                 Добавить продукт
             </Button>
             <Table dataSource={products} columns={columns} rowKey="_id" />
-            <Modal title={currentProduct ? 'Изменить продукт' : 'Добавить продукт'} visible={isModalVisible} onCancel={handleCancel} footer={null}>
+            <Modal title={currentProduct ? 'Изменить продукт' : 'Добавить продукт'} open={isModalVisible} onCancel={handleCancel} footer={null}>
                 <Form onFinish={handleFormSubmit} initialValues={currentProduct || { name: '', description: '', price: 0 }}>
                     <Form.Item name="name" label="Название" rules={[{ required: true }]}>
                         <Input />

@@ -4,21 +4,21 @@ import { UserOutlined, ShoppingOutlined, NotificationOutlined } from '@ant-desig
 
 const { Sider } = Layout;
 
-const Sidebar = ({ onSectionChange }) => { // Принимаем функцию onSectionChange как пропс
+const  Sidebar = ({ onSectionChange }) => { // Принимаем функцию onSectionChange как пропс
+    const items = [
+        {label: 'Сотрудники', key: 'employees', icon: <UserOutlined />},
+        {label: 'Продукция', key: 'products', icon: <ShoppingOutlined />},
+        {label: 'Новости', key: 'news', icon: <NotificationOutlined />},
+    ]
     return (
         <Sider collapsible>
             <div className="logo" />
-            <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" onSelect={({ key }) => onSectionChange(key)}>
-                <Menu.Item key="employees" icon={<UserOutlined />}>
-                    Сотрудники
-                </Menu.Item>
-                <Menu.Item key="products" icon={<ShoppingOutlined />}>
-                    Продукция
-                </Menu.Item>
-                <Menu.Item key="news" icon={<NotificationOutlined />}>
-                    Новости
-                </Menu.Item>
-            </Menu>
+            <Menu theme="dark" 
+                defaultSelectedKeys={['1']} 
+                mode="inline" 
+                onSelect={({ key }) => onSectionChange(key)} 
+                items={items}
+            />           
         </Sider>
     );
 };

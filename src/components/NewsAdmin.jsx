@@ -90,7 +90,7 @@ const NewsAdmin = () => {
                 Добавить новость
             </Button>
             <Table dataSource={news} columns={columns} rowKey="_id" />
-            <Modal title={currentNews ? 'Изменить новость' : 'Добавить новость'} visible={isModalVisible} onCancel={handleCancel} footer={null}>
+            <Modal title={currentNews ? 'Изменить новость' : 'Добавить новость'} open={isModalVisible} onCancel={handleCancel} footer={null}>
                 <Form onFinish={handleFormSubmit} initialValues={currentNews || { title: '', content: '' }}>
                     <Form.Item name="title" label="Заголовок" rules={[{ required: true }]}>
                         <Input />
