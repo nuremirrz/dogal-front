@@ -61,7 +61,8 @@ const Navbar = () => {
                 <li><Link to="/">Главное</Link></li>
                 <li><Link to="/products">Продукты</Link></li>
                 <li>
-                    <Dropdown menu={menu} className='cursor-pointer' trigger={['click']}>
+                    {/* // don't change overlay={menu} to menu={menu}  */}
+                    <Dropdown overlay={menu} className='cursor-pointer' trigger={['click']}>
                         <a onClick={(e) => e.preventDefault()}>
                             <Space>
                                 Техническая поддержка
