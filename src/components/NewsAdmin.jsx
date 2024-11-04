@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Table, Button, Modal, Form, Input, message } from 'antd';
+import { Table, Button, Modal, Form, Input, Select, Checkbox, DatePicker, InputNumber, message } from 'antd';
+import moment from 'moment';
+
+const { TextArea } = Input;
+const { Option } = Select;
 
 const NewsAdmin = () => {
     const [news, setNews] = useState([]);
@@ -68,9 +72,25 @@ const NewsAdmin = () => {
             key: 'title',
         },
         {
-            title: 'Содержание',
-            dataIndex: 'content',
-            key: 'content',
+            title: 'Категория',
+            dataIndex: 'category',
+            key: 'category',
+        },
+        {
+            title: 'Опубликовано',
+            dataIndex: 'published',
+            key: 'published',
+            render: (published) => (published ? 'Да' : 'Нет'),
+        },
+        {
+            title: 'Просмотры',
+            dataIndex: 'views',
+            key: 'views',
+        },
+        {
+            title: 'Лайки',
+            dataIndex: 'likes',
+            key: 'likes',
         },
         {
             title: 'Действия',
@@ -91,12 +111,40 @@ const NewsAdmin = () => {
             </Button>
             <Table dataSource={news} columns={columns} rowKey="_id" />
             <Modal title={currentNews ? 'Изменить новость' : 'Добавить новость'} open={isModalVisible} onCancel={handleCancel} footer={null}>
-                <Form onFinish={handleFormSubmit} initialValues={currentNews || { title: '', content: '' }}>
+                <Form onFinish={handleFormSubmit} initialValues={{
+                    ...currentNews,
+                    publishedAt: currentNews?.publishedAt ? moment(currentNews.publishedAt) : null
+                }}>
                     <Form.Item name="title" label="Заголовок" rules={[{ required: true }]}>
                         <Input />
                     </Form.Item>
                     <Form.Item name="content" label="Содержание" rules={[{ required: true }]}>
-                        <Input.TextArea rows={4} />
+                        <TextArea rows={4} />
+                    </Form.Item>
+                    <Form.Item name="image" label="Ссылка на изображение" rules={[{ required: true }]}>
+                        <Input />
+                    </Form.Item>
+                    <Form.Item name="category" label="Категория" rules={[{ required: true }]}>
+                        <Select>
+                            <Option value="События">События</Option>
+                            <Option value="Объявления">Объявления</Option>
+                            <Option value="Новости компании">Новости компании</Option>
+                        </Select>
+                    </Form.Item>
+                    <Form.Item name="tags" label="Теги">
+                        <Input placeholder="Введите теги через запятую" />
+                    </Form.Item>
+                    <Form.Item name="published" label="Опубликовано" valuePropName="checked">
+                        <Checkbox>Опубликовать новость</Checkbox>
+                    </Form.Item>
+                    <Form.Item name="publishedAt" label="Дата публикации">
+                        <DatePicker showTime />
+                    </Form.Item>
+                    <Form.Item name="views" label="Просмотры">
+                        <InputNumber min={0} />
+                    </Form.Item>
+                    <Form.Item name="likes" label="Лайки">
+                        <InputNumber min={0} />
                     </Form.Item>
                     <Button type="primary" htmlType="submit">
                         Сохранить

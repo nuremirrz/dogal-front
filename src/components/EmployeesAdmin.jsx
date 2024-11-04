@@ -155,7 +155,7 @@ const EmployeesAdmin = () => {
                     <Form.Item name="position" label="Должность" rules={[{ required: true }]}>
                         <Input />
                     </Form.Item>
-                    <Form.Item name="contact" label="Контакт">
+                    <Form.Item name="contact" label="Контакт" rules={[{ required: true }]}>
                         <Input />
                     </Form.Item>
                     <Form.Item name="country" label="Страна" rules={[{ required: true }]}>
