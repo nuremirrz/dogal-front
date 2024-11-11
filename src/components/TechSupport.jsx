@@ -4,7 +4,7 @@ import axios from 'axios';
 import '../styles/TechSupport.css';
 
 const TechSupport = () => {
-    const { slug } = useParams(); // Получаем slug из URL
+    const { country, slug } = useParams(); // Получаем country и slug из URL
     const [staff, setStaff] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -22,14 +22,14 @@ const TechSupport = () => {
         naryn: 'Нарынской области',
     };
 
-    const slugPlace = regionNames[slug] || '';
+    const slugPlace = regionNames[slug] || 'указанном регионе';
 
     // Получение данных сотрудников из API
     useEffect(() => {
         const fetchStaff = async () => {
             setLoading(true);
             try {
-                const response = await axios.get(`/api/employees/region/${slug}`);
+                const response = await axios.get(`/api/employees/country/${country}/region/${slug}`);
                 setStaff(response.data);
             } catch (err) {
                 setError('Ошибка при загрузке данных');
@@ -39,9 +39,9 @@ const TechSupport = () => {
             }
         };
         fetchStaff();
-    }, [slug]);
+    }, [country, slug]);
 
-    // Обработка случая отсутствия данных сотрудников
+    // Обработка состояния загрузки, ошибки и пустого результата
     if (loading) return <p className="loading-message">Загрузка...</p>;
     if (error) return <p className="error-message">{error}</p>;
     if (staff.length === 0) return <h2 className="page-title">Сотрудники в {slugPlace} не найдены</h2>;

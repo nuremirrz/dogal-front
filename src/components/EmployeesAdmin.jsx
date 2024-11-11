@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Table, Button, Modal, Form, Input, Select, message, Upload } from 'antd';
-import { UploadOutlined } from '@ant-design/icons';
+import { Table, Button, Modal, Form, Input, Select, message } from 'antd';
+import {DeleteOutlined, EditOutlined} from '@ant-design/icons'
 
 const { Option } = Select;
 
@@ -26,7 +26,8 @@ const EmployeesAdmin = () => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [currentEmployee, setCurrentEmployee] = useState(null);
     const [selectedCountries, setSelectedCountries] = useState([]);
-    const [fileList, setFileList] = useState([]);
+    const [imageUrl, setImageUrl] = useState('');
+    const [form] = Form.useForm(); // Создаем референс для формы
 
     // Загрузка данных сотрудников
     const fetchEmployees = async () => {
@@ -45,41 +46,40 @@ const EmployeesAdmin = () => {
 
     // Открытие и закрытие модального окна
     const showModal = (employee = null) => {
+        form.resetFields(); // Сбрасываем поля формы
         setCurrentEmployee(employee);
         setSelectedCountries(employee ? employee.countries : []);
-        setFileList(employee && employee.image ? [{
-            uid: '-1',
-            name: 'image.png',
-            status: 'done',
-            url: employee.image,
-        }] : []);
+        setImageUrl(employee ? employee.image : '');
         setIsModalVisible(true);
+
+        if (employee) {
+            // Устанавливаем значения формы для выбранного сотрудника
+            form.setFieldsValue(employee);
+        }
     };
 
     const handleCancel = () => {
         setIsModalVisible(false);
         setCurrentEmployee(null);
-        setFileList([]);
+        setImageUrl('');
     };
 
     // Создание или обновление данных сотрудника
     const handleFormSubmit = async (values) => {
         try {
-            const formData = new FormData();
-            Object.keys(values).forEach(key => {
-                if (key === 'countries' || key === 'regions') {
-                    formData.append(key, JSON.stringify(values[key]));
-                } else {
-                    formData.append(key, values[key]);
-                }
-            });
-            if (fileList.length > 0) {
-                formData.append("image", fileList[0].originFileObj);
-            }
+            const payload = {
+                ...values,
+                countries: values.countries || [],
+                regions: values.regions || [],
+            };
 
             const method = currentEmployee ? 'put' : 'post';
-            const url = currentEmployee ? `/api/employees/${currentEmployee._id}` : '/api/employees';
-            await axios[method](url, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+            const url = currentEmployee ? `/api/employees/${currentEmployee._id}` : `/api/employees`;
+
+            await axios[method](url, payload, {
+                headers: { 'Content-Type': 'application/json' },
+            });
+
             fetchEmployees();
             handleCancel();
             message.success('Сотрудник успешно сохранен!');
@@ -101,8 +101,10 @@ const EmployeesAdmin = () => {
         }
     };
 
-    // Обработчик изменения файла
-    const handleFileChange = ({ fileList }) => setFileList(fileList);
+    // Обработчик для обновления URL изображения
+    const handleImageChange = (e) => {
+        setImageUrl(e.target.value);
+    };
 
     // Таблица для отображения сотрудников
     const columns = [
@@ -110,12 +112,18 @@ const EmployeesAdmin = () => {
         { title: 'Должность', dataIndex: 'position', key: 'position' },
         { title: 'Контакт', dataIndex: 'contact', key: 'contact' },
         {
+            title: 'Фото',
+            dataIndex: 'image',
+            key: 'image',
+            render: (text) => text ? <img src={text} alt="Фото" style={{ width: 50, height: 50, borderRadius: '50%' }} /> : 'Нет фото',
+        },
+        {
             title: 'Действия',
             key: 'actions',
             render: (_, record) => (
                 <>
-                    <Button onClick={() => showModal(record)}>Изменить</Button>
-                    <Button danger onClick={() => handleDelete(record._id)}>Удалить</Button>
+                    <Button className='m-0.5' onClick={() => showModal(record)}><EditOutlined /></Button>
+                    <Button className='m-0.5' danger onClick={() => handleDelete(record._id)}><DeleteOutlined /></Button>
                 </>
             ),
         },
@@ -132,8 +140,9 @@ const EmployeesAdmin = () => {
                 footer={null}
             >
                 <Form
+                    form={form} // Связываем форму с референсом
                     onFinish={handleFormSubmit}
-                    initialValues={currentEmployee || { name: '', position: '', contact: '', countries: [], regions: [] }}
+                    initialValues={currentEmployee || { name: '', position: '', contact: '', countries: [], regions: [], image: '' }}
                     layout="vertical"
                 >
                     <Form.Item name="name" label="Имя" rules={[{ required: true }]}>
@@ -165,17 +174,25 @@ const EmployeesAdmin = () => {
                             </Select>
                         </Form.Item>
                     )}
-                    <Form.Item label="Фото" valuePropName="fileList">
-                        <Upload
-                            fileList={fileList}
-                            onChange={handleFileChange}
-                            beforeUpload={() => false} // Предотвращение авто-загрузки
-                            listType="picture"
-                            maxCount={1}
-                        >
-                            <Button icon={<UploadOutlined />}>Загрузить фото</Button>
-                        </Upload>
+                    <Form.Item name="image" label="URL фото">
+                        <Input 
+                            placeholder="Введите ссылку на изображение" 
+                            onChange={handleImageChange} 
+                        />
                     </Form.Item>
+
+                    {/* Предварительный просмотр изображения */}
+                    {imageUrl && (
+                        <div style={{ marginBottom: '20px' }}>
+                            <p>Предварительный просмотр:</p>
+                            <img 
+                                src={imageUrl} 
+                                alt="Предварительный просмотр" 
+                                style={{ width: '100%', maxHeight: '200px', objectFit: 'cover', borderRadius: '8px' }} 
+                            />
+                        </div>
+                    )}
+
                     <Button type="primary" htmlType="submit">Сохранить</Button>
                 </Form>
             </Modal>
