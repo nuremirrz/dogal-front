@@ -32,7 +32,7 @@ const EmployeesAdmin = () => {
     // Загрузка данных сотрудников
     const fetchEmployees = async () => {
         try {
-            const { data } = await axios.get('/api/employees');
+            const { data } = await axios.get('/tech-sup');
             setEmployees(data);
         } catch (error) {
             console.error('Ошибка при получении данных сотрудников:', error);
@@ -74,7 +74,7 @@ const EmployeesAdmin = () => {
             };
 
             const method = currentEmployee ? 'put' : 'post';
-            const url = currentEmployee ? `/api/employees/${currentEmployee._id}` : `/api/employees`;
+            const url = currentEmployee ? `/tech-sup/${currentEmployee._id}` : `/tech-sup`;
 
             await axios[method](url, payload, {
                 headers: { 'Content-Type': 'application/json' },
@@ -92,7 +92,7 @@ const EmployeesAdmin = () => {
     // Удаление сотрудника
     const handleDelete = async (id) => {
         try {
-            await axios.delete(`/api/employees/${id}`);
+            await axios.delete(`/tech-sup/${id}`);
             fetchEmployees();
             message.success('Сотрудник удален!');
         } catch (error) {

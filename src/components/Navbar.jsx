@@ -21,40 +21,39 @@ const Navbar = () => {
         setDropdownVisible(flag);
     };
 
-    // Создаем меню с обработчиками onClick для автоматического закрытия
     const menu = (
         <Menu>
             <Menu.ItemGroup key="1" title="Кыргызстан">
-                <Menu.Item key="1-1" onClick={handleLinkClick}>
+                <Menu.Item key="chuy" onClick={handleLinkClick}>
                     <Link to="/tech-sup/kyrgyzstan/chuy">Чуйская область</Link>
                 </Menu.Item>
-                <Menu.Item key="1-2" onClick={handleLinkClick}>
+                <Menu.Item key="issyk-kul" onClick={handleLinkClick}>
                     <Link to="/tech-sup/kyrgyzstan/issyk-kul">Иссык-Кульская область</Link>
                 </Menu.Item>
-                <Menu.Item key="1-3" onClick={handleLinkClick}>
+                <Menu.Item key="osh" onClick={handleLinkClick}>
                     <Link to="/tech-sup/kyrgyzstan/osh">Ошская область</Link>
                 </Menu.Item>
-                <Menu.Item key="1-4" onClick={handleLinkClick}>
+                <Menu.Item key="talas" onClick={handleLinkClick}>
                     <Link to="/tech-sup/kyrgyzstan/talas">Таласская область</Link>
                 </Menu.Item>
-                <Menu.Item key="1-5" onClick={handleLinkClick}>
+                <Menu.Item key="jalalabad" onClick={handleLinkClick}>
                     <Link to="/tech-sup/kyrgyzstan/jalalabad">Джалал-Абадская область</Link>
                 </Menu.Item>
-                <Menu.Item key="1-6" onClick={handleLinkClick}>
+                <Menu.Item key="naryn" onClick={handleLinkClick}>
                     <Link to="/tech-sup/kyrgyzstan/naryn">Нарынская область</Link>
                 </Menu.Item>
-                <Menu.Item key="1-7" onClick={handleLinkClick}>
+                <Menu.Item key="batken" onClick={handleLinkClick}>
                     <Link to="/tech-sup/kyrgyzstan/batken">Баткенская область</Link>
                 </Menu.Item>
             </Menu.ItemGroup>
             <Menu.ItemGroup key="2" title="Казахстан">
-                <Menu.Item key="2-1" onClick={handleLinkClick}>
-                    <Link to="/tech-sup/kazakhstan/kazakhstan">Казахстан</Link>
+                <Menu.Item key="kazakhstan" onClick={handleLinkClick}>
+                    <Link to="/tech-sup/kazakhstan">Казахстан</Link>
                 </Menu.Item>
             </Menu.ItemGroup>
             <Menu.ItemGroup key="3" title="Россия">
-                <Menu.Item key="3-1" onClick={handleLinkClick}>
-                    <Link to="/tech-sup/russia/russia">Россия</Link>
+                <Menu.Item key="russia" onClick={handleLinkClick}>
+                    <Link to="/tech-sup/russia">Россия</Link>
                 </Menu.Item>
             </Menu.ItemGroup>
         </Menu>
@@ -73,14 +72,14 @@ const Navbar = () => {
             </div>
 
             <ul className={`nav-links ${menuOpen ? 'active' : ''}`}>
-                <li><Link to="/" onClick={handleLinkClick}>Главное</Link></li>
-                <li><Link to="/products" onClick={handleLinkClick}>Продукты</Link></li>
+                <li><Link className='no-underline' to="/" onClick={handleLinkClick}>Главное</Link></li>
+                <li><Link className='no-underline' to="/products" onClick={handleLinkClick}>Продукты</Link></li>
                 <li>
                     <Dropdown 
                         overlay={menu} 
                         trigger={['click']} 
-                        visible={dropdownVisible} 
-                        onVisibleChange={handleDropdownVisibleChange}
+                        open={dropdownVisible} 
+                        onOpenChange={handleDropdownVisibleChange}
                         className='cursor-pointer'
                     >
                         <a onClick={(e) => e.preventDefault()}>
@@ -91,7 +90,7 @@ const Navbar = () => {
                         </a>
                     </Dropdown>
                 </li>
-                <li><Link to="/contact" onClick={handleLinkClick}>Контакты</Link></li>
+                <li><Link className='no-underline' to="/contact" onClick={handleLinkClick}>Контакты</Link></li>
             </ul>
         </nav>
     );

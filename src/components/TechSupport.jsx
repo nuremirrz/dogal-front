@@ -22,14 +22,18 @@ const TechSupport = () => {
         naryn: 'Нарынской области',
     };
 
-    const slugPlace = regionNames[slug] || 'указанном регионе';
+    const slugPlace = regionNames[slug] || regionNames[country] || 'указанном регионе';
 
     // Получение данных сотрудников из API
     useEffect(() => {
         const fetchStaff = async () => {
             setLoading(true);
             try {
-                const response = await axios.get(`/api/employees/country/${country}/region/${slug}`);
+                const url = slug 
+                    ? `/tech-sup/country/${country}/region/${slug}`  // Если указан регион
+                    : `/tech-sup/country/${country}`;               // Если указан только страна
+
+                const response = await axios.get(url);
                 setStaff(response.data);
             } catch (err) {
                 setError('Ошибка при загрузке данных');

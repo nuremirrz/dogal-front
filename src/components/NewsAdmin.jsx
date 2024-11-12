@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Table, Button, Modal, Form, Input, Select, Checkbox, DatePicker, InputNumber, message } from 'antd';
 import moment from 'moment';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 
 const { TextArea } = Input;
 const { Option } = Select;
@@ -97,8 +98,8 @@ const NewsAdmin = () => {
             key: 'actions',
             render: (_, record) => (
                 <>
-                    <Button onClick={() => showModal(record)}>Изменить</Button>
-                    <Button danger onClick={() => handleDelete(record._id)}>Удалить</Button>
+                    <Button className='m-0.5' onClick={() => showModal(record)}><EditOutlined/></Button>
+                    <Button className='m-0.5' danger onClick={() => handleDelete(record._id)}><DeleteOutlined/></Button>
                 </>
             ),
         },

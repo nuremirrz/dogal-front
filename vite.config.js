@@ -7,6 +7,11 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': 'http://localhost:5000', // Настраиваем прокси для API
+      '/tech-sup': {
+        target: 'http://localhost:5000', // Адрес вашего бэкенда
+        rewrite: (path) => path.replace(/^\/tech-sup/, '/api/employees'),
+        changeOrigin: true,
+      },
     },
   },
 });
