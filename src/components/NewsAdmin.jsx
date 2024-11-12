@@ -110,7 +110,7 @@ const NewsAdmin = () => {
             <Button type="primary" onClick={() => showModal()}>
                 Добавить новость
             </Button>
-            <Table dataSource={news} columns={columns} rowKey="_id" />
+            <Table dataSource={news} columns={columns} rowKey="_id" pagination={{pageSize: 6}} />
             <Modal title={currentNews ? 'Изменить новость' : 'Добавить новость'} open={isModalVisible} onCancel={handleCancel} footer={null}>
                 <Form onFinish={handleFormSubmit} initialValues={{
                     ...currentNews,

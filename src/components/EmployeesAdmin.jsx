@@ -132,7 +132,7 @@ const EmployeesAdmin = () => {
     return (
         <>
             <Button type="primary" onClick={() => showModal()}>Добавить сотрудника</Button>
-            <Table dataSource={employees} columns={columns} rowKey="_id" />
+            <Table dataSource={employees} columns={columns} rowKey="_id" pagination={{pageSize: 6}} />
             <Modal
                 title={currentEmployee ? 'Изменить сотрудника' : 'Добавить сотрудника'}
                 open={isModalVisible}
