@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Table, Button, Modal, Form, Input, InputNumber, message } from 'antd';
+import { Table, Button, Modal, Form, Input, InputNumber, Select, message } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
+
+const { Option } = Select;
+
+const categories = [
+    "Гербициды", "ПГР", "Инсектициды", "Акарициды", "Нематициды",
+    "Фунгициды", "Моллюскоциды", "Фумиганты"
+];
 
 const ProductsAdmin = () => {
     const [products, setProducts] = useState([]);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [currentProduct, setCurrentProduct] = useState(null);
+    const [form] = Form.useForm();
 
     // Загрузка данных продуктов
     const fetchProducts = async () => {
@@ -25,7 +33,9 @@ const ProductsAdmin = () => {
 
     // Открытие и закрытие модального окна
     const showModal = (product = null) => {
+        form.resetFields();
         setCurrentProduct(product);
+        if (product) form.setFieldsValue(product);
         setIsModalVisible(true);
     };
 
@@ -69,6 +79,11 @@ const ProductsAdmin = () => {
             key: 'name',
         },
         {
+            title: 'Категория',
+            dataIndex: 'category',
+            key: 'category',
+        },
+        {
             title: 'Описание',
             dataIndex: 'description',
             key: 'description',
@@ -77,7 +92,7 @@ const ProductsAdmin = () => {
             title: 'Цена',
             dataIndex: 'price',
             key: 'price',
-            render: (text) => `$${text.toFixed(2)}`, // Форматирование цены
+            render: (text) => `${text} ₽`,
         },
         {
             title: 'Действия',
@@ -96,19 +111,67 @@ const ProductsAdmin = () => {
             <Button type="primary" onClick={() => showModal()}>
                 Добавить продукт
             </Button>
-            <Table dataSource={products} columns={columns} rowKey="_id" pagination={{pageSize: 6}} />
-            <Modal title={currentProduct ? 'Изменить продукт' : 'Добавить продукт'} open={isModalVisible} onCancel={handleCancel} footer={null}>
-                <Form onFinish={handleFormSubmit} initialValues={currentProduct || { name: '', description: '', price: 0 }}>
+            <Table dataSource={products} columns={columns} rowKey="_id" pagination={{ pageSize: 6 }} />
+            <Modal
+                title={currentProduct ? 'Изменить продукт' : 'Добавить продукт'}
+                open={isModalVisible}
+                onCancel={handleCancel}
+                footer={null}
+            >
+                <Form
+                    form={form}
+                    onFinish={handleFormSubmit}
+                    initialValues={{
+                        name: '',
+                        description: '',
+                        price: 0,
+                        category: '',
+                        dosage: '',
+                        aplicableCrops: [],
+                        activeIngredients: [],
+                        safetyPrecautions: '',
+                        expirationData: null,
+                        image: ''
+                    }}
+                    layout="vertical"
+                >
                     <Form.Item name="name" label="Название" rules={[{ required: true }]}>
                         <Input />
+                    </Form.Item>
+                    <Form.Item name="category" label="Категория" rules={[{ required: true }]}>
+                        <Select placeholder="Выберите категорию">
+                            {categories.map(category => (
+                                <Option key={category} value={category}>{category}</Option>
+                            ))}
+                        </Select>
                     </Form.Item>
                     <Form.Item name="description" label="Описание" rules={[{ required: true }]}>
                         <Input />
                     </Form.Item>
                     <Form.Item name="price" label="Цена" rules={[{ required: true }]}>
-                        <InputNumber min={0} step={0.01} />
+                        <InputNumber min={0} style={{ width: '100%' }} />
                     </Form.Item>
-                    <Button type="primary" htmlType="submit">
+                    <Form.Item name="dosage" label="Дозировка" rules={[{ required: true }]}>
+                        <Input />
+                    </Form.Item>
+                    <Form.Item name="aplicableCrops" label="Применимые культуры">
+                        <Select mode="tags" placeholder="Введите культуры">
+                        </Select>
+                    </Form.Item>
+                    <Form.Item name="activeIngredients" label="Активные ингредиенты">
+                        <Select mode="tags" placeholder="Введите ингредиенты">
+                        </Select>
+                    </Form.Item>
+                    <Form.Item name="safetyPrecautions" label="Меры предосторожности">
+                        <Input.TextArea rows={3} />
+                    </Form.Item>
+                    <Form.Item name="expirationData" label="Срок годности">
+                        <Input type="date" />
+                    </Form.Item>
+                    <Form.Item name="image" label="Ссылка на изображение">
+                        <Input placeholder="Введите URL изображения" />
+                    </Form.Item>
+                    <Button type="primary" htmlType="submit" style={{ marginTop: 16 }}>
                         Сохранить
                     </Button>
                 </Form>

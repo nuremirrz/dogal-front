@@ -1,36 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { getProducts } from '../services/apiService';
+import React from 'react';
+import { Row, Col } from 'antd';
+import ProductCard from './ProductCard';
 
-const ProductList = () => {
-    const [products, setProducts] = useState([]);
-
-    useEffect(() => {
-        const fetchProducts = async () => {
-            try {
-                const data = await getProducts(); 
-                console.log(data);
-                setProducts(data);
-            } catch (error) {
-                console.error('Failed to fetch products:', error);                
-            }
-        };
-
-        fetchProducts();
-        
-    }, []);
-
-    return (
-        <>
-            <h2>Product List</h2>
-            <ul>
-                {products.map((product) => (
-                    <li key={product._id}>
-                        {product.name}
-                    </li>
-                ))}
-            </ul>
-        </>
-    );
-};
+const ProductList = ({ products }) => (
+    <Row gutter={[16, 16]} justify="center">
+        {products.map(product => (
+            <Col xs={24} sm={12} md={8} lg={5} key={product._id}>
+                <ProductCard product={product} />
+            </Col>
+        ))}
+    </Row>
+);
 
 export default ProductList;
