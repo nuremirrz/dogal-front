@@ -4,7 +4,6 @@ import { useEffect, useState, useCallback } from "react";
 import axios from 'axios';
 import moment from 'moment';
 import { HeartOutlined, HeartFilled } from '@ant-design/icons';
-import PlaceholderImage from './PlaceholderImage';
 
 const News = () => {
     const [news, setNews] = useState([]);
@@ -81,7 +80,7 @@ const News = () => {
                                         className="h-full w-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-105"
                                     />
                                 ) : (
-                                    <PlaceholderImage alt="Изображение недоступно" />
+                                    <h1>NO News</h1>
                                 )}
                             </div>
 

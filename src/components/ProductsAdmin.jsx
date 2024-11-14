@@ -92,7 +92,7 @@ const ProductsAdmin = () => {
             title: 'Цена',
             dataIndex: 'price',
             key: 'price',
-            render: (text) => `${text} ₽`,
+            render: (text) => `${text} сом`,
         },
         {
             title: 'Действия',
@@ -126,11 +126,8 @@ const ProductsAdmin = () => {
                         description: '',
                         price: 0,
                         category: '',
-                        dosage: '',
                         aplicableCrops: [],
                         activeIngredients: [],
-                        safetyPrecautions: '',
-                        expirationData: null,
                         image: ''
                     }}
                     layout="vertical"
@@ -150,10 +147,7 @@ const ProductsAdmin = () => {
                     </Form.Item>
                     <Form.Item name="price" label="Цена" rules={[{ required: true }]}>
                         <InputNumber min={0} style={{ width: '100%' }} />
-                    </Form.Item>
-                    <Form.Item name="dosage" label="Дозировка" rules={[{ required: true }]}>
-                        <Input />
-                    </Form.Item>
+                    </Form.Item>                    
                     <Form.Item name="aplicableCrops" label="Применимые культуры">
                         <Select mode="tags" placeholder="Введите культуры">
                         </Select>
@@ -161,13 +155,7 @@ const ProductsAdmin = () => {
                     <Form.Item name="activeIngredients" label="Активные ингредиенты">
                         <Select mode="tags" placeholder="Введите ингредиенты">
                         </Select>
-                    </Form.Item>
-                    <Form.Item name="safetyPrecautions" label="Меры предосторожности">
-                        <Input.TextArea rows={3} />
-                    </Form.Item>
-                    <Form.Item name="expirationData" label="Срок годности">
-                        <Input type="date" />
-                    </Form.Item>
+                    </Form.Item>                    
                     <Form.Item name="image" label="Ссылка на изображение">
                         <Input placeholder="Введите URL изображения" />
                     </Form.Item>

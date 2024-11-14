@@ -45,7 +45,17 @@ const ProductSection = () => {
             filtered = filtered.filter(product => product.category === category);
         }
         if (searchTerm) {
-            filtered = filtered.filter(product => product.name.toLowerCase().includes(searchTerm.toLowerCase()));
+            const lowerCaseSearchTerm = searchTerm.toLowerCase()
+
+            filtered = filtered.filter(product => {
+                const nameMatch = product.name.toLowerCase().includes(lowerCaseSearchTerm)
+                const descriptionMatch = product.description && product.description.toLowerCase().includes(lowerCaseSearchTerm)
+                const activeIngredientsMatch = product.activeIngredients && product.activeIngredients.some(ingredient => 
+                    ingredient.toLowerCase().includes(lowerCaseSearchTerm)
+                );
+
+                return nameMatch || descriptionMatch || activeIngredientsMatch;
+            })
         }
         setFilteredProducts(filtered);
     };
