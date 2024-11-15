@@ -73,7 +73,7 @@ const SidebarForProducts = ({ filters, onFilterChange, resetFilters, onSearch, a
           ))}
         </Checkbox.Group>
       </div>
-
+{/* изменить фильтр */}
       {/* Кнопка для сброса фильтров */}
       <Button type="default" onClick={resetFilters} className="mt-4 bg-green-600 hover:bg-green-700 text-white border-green-600">
         Сбросить фильтры
