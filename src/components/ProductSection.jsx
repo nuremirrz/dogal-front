@@ -1,16 +1,20 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Typography, Input, Select, Pagination } from 'antd';
+import { Typography, Pagination } from 'antd';
 import ProductList from './ProductList';
+import Sidebar from './SidebarForProducts';
 import axios from 'axios';
+import "../styles/ProductSection.css";
 
 const { Title } = Typography;
-const { Search } = Input;
-const { Option } = Select;
 
 const ProductSection = () => {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
-    const [category, setCategory] = useState(null);
+    const [filters, setFilters] = useState({
+        category: null,
+        priceRange: [0, 100000],
+        activeIngredients: [],
+    });
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 8;
@@ -29,33 +33,69 @@ const ProductSection = () => {
         fetchProducts();
     }, [fetchProducts]);
 
-    const handleCategoryChange = (value) => {
-        setCategory(value);
-        filterProducts(value, searchTerm);
+    // Добавляем обработчик touchmove с passive: true для устранения предупреждения
+    useEffect(() => {
+        const handleTouchMove = () => {};
+
+        window.addEventListener('touchmove', handleTouchMove, { passive: true });
+
+        return () => {
+            window.removeEventListener('touchmove', handleTouchMove);
+        };
+    }, []);
+    // Получаем уникальные активные ингредиенты из продуктов
+    const uniqueActiveIngredients = [...new Set(products.flatMap(product => product.activeIngredients))];
+
+    // Вычисляем минимальную и максимальную цену из данных продуктов
+    const minPrice = Math.min(...products.map(product => product.price));
+    const maxPrice = Math.max(...products.map(product => product.price));
+
+    const handleFilterChange = (newFilters) => {
+        const updatedFilters = { ...filters, ...newFilters };
+        setFilters(updatedFilters);
+        filterProducts(updatedFilters, searchTerm);
     };
 
     const handleSearch = (value) => {
         setSearchTerm(value);
-        filterProducts(category, value);
+        filterProducts(filters, value);
     };
 
-    const filterProducts = (category, searchTerm) => {
+    const resetFilters = () => {
+        setFilters({
+            category: null,
+            priceRange: [minPrice, maxPrice], // Сбрасываем на минимальную и максимальную цены из базы данных
+            activeIngredients: [],
+        });
+        setSearchTerm('');
+        setFilteredProducts(products);
+    };
+
+    const filterProducts = (filters, searchTerm) => {
         let filtered = products;
-        if (category && category !== "Не выбрано") {
-            filtered = filtered.filter(product => product.category === category);
+        if (filters.category && filters.category !== "Не выбрано") {
+            filtered = filtered.filter(product => product.category === filters.category);
         }
         if (searchTerm) {
-            const lowerCaseSearchTerm = searchTerm.toLowerCase()
-
+            const lowerCaseSearchTerm = searchTerm.toLowerCase();
             filtered = filtered.filter(product => {
-                const nameMatch = product.name.toLowerCase().includes(lowerCaseSearchTerm)
-                const descriptionMatch = product.description && product.description.toLowerCase().includes(lowerCaseSearchTerm)
+                const nameMatch = product.name.toLowerCase().includes(lowerCaseSearchTerm);
+                const descriptionMatch = product.description && product.description.toLowerCase().includes(lowerCaseSearchTerm);
                 const activeIngredientsMatch = product.activeIngredients && product.activeIngredients.some(ingredient => 
                     ingredient.toLowerCase().includes(lowerCaseSearchTerm)
                 );
-
                 return nameMatch || descriptionMatch || activeIngredientsMatch;
-            })
+            });
+        }
+        if (filters.priceRange) {
+            filtered = filtered.filter(product => product.price >= filters.priceRange[0] && product.price <= filters.priceRange[1]);
+        }
+        if (filters.activeIngredients.length > 0) {
+            filtered = filtered.filter(product =>
+                product.activeIngredients && product.activeIngredients.some(ingredient =>
+                    filters.activeIngredients.includes(ingredient)
+                )
+            );
         }
         setFilteredProducts(filtered);
     };
@@ -67,40 +107,41 @@ const ProductSection = () => {
     const paginatedProducts = filteredProducts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
     return (
-        <div>
-            <Title className='text-4xl text-center m-8 font-semibold text-green-600' level={2}>Продукция</Title>
-            <div style={{ display: 'flex', justifyContent: 'space-around', marginBottom: '20px' }}>
-                <Search
-                    placeholder="Поиск по названию"
-                    onSearch={handleSearch}
-                    enterButton
-                    style={{ width: '30%' }}
-                />
-                <Select
-                    placeholder="Выберите категорию"
-                    onChange={handleCategoryChange}
-                    style={{ width: '20%' }}
-                    value={category}
-                >
-                    <Option value="Не выбрано">Не выбрано</Option>
-                    <Option value="Гербициды">Гербициды</Option>
-                    <Option value="ПГР">ПГР</Option>
-                    <Option value="Инсектициды">Инсектициды</Option>
-                    <Option value="Акарициды">Акарициды</Option>
-                    <Option value="Нематициды">Нематициды</Option>
-                    <Option value="Фунгициды">Фунгициды</Option>
-                    <Option value="Моллюскоциды">Моллюскоциды</Option>
-                    <Option value="Фумиганты">Фумиганты</Option>
-                </Select>
-            </div>
-            <ProductList products={paginatedProducts} />
-            <Pagination
-                current={currentPage}
-                pageSize={itemsPerPage}
-                total={filteredProducts.length}
-                onChange={handlePageChange}
-                style={{ marginTop: '20px', marginBottom: '30px', textAlign: 'center' }}
+        <div className="flex">
+            <Sidebar
+                filters={filters}
+                onFilterChange={handleFilterChange}
+                resetFilters={resetFilters}
+                onSearch={handleSearch}
+                activeIngredients={uniqueActiveIngredients}
+                minPrice={minPrice}  // Передаем минимальную цену
+                maxPrice={maxPrice}  // Передаем максимальную цену
             />
+            <div className="flex-grow p-4">
+                <Title className='text-4xl text-center m-8 font-semibold text-green-600' level={2}>Список Продукции</Title>
+                <p className="text-gray-500">Количество Товаров: {products.length}</p>
+                <Pagination
+                    current={currentPage}
+                    pageSize={itemsPerPage}
+                    total={filteredProducts.length}
+                    onChange={handlePageChange}
+                    style={{ marginBottom: '20px', textAlign: 'center' }}
+                    />
+                
+                {filteredProducts.length === 0 ? (
+                    <p className="text-center text-gray-500 mt-8">Продукты не найдены</p>
+                ) : (
+                    <ProductList products={paginatedProducts} />
+                )}
+                
+                <Pagination
+                    current={currentPage}
+                    pageSize={itemsPerPage}
+                    total={filteredProducts.length}
+                    onChange={handlePageChange}
+                    style={{ marginTop: '20px', marginBottom: '30px', textAlign: 'center' }}
+                />
+            </div>
         </div>
     );
 };

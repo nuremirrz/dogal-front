@@ -1,0 +1,42 @@
+/* Стили для кнопки поиска Ant Design */
+.ant-input-search-button {
+    background-color: #008f00 !important; /* Зеленый цвет кнопки */
+    color: #fff !important; /* Белый цвет текста */
+    border: none !important;
+  }
+  
+  .ant-input-search-button:hover {
+    background-color: #006b00 !important; /* Темно-зеленый цвет при наведении */
+    color: #fff !important;
+  }
+  
+/* Изменение цвета текста и обводки активного номера страницы в пагинации */
+.ant-pagination-item-active {
+  border-color: #008f00 !important; /* Зеленая обводка */
+}
+
+.ant-pagination-item-active a {
+  color: #008f00 !important; /* Зеленый цвет текста */
+}
+
+/* Изменение цвета при наведении */
+.ant-pagination-item:hover a {
+  color: #008f00 !important;
+}
+
+/* Цвет дорожки ползунка */
+.ant-slider-track {
+  background-color:#60a15f !important; /* Зеленый цвет для трека */
+}
+
+/* Цвет ручки ползунка */
+.ant-slider-handle {
+  border-color: #60a15f !important; /* Зеленая обводка ручки */
+}
+
+.ant-slider-handle:hover {
+  border-color: #60a15f !important; /* Темнее при наведении */
+}
+
+
+  

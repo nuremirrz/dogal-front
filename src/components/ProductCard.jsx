@@ -1,23 +1,29 @@
 import React from 'react';
-import { Card } from 'antd';
 
-const ProductCard = ({ product }) => (
-  <Card
-    hoverable
-    cover={<img alt={product.name} src={product.image} className="w-full h-48 object-contain" />}
-    className="w-60 h-85 bg-white shadow-md rounded-lg overflow-hidden transform transition-transform duration-300 hover:scale-105"
-  >
-    <Card.Meta
-      title={<h2 className="text-lg font-semibold">{product.name}</h2>}
-      description={
+const ProductCard = ({ product }) => {
+  return (
+    <div className="flex justify-between items-start p-4 bg-white shadow-md rounded-lg mb-4">
+      {/* Левая часть - Изображение и информация о продукте */}
+      <div className="flex space-x-4">
+        <img src={product.image} alt={product.name} className="w-20 h-20 object-cover rounded-md" />
         <div>
-          <p><strong>{product.activeIngredients}</strong></p>
-          <p className="text-sm text-gray-600">{product.description}</p>
-          <p><strong>Цена: </strong>{product.price} сом</p>
+          <h3 className="text-lg font-semibold">{product.name}</h3>
+          <p className="text-sm text-gray-500">{product.description}</p>
+          <p className="text-xs text-gray-400 mt-1">{product.specs}</p> {/* Дополнительные характеристики */}
         </div>
-      }
-    />
-  </Card>
-);
+      </div>
+
+      {/* Правая часть - Цена, доступность и кнопки */}
+      <div className="flex flex-col items-end space-y-2">
+        <p className="text-xl font-bold text-green-600">{product.price} сом</p>
+        <p className="text-sm text-gray-500">{product.availability}</p>
+        <div className="flex space-x-2">
+          <button className="px-4 py-1 bg-orange-400 text-white rounded">Подробнее</button>
+          <button className="px-4 py-1 bg-green-500 text-white rounded">Купить</button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 export default ProductCard;
