@@ -18,7 +18,7 @@ const SidebarForProducts = ({ filters, onFilterChange, resetFilters, onSearch, a
   };
 
   return (
-    <div className="p-4 bg-white shadow-md rounded-lg mb-4 w-1/5">
+    <div className="p-4 bg-white shadow-md rounded-lg mb-4 w-1/5 max-[768px]:w-1/2">
       <h3 className="text-lg font-semibold mb-4">Фильтры</h3>
 
       {/* Поиск по названию */}

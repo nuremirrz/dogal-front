@@ -19,7 +19,7 @@ const About = () => {
           <div className="about-content">
             <h3 className="about-header">Наше видение и ценности</h3>
             <p className="about-text">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Maiores, nihil reiciendis aut corporis laudantium explicabo odit natus eaque optio laborum, in saepe impedit doloremque ipsam ullam nisi praesentium voluptates voluptatum eligendi minima tempore asperiores soluta.
+            Стать ведущим партнером в сельском хозяйстве, предоставляя качественные средства защиты растений для устойчивого увеличения урожайности.
             </p>
           </div>
         </div>

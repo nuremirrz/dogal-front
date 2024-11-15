@@ -51,7 +51,7 @@ const TechSupport = () => {
     if (staff.length === 0) return <h2 className="page-title">Сотрудники в {slugPlace} не найдены</h2>;
 
     return (
-        <div className="container">
+        <div className="container tech-sup-container">
             <h1 className="page-title">Сотрудники технической поддержки в {slugPlace}</h1>
             <div className="staff-list">
                 {staff.map((member, index) => (

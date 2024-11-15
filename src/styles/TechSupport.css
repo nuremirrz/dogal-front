@@ -4,7 +4,9 @@
     background-color: #f9f9f9;
     margin-bottom: 40px;
 }
-
+.tech-sup-container {
+    min-height: calc(100vh - 180px);
+}
 /* Стили для заголовка страницы */
 .page-title {
     text-align: center;
