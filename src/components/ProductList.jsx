@@ -1,15 +1,17 @@
 import React from 'react';
-import { Row, Col } from 'antd';
 import ProductCard from './ProductCard';
 
 const ProductList = ({ products }) => (
-    <Row gutter={[16, 16]} justify="center">
-        {products.map(product => (
-            <Col xs={24} sm={12} md={8} lg={5} key={product._id}>
-                <ProductCard product={product} />
-            </Col>
-        ))}
-    </Row>
+  <div className="grid gap-4 grid-cols-1 my-12 sm:grid-cols-3 lg:grid-cols-4">
+    {products.map(product => (
+      <div
+        key={product._id}
+        className="flex justify-center"
+      >
+        <ProductCard product={product} />
+      </div>
+    ))}
+  </div>
 );
 
 export default ProductList;
