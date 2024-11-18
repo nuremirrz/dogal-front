@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Typography, Pagination } from 'antd';
+import { Typography, Pagination, Spin } from 'antd';
 import ProductList from './ProductList';
 import Sidebar from './SidebarForProducts';
 import axios from 'axios';
@@ -17,22 +17,26 @@ const ProductSection = () => {
     });
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
+    const [loading, setLoading] = useState(true); // Добавляем состояние для лоадера
     const itemsPerPage = 8;
 
     const fetchProducts = useCallback(async () => {
+        setLoading(true); // Включаем лоадер перед загрузкой данных
         try {
             const response = await axios.get('/api/products');
             setProducts(response.data);
             setFilteredProducts(response.data);
         } catch (error) {
             console.error('Ошибка при загрузке продуктов:', error);
+        } finally {
+            setLoading(false); // Выключаем лоадер после загрузки данных
         }
     }, []);
 
     useEffect(() => {
         fetchProducts();
     }, [fetchProducts]);
-
+    
     // Добавляем обработчик touchmove с passive: true для устранения предупреждения
     useEffect(() => {
         const handleTouchMove = () => {};
@@ -45,7 +49,6 @@ const ProductSection = () => {
     }, []);
 
     const uniqueCrops = [...new Set(products.flatMap(product => product.aplicableCrops))];
-
     const minPrice = Math.min(...products.map(product => product.price));
     const maxPrice = Math.max(...products.map(product => product.price));
 
@@ -123,29 +126,37 @@ const ProductSection = () => {
             />
 
             <div className="flex-grow p-4">
-                <Title className='text-4xl text-center m-8 font-semibold text-green-600' level={2}>Список Продукции</Title>
-                <p className="text-gray-500">Количество Товаров: {filteredProducts.length}</p>
-                <Pagination
-                    current={currentPage}
-                    pageSize={itemsPerPage}
-                    total={filteredProducts.length}
-                    onChange={handlePageChange}
-                    style={{ marginBottom: '20px', textAlign: 'center' }}
-                />
-
-                {filteredProducts.length === 0 ? (
-                    <p className="text-center text-gray-500 mt-8">Продукты не найдены</p>
+                {loading ? ( // Отображение лоадера, пока данные загружаются
+                    <div className="flex justify-center items-center min-h-screen">
+                        <Spin size="large" tip="Загрузка продуктов..." />
+                    </div>
                 ) : (
-                    <ProductList products={paginatedProducts} />
-                )}
+                    <>
+                        <Title className='text-4xl text-center m-8 font-semibold text-green-600' level={2}>Список Продукции</Title>
+                        <p className="text-gray-500">Количество Товаров: {filteredProducts.length}</p>
+                        <Pagination
+                            current={currentPage}
+                            pageSize={itemsPerPage}
+                            total={filteredProducts.length}
+                            onChange={handlePageChange}
+                            style={{ marginBottom: '20px', textAlign: 'center' }}
+                        />
 
-                <Pagination
-                    current={currentPage}
-                    pageSize={itemsPerPage}
-                    total={filteredProducts.length}
-                    onChange={handlePageChange}
-                    style={{ marginTop: '20px', marginBottom: '30px', textAlign: 'center' }}
-                />
+                        {filteredProducts.length === 0 ? (
+                            <p className="text-center text-gray-500 mt-8">Продукты не найдены</p>
+                        ) : (
+                            <ProductList products={paginatedProducts} />
+                        )}
+
+                        <Pagination
+                            current={currentPage}
+                            pageSize={itemsPerPage}
+                            total={filteredProducts.length}
+                            onChange={handlePageChange}
+                            style={{ marginTop: '20px', marginBottom: '30px', textAlign: 'center' }}
+                        />
+                    </>
+                )}
             </div>
         </div>
     );
