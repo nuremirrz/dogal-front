@@ -9,9 +9,11 @@ const SidebarForProducts = ({ filters, onFilterChange, resetFilters, onSearch, a
     onFilterChange({ priceRange: value });
   };
 
-  const handleIngredientChange = (checkedValues) => {
-    onFilterChange({ activeIngredients: checkedValues });
-  };
+  
+  const handleCropChange = (checkedValues) => {
+    onFilterChange({ aplicableCrops: checkedValues }); // Изменяем фильтр для культур
+};
+
 
   const handleCategoryChange = (value) => {
     onFilterChange({ category: value });
@@ -64,15 +66,16 @@ const SidebarForProducts = ({ filters, onFilterChange, resetFilters, onSearch, a
         />
       </div>
 
-      {/* Активные ингредиенты */}
-      <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Активные ингредиенты</label>
-        <Checkbox.Group onChange={handleIngredientChange} value={filters.activeIngredients}>
-          {activeIngredients.map((ingredient) => (
-            <Checkbox key={ingredient} value={ingredient}>{ingredient}</Checkbox>
-          ))}
-        </Checkbox.Group>
-      </div>
+      {/* Применимые Культуры */}
+<div className="mb-4">
+    <label className="block text-sm font-medium text-gray-700">Применимые Культуры</label>
+    <Checkbox.Group onChange={handleCropChange} value={filters.aplicableCrops}>
+        {activeIngredients.map((crop) => (
+            <Checkbox key={crop} value={crop}>{crop}</Checkbox>
+        ))}
+    </Checkbox.Group>
+</div>
+
 {/* изменить фильтр */}
       {/* Кнопка для сброса фильтров */}
       <Button type="default" onClick={resetFilters} className="mt-4 bg-green-600 hover:bg-green-700 text-white border-green-600">

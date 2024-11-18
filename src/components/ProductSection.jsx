@@ -13,7 +13,7 @@ const ProductSection = () => {
     const [filters, setFilters] = useState({
         category: null,
         priceRange: [0, 100000],
-        activeIngredients: [],
+        aplicableCrops: [],
     });
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
@@ -43,8 +43,9 @@ const ProductSection = () => {
             window.removeEventListener('touchmove', handleTouchMove);
         };
     }, []);
-    // Получаем уникальные активные ингредиенты из продуктов
-    const uniqueActiveIngredients = [...new Set(products.flatMap(product => product.activeIngredients))];
+    // Получаем уникальные применимые культуры  из продуктов
+    // const uniqueActiveIngredients = [...new Set(products.flatMap(product => product.activeIngredients))];
+    const uniqueCrops = [...new Set(products.flatMap(product => product.aplicableCrops))];
 
     // Вычисляем минимальную и максимальную цену из данных продуктов
     const minPrice = Math.min(...products.map(product => product.price));
@@ -73,32 +74,38 @@ const ProductSection = () => {
 
     const filterProducts = (filters, searchTerm) => {
         let filtered = products;
+    
         if (filters.category && filters.category !== "Не выбрано") {
             filtered = filtered.filter(product => product.category === filters.category);
         }
+    
         if (searchTerm) {
             const lowerCaseSearchTerm = searchTerm.toLowerCase();
             filtered = filtered.filter(product => {
                 const nameMatch = product.name.toLowerCase().includes(lowerCaseSearchTerm);
                 const descriptionMatch = product.description && product.description.toLowerCase().includes(lowerCaseSearchTerm);
-                const activeIngredientsMatch = product.activeIngredients && product.activeIngredients.some(ingredient => 
-                    ingredient.toLowerCase().includes(lowerCaseSearchTerm)
+                const cropsMatch = product.aplicableCrops && product.aplicableCrops.some(crop => 
+                    crop.toLowerCase().includes(lowerCaseSearchTerm)
                 );
-                return nameMatch || descriptionMatch || activeIngredientsMatch;
+                return nameMatch || descriptionMatch || cropsMatch;
             });
         }
+    
         if (filters.priceRange) {
             filtered = filtered.filter(product => product.price >= filters.priceRange[0] && product.price <= filters.priceRange[1]);
         }
-        if (filters.activeIngredients.length > 0) {
+    
+        if (filters.aplicableCrops.length > 0) {
             filtered = filtered.filter(product =>
-                product.activeIngredients && product.activeIngredients.some(ingredient =>
-                    filters.activeIngredients.includes(ingredient)
+                product.aplicableCrops && product.aplicableCrops.some(crop =>
+                    filters.aplicableCrops.includes(crop)
                 )
             );
         }
+    
         setFilteredProducts(filtered);
     };
+    
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
@@ -113,10 +120,11 @@ const ProductSection = () => {
                 onFilterChange={handleFilterChange}
                 resetFilters={resetFilters}
                 onSearch={handleSearch}
-                activeIngredients={uniqueActiveIngredients}
+                activeIngredients={uniqueCrops} // Передаем уникальные культуры
                 minPrice={minPrice}  // Передаем минимальную цену
                 maxPrice={maxPrice}  // Передаем максимальную цену
-            />
+            />           
+
             <div className="flex-grow p-4">
                 <Title className='text-4xl text-center m-8 font-semibold text-green-600' level={2}>Список Продукции</Title>
                 <p className="text-gray-500">Количество Товаров: {products.length}</p>
