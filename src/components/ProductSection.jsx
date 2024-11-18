@@ -43,11 +43,9 @@ const ProductSection = () => {
             window.removeEventListener('touchmove', handleTouchMove);
         };
     }, []);
-    // Получаем уникальные применимые культуры  из продуктов
-    // const uniqueActiveIngredients = [...new Set(products.flatMap(product => product.activeIngredients))];
+
     const uniqueCrops = [...new Set(products.flatMap(product => product.aplicableCrops))];
 
-    // Вычисляем минимальную и максимальную цену из данных продуктов
     const minPrice = Math.min(...products.map(product => product.price));
     const maxPrice = Math.max(...products.map(product => product.price));
 
@@ -65,8 +63,8 @@ const ProductSection = () => {
     const resetFilters = () => {
         setFilters({
             category: null,
-            priceRange: [minPrice, maxPrice], // Сбрасываем на минимальную и максимальную цены из базы данных
-            activeIngredients: [],
+            priceRange: [minPrice, maxPrice],
+            aplicableCrops: [],
         });
         setSearchTerm('');
         setFilteredProducts(products);
@@ -74,11 +72,11 @@ const ProductSection = () => {
 
     const filterProducts = (filters, searchTerm) => {
         let filtered = products;
-    
+
         if (filters.category && filters.category !== "Не выбрано") {
             filtered = filtered.filter(product => product.category === filters.category);
         }
-    
+
         if (searchTerm) {
             const lowerCaseSearchTerm = searchTerm.toLowerCase();
             filtered = filtered.filter(product => {
@@ -90,11 +88,11 @@ const ProductSection = () => {
                 return nameMatch || descriptionMatch || cropsMatch;
             });
         }
-    
+
         if (filters.priceRange) {
             filtered = filtered.filter(product => product.price >= filters.priceRange[0] && product.price <= filters.priceRange[1]);
         }
-    
+
         if (filters.aplicableCrops.length > 0) {
             filtered = filtered.filter(product =>
                 product.aplicableCrops && product.aplicableCrops.some(crop =>
@@ -102,10 +100,9 @@ const ProductSection = () => {
                 )
             );
         }
-    
+
         setFilteredProducts(filtered);
     };
-    
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
@@ -120,28 +117,28 @@ const ProductSection = () => {
                 onFilterChange={handleFilterChange}
                 resetFilters={resetFilters}
                 onSearch={handleSearch}
-                activeIngredients={uniqueCrops} // Передаем уникальные культуры
-                minPrice={minPrice}  // Передаем минимальную цену
-                maxPrice={maxPrice}  // Передаем максимальную цену
-            />           
+                activeIngredients={uniqueCrops}
+                minPrice={minPrice}
+                maxPrice={maxPrice}
+            />
 
             <div className="flex-grow p-4">
                 <Title className='text-4xl text-center m-8 font-semibold text-green-600' level={2}>Список Продукции</Title>
-                <p className="text-gray-500">Количество Товаров: {products.length}</p>
+                <p className="text-gray-500">Количество Товаров: {filteredProducts.length}</p>
                 <Pagination
                     current={currentPage}
                     pageSize={itemsPerPage}
                     total={filteredProducts.length}
                     onChange={handlePageChange}
                     style={{ marginBottom: '20px', textAlign: 'center' }}
-                    />
-                
+                />
+
                 {filteredProducts.length === 0 ? (
                     <p className="text-center text-gray-500 mt-8">Продукты не найдены</p>
                 ) : (
                     <ProductList products={paginatedProducts} />
                 )}
-                
+
                 <Pagination
                     current={currentPage}
                     pageSize={itemsPerPage}
