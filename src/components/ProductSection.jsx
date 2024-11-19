@@ -128,7 +128,8 @@ const ProductSection = () => {
             <div className="flex-grow p-4">
                 {loading ? ( // Отображение лоадера, пока данные загружаются
                     <div className="flex justify-center items-center min-h-screen">
-                        <Spin size="large" tip="Загрузка продуктов..." />
+                        {/* <Spin size="large" tip="Загрузка продуктов..." /> */}
+                        <Spin size="large"/>
                     </div>
                 ) : (
                     <>

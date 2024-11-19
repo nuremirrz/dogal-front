@@ -46,6 +46,7 @@ const SidebarForProducts = ({ filters, onFilterChange, resetFilters, onSearch, a
           <Option value="Гербициды">Гербициды</Option>
           <Option value="ПГР">ПГР</Option>
           <Option value="Инсектициды">Инсектициды</Option>
+          <Option value="Удобрения">Удобрения</Option>
           <Option value="Акарициды">Акарициды</Option>
           <Option value="Нематициды">Нематициды</Option>
           <Option value="Фунгициды">Фунгициды</Option>
