@@ -17,11 +17,11 @@ const ProductSection = () => {
     });
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const [loading, setLoading] = useState(true); // Добавляем состояние для лоадера
+    const [loading, setLoading] = useState(true);
     const itemsPerPage = 8;
 
     const fetchProducts = useCallback(async () => {
-        setLoading(true); // Включаем лоадер перед загрузкой данных
+        setLoading(true);
         try {
             const response = await axios.get('/api/products');
             setProducts(response.data);
@@ -29,26 +29,17 @@ const ProductSection = () => {
         } catch (error) {
             console.error('Ошибка при загрузке продуктов:', error);
         } finally {
-            setLoading(false); // Выключаем лоадер после загрузки данных
+            setLoading(false);
         }
     }, []);
 
     useEffect(() => {
         fetchProducts();
     }, [fetchProducts]);
-    
-    // Добавляем обработчик touchmove с passive: true для устранения предупреждения
-    useEffect(() => {
-        const handleTouchMove = () => {};
 
-        window.addEventListener('touchmove', handleTouchMove, { passive: true });
+    const uniqueCrops = [...new Set(products.flatMap(product => product.aplicableCrops))]
+        .sort((a, b) => a.localeCompare(b)); // Сортировка культур в алфавитном порядке
 
-        return () => {
-            window.removeEventListener('touchmove', handleTouchMove);
-        };
-    }, []);
-
-    const uniqueCrops = [...new Set(products.flatMap(product => product.aplicableCrops))];
     const minPrice = Math.min(...products.map(product => product.price));
     const maxPrice = Math.max(...products.map(product => product.price));
 
@@ -126,9 +117,8 @@ const ProductSection = () => {
             />
 
             <div className="flex-grow p-4">
-                {loading ? ( // Отображение лоадера, пока данные загружаются
+                {loading ? (
                     <div className="flex justify-center items-center min-h-screen">
-                        {/* <Spin size="large" tip="Загрузка продуктов..." /> */}
                         <Spin size="large"/>
                     </div>
                 ) : (
