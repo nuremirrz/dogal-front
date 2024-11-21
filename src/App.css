@@ -38,6 +38,9 @@ h1, h2, h3, h4, h5, h6 {
     height: 500px !important;
     border: 2px solid #b9b3b3;
 }
+.leaflet-control-attribution {
+    display: none;
+}
 .map__container{
     margin: 40px;
 }  

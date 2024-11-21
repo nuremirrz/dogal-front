@@ -6,7 +6,7 @@
     padding: 10px 60px;
     color: white;
     position: relative;
-    z-index: 10;
+    z-index: 1001;
 }
 .no-underline{
     text-decoration: none !important;

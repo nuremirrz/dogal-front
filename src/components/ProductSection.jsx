@@ -18,8 +18,9 @@ const ProductSection = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(true);
-    const itemsPerPage = 8;
+    const [itemsPerPage, setItemsPerPage] = useState(8); // Количество элементов на странице
 
+    // Загрузка продуктов
     const fetchProducts = useCallback(async () => {
         setLoading(true);
         try {
@@ -37,12 +38,13 @@ const ProductSection = () => {
         fetchProducts();
     }, [fetchProducts]);
 
-    const uniqueCrops = [...new Set(products.flatMap(product => product.aplicableCrops))]
-        .sort((a, b) => a.localeCompare(b)); // Сортировка культур в алфавитном порядке
+    // Уникальные культуры (для фильтров)
+    const uniqueCrops = [...new Set(products.flatMap(product => product.aplicableCrops))].sort((a, b) => a.localeCompare(b));
 
     const minPrice = Math.min(...products.map(product => product.price));
     const maxPrice = Math.max(...products.map(product => product.price));
 
+    // Обработка фильтров
     const handleFilterChange = (newFilters) => {
         const updatedFilters = { ...filters, ...newFilters };
         setFilters(updatedFilters);
@@ -99,7 +101,7 @@ const ProductSection = () => {
     };
 
     const handlePageChange = (page) => {
-        setCurrentPage(page);
+        setCurrentPage(page); // Обновляем текущую страницу
     };
 
     const paginatedProducts = filteredProducts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
@@ -124,12 +126,21 @@ const ProductSection = () => {
                 ) : (
                     <>
                         <Title className='text-4xl text-center m-8 font-semibold text-green-600' level={2}>Список Продукции</Title>
-                        <p className="text-gray-500">Количество Товаров: {filteredProducts.length}</p>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <p className="text-gray-500">Количество Товаров: {filteredProducts.length}</p>
+                        </div>
+                        
                         <Pagination
                             current={currentPage}
                             pageSize={itemsPerPage}
                             total={filteredProducts.length}
-                            onChange={handlePageChange}
+                            onChange={handlePageChange} // Обновляем текущую страницу
+                            showSizeChanger // Включаем встроенный выбор количества элементов
+                            pageSizeOptions={['8', '10', '20', '50', '100']} // Опции для выбора
+                            onShowSizeChange={(current, size) => {
+                                setItemsPerPage(size); // Обновляем количество элементов на странице
+                                setCurrentPage(1); // Сбрасываем текущую страницу на первую
+                            }}
                             style={{ marginBottom: '20px', textAlign: 'center' }}
                         />
 
@@ -144,6 +155,12 @@ const ProductSection = () => {
                             pageSize={itemsPerPage}
                             total={filteredProducts.length}
                             onChange={handlePageChange}
+                            showSizeChanger
+                            pageSizeOptions={['8', '10', '20', '50', '100']}
+                            onShowSizeChange={(current, size) => {
+                                setItemsPerPage(size);
+                                setCurrentPage(1);
+                            }}
                             style={{ marginTop: '20px', marginBottom: '30px', textAlign: 'center' }}
                         />
                     </>
