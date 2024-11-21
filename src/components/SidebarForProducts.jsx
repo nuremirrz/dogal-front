@@ -3,7 +3,6 @@ import { Input, Slider, Select, Button, Collapse } from 'antd';
 
 const { Search } = Input;
 const { Option } = Select;
-const { Panel } = Collapse;
 
 const SidebarForProducts = ({ filters, onFilterChange, resetFilters, onSearch, activeIngredients, minPrice, maxPrice }) => {
     const handlePriceChange = (value) => {
@@ -18,23 +17,23 @@ const SidebarForProducts = ({ filters, onFilterChange, resetFilters, onSearch, a
         onFilterChange({ category: value });
     };
 
-    return (
-        <Collapse
-            defaultActiveKey={['1', '2']}
-            className="p-4 h-3/4 sticky top-12 left-0 right-0 bg-white shadow-md rounded-lg mb-4 w-1/5 max-[768px]:w-1/2"
-        >
-            {/* Поиск */}
-            <Panel header="Поиск" key="1">
+    const items = [
+        {
+            key: '1',
+            label: 'Поиск',
+            children: (
                 <Search
                     placeholder="Поиск по названию"
                     onSearch={onSearch}
                     enterButton="Поиск"
                     style={{ width: '100%' }}
                 />
-            </Panel>
-
-            {/* Категория */}
-            <Panel header="Категория" key="2">
+            ),
+        },
+        {
+            key: '2',
+            label: 'Категория',
+            children: (
                 <Select
                     placeholder="Выберите категорию"
                     onChange={handleCategoryChange}
@@ -53,10 +52,12 @@ const SidebarForProducts = ({ filters, onFilterChange, resetFilters, onSearch, a
                     <Option value="Моллюскоциды">Моллюскоциды</Option>
                     <Option value="Фумиганты">Фумиганты</Option>
                 </Select>
-            </Panel>
-
-            {/* Цена */}
-            <Panel header="Цена" key="3">
+            ),
+        },
+        {
+            key: '3',
+            label: 'Цена',
+            children: (
                 <Slider
                     range
                     min={minPrice}
@@ -64,10 +65,12 @@ const SidebarForProducts = ({ filters, onFilterChange, resetFilters, onSearch, a
                     defaultValue={filters.priceRange}
                     onChange={handlePriceChange}
                 />
-            </Panel>
-
-            {/* Применимые Культуры */}
-            <Panel header="Применимые Культуры" key="4">
+            ),
+        },
+        {
+            key: '4',
+            label: 'Применимые Культуры',
+            children: (
                 <Select
                     mode="multiple"
                     placeholder="Выберите культуры"
@@ -81,9 +84,18 @@ const SidebarForProducts = ({ filters, onFilterChange, resetFilters, onSearch, a
                         </Option>
                     ))}
                 </Select>
-            </Panel>
+            ),
+        },
+    ];
 
-            {/* Сброс фильтров */}
+    return (
+        <div className="p-4 h-3/4 sticky top-14 left-0 right-0 bg-white shadow-md rounded-lg mb-4 w-1/5 max-[768px]:w-1/2">
+             <h3 className="text-lg font-semibold mb-4">Фильтры</h3>
+            <Collapse
+                items={items}
+                defaultActiveKey={['1', '2']}
+                className="bg-white shadow-md rounded-lg"
+            />
             <div className="mt-4 text-center">
                 <Button
                     type="default"
@@ -93,7 +105,7 @@ const SidebarForProducts = ({ filters, onFilterChange, resetFilters, onSearch, a
                     Сбросить фильтры
                 </Button>
             </div>
-        </Collapse>
+        </div>
     );
 };
 
