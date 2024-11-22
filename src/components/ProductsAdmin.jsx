@@ -6,12 +6,14 @@ import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 const { Option } = Select;
 
 const categories = [
-    "Гербициды", "ПГР","Специальные Препараты", "Инсектициды", "Удобрения", "Акарициды", "Нематициды",
+    "Гербициды", "ПГР", "Специальные Препараты", "Инсектициды", "Удобрения", "Акарициды", "Нематициды",
     "Фунгициды", "Моллюскоциды", "Фумиганты"
 ];
 
 const ProductsAdmin = () => {
     const [products, setProducts] = useState([]);
+    const [filteredProducts, setFilteredProducts] = useState([]);
+    const [searchTerm, setSearchTerm] = useState('');
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [currentProduct, setCurrentProduct] = useState(null);
     const [form] = Form.useForm();
@@ -21,6 +23,7 @@ const ProductsAdmin = () => {
         try {
             const { data } = await axios.get('/api/products');
             setProducts(data);
+            setFilteredProducts(data);
         } catch (error) {
             console.error('Ошибка при получении данных продуктов:', error);
             message.error('Ошибка при загрузке продуктов');
@@ -30,6 +33,20 @@ const ProductsAdmin = () => {
     useEffect(() => {
         fetchProducts();
     }, []);
+
+    // Фильтрация продуктов на основе поиска
+    useEffect(() => {
+        if (!searchTerm) {
+            setFilteredProducts(products);
+        } else {
+            const lowercasedSearchTerm = searchTerm.toLowerCase();
+            setFilteredProducts(products.filter(product =>
+                product.name.toLowerCase().includes(lowercasedSearchTerm) ||
+                product.category.toLowerCase().includes(lowercasedSearchTerm) ||
+                product.description.toLowerCase().includes(lowercasedSearchTerm)
+            ));
+        }
+    }, [searchTerm, products]);
 
     // Открытие и закрытие модального окна
     const showModal = (product = null) => {
@@ -108,10 +125,18 @@ const ProductsAdmin = () => {
 
     return (
         <>
-            <Button type="primary" onClick={() => showModal()}>
-                Добавить продукт
-            </Button>
-            <Table dataSource={products} columns={columns} rowKey="_id" pagination={{ pageSize: 6 }} />
+            <div style={{ marginBottom: 16, display: 'flex', justifyContent: 'space-between' }}>
+                <Input
+                    placeholder="Поиск по названию, категории или описанию"
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    style={{ width: '300px' }}
+                />
+                <Button type="primary" onClick={() => showModal()}>
+                    Добавить продукт
+                </Button>
+            </div>
+            <Table dataSource={filteredProducts} columns={columns} rowKey="_id" pagination={{ pageSize: 6 }} />
             <Modal
                 title={currentProduct ? 'Изменить продукт' : 'Добавить продукт'}
                 open={isModalVisible}
@@ -147,7 +172,7 @@ const ProductsAdmin = () => {
                     </Form.Item>
                     <Form.Item name="price" label="Цена" rules={[{ required: true }]}>
                         <InputNumber min={0} style={{ width: '100%' }} />
-                    </Form.Item>                    
+                    </Form.Item>
                     <Form.Item name="aplicableCrops" label="Применимые культуры">
                         <Select mode="tags" placeholder="Введите культуры">
                         </Select>
@@ -155,7 +180,7 @@ const ProductsAdmin = () => {
                     <Form.Item name="activeIngredients" label="Активные ингредиенты">
                         <Select mode="tags" placeholder="Введите ингредиенты">
                         </Select>
-                    </Form.Item>                    
+                    </Form.Item>
                     <Form.Item name="image" label="Ссылка на изображение">
                         <Input placeholder="Введите URL изображения" />
                     </Form.Item>
