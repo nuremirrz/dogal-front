@@ -23,6 +23,14 @@
 .ant-pagination-item:hover a {
   color: #16a34a !important;
 }
+.truncate-text {
+  display: -webkit-box; /* Для поддержки WebKit браузеров */
+  -webkit-box-orient: vertical; /* Задаёт направление текста */
+  overflow: hidden; /* Скрывает текст за пределами блока */
+  text-overflow: ellipsis; /* Добавляет многоточие */
+  line-clamp: 3; /* Ограничивает текст тремя строками */
+  -webkit-line-clamp: 3; /* Для поддержки WebKit */
+}
 
 /* Цвет дорожки ползунка */
 .ant-slider-track {
