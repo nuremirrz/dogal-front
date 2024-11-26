@@ -9,14 +9,13 @@ const ProductCard = ({ product }) => {
         <div>
           <h3 className="text-lg font-semibold">{product.name}</h3>
           <p className="text-sm text-gray-500 truncate-text">{product.description}</p>
-          <p className="text-xs text-gray-400 mt-1">{product.specs}</p> 
         </div>
       </div>
 
       {/* Правая часть - Цена, доступность и кнопки */}
       <div className="flex flex-col items-end space-y-2">
-        <p className="text-xl font-bold text-center text-green-600">{product.price} сом</p>
-        <div className="flex space-x-2 max-[768px]:flex-wrap">
+        {/* <p className="text-xl font-bold text-center text-green-600">{product.price} сом</p> */}
+        <div className="flex items-center space-x-2 max-[768px]:flex-wrap">
           <a href="../../public/assets/pdf/dogal.pdf" download="dogal.pdf">
           <button className="px-4 py-1 m-1 bg-orange-400 hover:bg-orange-500 text-white rounded">Подробнее</button>
           </a>

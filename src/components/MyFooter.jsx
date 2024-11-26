@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Layout, Row, Col, Typography, Form, Input, Button, message } from 'antd';
-import { InstagramOutlined, FacebookOutlined, XOutlined, LinkedinOutlined, TikTokOutlined, SendOutlined } from '@ant-design/icons';
+import { InstagramOutlined, FacebookOutlined, XOutlined, LinkedinOutlined, TikTokOutlined, SendOutlined, YoutubeOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import '../styles/Footer.css'; // Импортируем CSS стили
 
@@ -40,33 +40,33 @@ const MyFooter = () => {
                 {/* Социальные сети */}
                 <Col xs={24} sm={12} md={8} className="footer__links text-center mt-4 sm:mt-0">
   {/* Facebook */}
-  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.facebook.com/share/1Ake2Be9WD/?mibextid=JRoKGi" target="_blank" rel="noopener noreferrer">
     <FacebookOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
   </a>
   
   {/* X (ранее Twitter) */}
-  <a href="https://x.com" target="_blank" rel="noopener noreferrer">
+  {/* <a href="https://x.com" target="_blank" rel="noopener noreferrer">
     <XOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
-  </a>
-
-  {/* Instagram */}
-  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-    <InstagramOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
-  </a>
-
+  </a> */}
+  
   {/* TikTok */}
-  <a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">
+  <a href="https://www.tiktok.com/@dogal_kg?_t=8riIft2ZX0S&_r=1" target="_blank" rel="noopener noreferrer">
     <TikTokOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
   </a>
 
-  {/* Telegram */}
-  <a href="https://t.me/yourchannel" target="_blank" rel="noopener noreferrer">
-    <SendOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
+  {/* YouTube */}
+  <a href="https://youtube.com/@dogal_cis?si=TzfpMK3_Qk0KopgO" target="_blank" rel="noopener noreferrer">
+    <YoutubeOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
   </a>
 
   {/* LinkedIn */}
-  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+  {/* <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
     <LinkedinOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
+  </a> */}
+
+  {/* Instagram */}
+  <a href="https://www.instagram.com/dogal_cis/profilecard/?igsh=MXM2M2lxbnBibGI5" target="_blank" rel="noopener noreferrer">
+    <InstagramOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
   </a>
 </Col>
 
