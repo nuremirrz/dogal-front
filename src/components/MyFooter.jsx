@@ -39,13 +39,37 @@ const MyFooter = () => {
 
                 {/* Социальные сети */}
                 <Col xs={24} sm={12} md={8} className="footer__links text-center mt-4 sm:mt-0">
-                    <FacebookOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
-                    <XOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
-                    <InstagramOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
-                    <TikTokOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
-                    <SendOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
-                    <LinkedinOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
-                </Col>
+  {/* Facebook */}
+  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+    <FacebookOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
+  </a>
+  
+  {/* X (ранее Twitter) */}
+  <a href="https://x.com" target="_blank" rel="noopener noreferrer">
+    <XOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
+  </a>
+
+  {/* Instagram */}
+  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+    <InstagramOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
+  </a>
+
+  {/* TikTok */}
+  <a href="https://www.tiktok.com" target="_blank" rel="noopener noreferrer">
+    <TikTokOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
+  </a>
+
+  {/* Telegram */}
+  <a href="https://t.me/yourchannel" target="_blank" rel="noopener noreferrer">
+    <SendOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
+  </a>
+
+  {/* LinkedIn */}
+  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+    <LinkedinOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
+  </a>
+</Col>
+
 
                 {/* Форма подписки */}
                 <Col xs={24} md={8} className="text-center md:text-right mt-4 md:mt-0">

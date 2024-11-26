@@ -97,13 +97,14 @@ const SidebarForProducts = ({ filters, onFilterChange, resetFilters, onSearch, a
                 className="bg-white shadow-md rounded-lg"
             />
             <div className="mt-4 text-center">
-                <Button
-                    type="default"
+                {/* <Button
+                    // type="default"
                     onClick={resetFilters}
-                    className="bg-green-600 hover:bg-green-700 text-white border-green-600"
+                    className="bg-green-500 hover:bg-green-600 text-white border-green-600"
                 >
                     Сбросить фильтры
-                </Button>
+                </Button> */}
+                <button onClick={resetFilters} className="px-4 py-1 m-1 bg-green-500 hover:bg-green-600 text-white rounded">Сбросить фильтры</button>
             </div>
         </div>
     );

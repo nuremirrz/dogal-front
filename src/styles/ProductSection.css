@@ -1,27 +1,27 @@
 /* Стили для кнопки поиска Ant Design */
 .ant-input-search-button {
-    background-color: #008f00 !important; /* Зеленый цвет кнопки */
+    background-color: #22c55e !important; /* Зеленый цвет кнопки */
     color: #fff !important; /* Белый цвет текста */
     border: none !important;
   }
   
   .ant-input-search-button:hover {
-    background-color: #006b00 !important; /* Темно-зеленый цвет при наведении */
+    background-color: #16a34a !important; /* Темно-зеленый цвет при наведении */
     color: #fff !important;
   }
   
 /* Изменение цвета текста и обводки активного номера страницы в пагинации */
 .ant-pagination-item-active {
-  border-color: #008f00 !important; /* Зеленая обводка */
+  border-color: #22c55e !important; /* Зеленая обводка */
 }
 
 .ant-pagination-item-active a {
-  color: #008f00 !important; /* Зеленый цвет текста */
+  color: #22c55e !important; /* Зеленый цвет текста */
 }
 
 /* Изменение цвета при наведении */
 .ant-pagination-item:hover a {
-  color: #008f00 !important;
+  color: #16a34a !important;
 }
 
 /* Цвет дорожки ползунка */
