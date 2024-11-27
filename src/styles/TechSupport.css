@@ -13,7 +13,8 @@
     font-size: 2.5rem;
     margin-bottom: 40px;
     font-weight: 500;
-    color: #000; /* Оранжевый цвет для заголовка */
+    color: #000; 
+    /* color: #17a34a; */
 }
 
 /* Стили для списка сотрудников */
@@ -31,7 +32,7 @@
     transition: transform 0.3s ease;
     padding: 20px;
     text-align: center;
-    border: 2px solid #FF6B00; /* Оранжевая граница */
+    border: 2px solid #17a34a; 
     cursor: pointer;
     display: flex;
     flex-direction: column;
@@ -63,6 +64,7 @@
     font-size: 1.5rem;
     font-weight: bold;
     color: #026a00; /* Зеленый для имени */
+    color: #000;
 }
 
 .staff-position,
@@ -74,6 +76,8 @@
 .staff-phone {
     font-weight: bold;
     color: #FF6B00; /* Оранжевый для телефона */
+    color:#000;
+    color: #026a00;
 }
 
 /* Адаптивные стили для планшетов */

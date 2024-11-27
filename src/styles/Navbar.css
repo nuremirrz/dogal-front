@@ -57,7 +57,8 @@
         padding: 20px 0;
         z-index: 5;
         border-radius: 10px; /* Закругленные углы для меню */
-        border: 2px solid #217c1f;
+        border: 3px solid #217c1f;
+        /* border: 2px solid #000;         */
     }
 
     .nav-links.active {
@@ -74,6 +75,7 @@
         margin: 0 auto;
         font-weight: bold;
         color:#287a20;
+        /* color:#ff6b00; */
     }
         
     /* Эффект при наведении */

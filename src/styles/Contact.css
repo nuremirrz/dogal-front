@@ -17,6 +17,7 @@
     font-size: 2.5rem;
     color: #FF6B00;
     color: #000;
+    color: #17a34a;
     margin-bottom: 40px;
     font-weight: bold;
     
@@ -25,6 +26,7 @@
 .contact-subtitle {
     font-size: 1.75rem;
     color: #17a34a;
+    color: #000;
     margin-bottom: 40px;
     font-weight: bold;
 }
@@ -46,7 +48,8 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100%; /* Равномерная высота карточек */
-    border: 2px solid #FF6B00;
+    /* border: 2px solid #FF6B00; */
+    border: 2px solid #17a34a;
 }
 
 /* Эффект при наведении на карточку */

@@ -12,7 +12,8 @@
       <div className="contact-container">
         <h1 className='contact-title text-center'>Свяжитесь с нами</h1>
         <ContactContent/>
-        <h3 className='contact-subtitle text-customGreen-600'>Наше расположение</h3>
+        {/* <h3 className='contact-subtitle text-customGreen-600'>Наше расположение</h3> */}
+        <h3 className='contact-subtitle mt-4 text-black'>Наше расположение</h3>
         <ContactMap/>
       </div>
       <MyFooter/>

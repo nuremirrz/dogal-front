@@ -60,7 +60,8 @@ const Navbar = () => {
     );
 
     return (
-        <nav className="navbar sticky top-0 left-0 right-0 bg-green-600 border-2" style={{ borderColor: '#217c1f' }}>
+        // <nav className="navbar sticky top-0 left-0 right-0 bg-green-600 border-2" style={{ borderColor: '#217c1f' }}>
+<nav className="navbar sticky top-0 left-0 right-0 border-orange-600 border-2" style={{ backgroundColor: '#ff6b00' }}>
             <div className="logo">
                 <h1 className='ml-4 text-3xl text-bold text-white font-custom'>
                     <Link className='text-white' to="/" onClick={handleLinkClick}>DOĞAL</Link>

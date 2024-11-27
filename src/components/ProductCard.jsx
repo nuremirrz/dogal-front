@@ -2,7 +2,7 @@ import React from 'react';
 
 const ProductCard = ({ product }) => {
   return (
-    <div className="flex justify-between items-start p-4 bg-white shadow-md rounded-lg mb-4 max-[768px]:flex-wrap">
+    <div className="flex border-2 border-customGreen-400 justify-between items-start p-4 bg-white shadow-md rounded-lg mb-4 max-[768px]:flex-wrap">
       {/* Левая часть - Изображение и информация о продукте */}
       <div className="flex space-x-4">
         <img src={product.image} alt={product.name} className="w-20 h-20 object-cover rounded-md" />
