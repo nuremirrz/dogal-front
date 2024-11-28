@@ -1,11 +1,15 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
-import certificateImg from '../assets/images/certificate.jpg';
+import certificateImg1 from '../assets/images/cert1.png';
+import certificateImg2 from '../assets/images/cert2.png';
+import certificateImg3 from '../assets/images/cert3.png';
+import certificateImg4 from '../assets/images/cert4.png';
+import certificateImg5 from '../assets/images/cert5.png';
 
 const Sertificate = () => {
   // Массив с изображениями сертификатов
-  const certificates = [certificateImg, certificateImg, certificateImg, certificateImg, certificateImg];
+  const certificates = [certificateImg1, certificateImg2, certificateImg3, certificateImg4, certificateImg5];
 
   return (
     <div>
@@ -19,38 +23,41 @@ const Sertificate = () => {
       </h2>
 
       <Swiper
-        slidesPerView={3}
-        spaceBetween={30} // Промежуток между карточками слайдера
-        loop={true}
-        className="w-2/3 m-auto my-14 max-[480px]:my-4"
-        onSwiper={(swiper) => console.log(swiper)}        
-        breakpoints={{
-          // Уменьшаем количество карточек на маленьких экранах
-          320: {
-            slidesPerView: 1, // 1 карточка на маленьких экранах
-            spaceBetween: 20,  // Меньший промежуток на маленьких экранах
-          },
-          640: {
-            slidesPerView: 2, // 2 карточки на экранах среднего размера
-            spaceBetween: 20,
-          },
-          1024: {
-            slidesPerView: 3, // 3 карточки на больших экранах
-            spaceBetween: 30,
-          },
-        }}
-      >
-        {certificates.map((img, index) => (
-          <SwiperSlide key={index} className="certificate-slide">
-            <img 
-              className='h-128 w-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg rounded-lg max-[480px]:h-64' 
-              src={img} 
-              alt={`Сертификат ${index + 1}`} 
-              loading="lazy" // Lazy loading для улучшения производительности
-            />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+  slidesPerView={3}
+  spaceBetween={30} // Промежуток между карточками слайдера
+  loop={true}
+  className="w-2/3 m-auto my-14 max-[480px]:my-4"
+  breakpoints={{
+    // Уменьшаем количество карточек на маленьких экранах
+    320: {
+      slidesPerView: 1, // 1 карточка на маленьких экранах
+      spaceBetween: 20,  // Меньший промежуток на маленьких экранах
+    },
+    640: {
+      slidesPerView: 2, // 2 карточки на экранах среднего размера
+      spaceBetween: 20,
+    },
+    1024: {
+      slidesPerView: 3, // 3 карточки на больших экранах
+      spaceBetween: 30,
+    },
+  }}
+>
+  {certificates.map((img, index) => (
+    <SwiperSlide
+      key={index}
+      className="certificate-slide flex justify-center items-center h-64" // Добавляем правильное выравнивание
+    >
+      <img 
+        className="h-auto max-h-full w-auto object-contain" // Контроль пропорций изображения
+        src={img} 
+        alt={`Сертификат ${index + 1}`} 
+        loading="lazy" // Lazy loading для улучшения производительности
+      />
+    </SwiperSlide>
+  ))}
+</Swiper>
+
     </div>
   );
 }
