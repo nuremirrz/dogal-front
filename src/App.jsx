@@ -1,5 +1,5 @@
 import './App.css'
-import { Route, Router, Routes, MainPage, AdminPage, ContactPage, TechSupportPage, ProductsPage, ErrorPage } from './routes/page.js'
+import { Route, Router, Routes, MainPage, AdminPage,  AdminLogin, ContactPage, TechSupportPage, ProductsPage, ErrorPage } from './routes/page.js'
 
 function App() {
   return (
@@ -8,6 +8,7 @@ function App() {
         <Routes>
           <Route path='/' element={<MainPage />} />
           <Route path='/admin' element={<AdminPage />} />
+          <Route path='/admin/login' element={<AdminLogin />} />
           <Route path='/products' element={<ProductsPage />} />
           <Route path="/tech-sup/:country/:slug" element={<TechSupportPage />} />        
           <Route path="/tech-sup/:country" element={<TechSupportPage />} />           
