@@ -92,11 +92,12 @@ const Navbar = () => {
                     </Dropdown>
                 </li>
                 <li><Link className='no-underline' to="/contact" onClick={handleLinkClick}>Контакты</Link></li>
-                <li><Link className='no-underline' to="/admin" onClick={handleLinkClick}>
-                    <Tooltip title="Admin Panel">
-                    <UserOutlined style={{fontSize: '24px'}}/>
-
-                    </Tooltip></Link>
+                <li>
+                    <Link className="no-underline" to="/admin/login" onClick={handleLinkClick}>
+                        <Tooltip title="Admin Panel">
+                            <UserOutlined style={{ fontSize: '24px' }} />
+                        </Tooltip>
+                    </Link>
                 </li>
             </ul>
         </nav>

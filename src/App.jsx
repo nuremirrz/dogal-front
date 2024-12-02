@@ -9,14 +9,14 @@ function App() {
         <Routes>
           <Route path='/' element={<MainPage />} />
           <Route path="/admin/login" element={<AdminLogin />} />
-                <Route
-                    path="/admin"
-                    element={
-                        <ProtectedRoute>
-                            <AdminPage />
-                        </ProtectedRoute>
-                    }
-                />
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute>
+                <AdminPage />
+              </ProtectedRoute>
+            }
+          />
           {/* <Route path='/admin' element={<AdminPage />} />
           <Route path='/admin/login' element={<AdminLogin />} /> */}
           <Route path='/products' element={<ProductsPage />} />

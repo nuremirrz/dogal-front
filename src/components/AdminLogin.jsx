@@ -19,7 +19,7 @@ const AdminLogin = () => {
 
       if (response.ok) {
         const data = await response.json();
-        localStorage.setItem('token', data.token); // Сохраняем токен
+        localStorage.setItem('adminLoggedIn', true); // Сохраняем статус авторизации
         message.success('Успешный вход в систему!');
         navigate('/admin'); // Переход в админку
       } else {
