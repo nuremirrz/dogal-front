@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Form, Input, Button, message } from 'antd';
+import { Form, Input, Button, message, Tooltip } from 'antd';
+import { LogoutOutlined } from '@ant-design/icons';
 
 const AdminLogin = () => {
   const [loading, setLoading] = useState(false);
@@ -32,7 +33,24 @@ const AdminLogin = () => {
     }
   };
 
+
+  // Функция для выхода из админки
+  const handleLogout = () => {
+    localStorage.removeItem('adminLoggedIn'); // Удаляем статус авторизации
+    message.success('Вы вышли из админки.');
+    navigate('/'); // Перенаправляем на страницу логина
+  };
+
   return (
+    <>
+      <Tooltip title="Выйти">
+        <Button
+          type="text"
+          icon={<LogoutOutlined style={{ fontSize: '24px' }} />}
+          onClick={handleLogout}
+          className="flex flex-end px-4"
+        />
+      </Tooltip>
     <div className="flex items-center justify-center h-screen bg-gray-100">
       <div className="bg-white shadow-lg rounded-lg p-8 max-w-sm w-full">
         <h1 className="text-2xl font-bold text-center mb-6">Вход в админку</h1>
@@ -75,6 +93,7 @@ const AdminLogin = () => {
         </Form>
       </div>
     </div>
+    </>
   );
 };
 

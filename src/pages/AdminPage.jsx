@@ -1,34 +1,31 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
-import AdminDashboard from "../components/AdminDashboard"
+import AdminDashboard from "../components/AdminDashboard";
 
 const AdminPage = () => {
     const navigate = useNavigate();
-    let logoutTimer;
+    const logoutTimer = useRef(null); // Используем useRef
 
-    // Функция для сброса таймера
     const resetTimer = useCallback(() => {
-        clearTimeout(logoutTimer); // Очищаем предыдущий таймер
-        logoutTimer = setTimeout(() => {
+        if (logoutTimer.current) {
+            clearTimeout(logoutTimer.current); // Очищаем предыдущий таймер
+        }
+        logoutTimer.current = setTimeout(() => {
             alert('Вы вышли из админки из-за бездействия.');
             navigate('/admin/login'); // Перенаправление на страницу логина
         }, 180000); // 3 минуты
     }, [navigate]);
 
-    // Отслеживание действий пользователя
     useEffect(() => {
-        // Сбрасываем таймер при действиях
         window.addEventListener('mousemove', resetTimer);
         window.addEventListener('click', resetTimer);
         window.addEventListener('keypress', resetTimer);
         window.addEventListener('scroll', resetTimer);
 
-        // Устанавливаем первый таймер
-        resetTimer();
+        resetTimer(); // Устанавливаем первый таймер
 
-        // Очистка при выходе из компонента
         return () => {
-            clearTimeout(logoutTimer);
+            clearTimeout(logoutTimer.current);
             window.removeEventListener('mousemove', resetTimer);
             window.removeEventListener('click', resetTimer);
             window.removeEventListener('keypress', resetTimer);
@@ -36,11 +33,7 @@ const AdminPage = () => {
         };
     }, [resetTimer]);
 
-    return (
-        <>
-            <AdminDashboard/>
-        </>
-    );
+    return <AdminDashboard />;
 };
 
 export default AdminPage;

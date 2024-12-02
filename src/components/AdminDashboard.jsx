@@ -20,10 +20,12 @@ const AdminDashboard = () => {
 
     // Функция для выхода из админки
     const handleLogout = () => {
+        localStorage.removeItem('adminLoggedIn'); // Удаляем статус авторизации
         message.success('Вы вышли из админки.');
-        navigate('/'); // Перенаправляем на главную страницу
+        navigate('/'); // Перенаправляем на страницу логина
+        
     };
-
+    
     return (
         <Layout style={{ minHeight: '100vh' }}>
             <Sidebar onSectionChange={handleSectionChange} />
