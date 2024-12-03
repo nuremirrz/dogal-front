@@ -1,6 +1,6 @@
 import React from 'react';
 import { Menu, Layout } from 'antd';
-import { UserOutlined, ShoppingOutlined, NotificationOutlined } from '@ant-design/icons';
+import { UserOutlined, ShoppingOutlined, NotificationOutlined, MailOutlined } from '@ant-design/icons';
 
 const { Sider } = Layout;
 
@@ -9,6 +9,7 @@ const  Sidebar = ({ onSectionChange }) => { // Принимаем функцию
         {label: 'Сотрудники', key: 'employees', icon: <UserOutlined />},
         {label: 'Продукция', key: 'products', icon: <ShoppingOutlined />},
         {label: 'Новости', key: 'news', icon: <NotificationOutlined />},
+        {label: 'Рассылки', key: 'newsletter', icon: <MailOutlined />},
     ]
     return (
         <Sider collapsible>

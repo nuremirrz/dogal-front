@@ -5,6 +5,7 @@ import Sidebar from './Sidebar.jsx';
 import EmployeesAdmin from './EmployeesAdmin.jsx';
 import NewsAdmin from './NewsAdmin.jsx';
 import ProductsAdmin from './ProductsAdmin.jsx';
+import NewsletterAdmin from './NewsletterAdmin.jsx'
 import { useNavigate } from 'react-router-dom';
 
 const { Content, Header } = Layout;
@@ -43,6 +44,7 @@ const AdminDashboard = () => {
                     {activeSection === 'employees' && <EmployeesAdmin />}
                     {activeSection === 'products' && <ProductsAdmin />}
                     {activeSection === 'news' && <NewsAdmin />}
+                    {activeSection === "newsletter" && <NewsletterAdmin />}
                 </Content>
             </Layout>
         </Layout>
