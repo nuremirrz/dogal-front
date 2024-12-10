@@ -9,6 +9,7 @@ const countries = [
     { label: "Кыргызстан", value: "Кыргызстан" },
     { label: "Казахстан", value: "Казахстан" },
     { label: "Россия", value: "Россия" },
+    { label: "Узбекистан", value: "Узбекистан" },
 ];
 
 const kyrgyzstanRegions = [

@@ -56,6 +56,11 @@ const Navbar = () => {
                     <Link to="/tech-sup/russia">Россия</Link>
                 </Menu.Item>
             </Menu.ItemGroup>
+            <Menu.ItemGroup key="4" title="Узбекистан">
+                <Menu.Item key="uzbekistan" onClick={handleLinkClick}>
+                    <Link to="/tech-sup/uzbekistan">Узбекистан</Link>
+                </Menu.Item>
+            </Menu.ItemGroup>
         </Menu>
     );
 
