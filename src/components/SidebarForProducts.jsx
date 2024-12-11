@@ -1,5 +1,6 @@
 import React from 'react';
 import { Input, Slider, Select, Button, Collapse } from 'antd';
+import Link from 'antd/es/typography/Link';
 
 const { Search } = Input;
 const { Option } = Select;
@@ -53,22 +54,9 @@ const SidebarForProducts = ({ filters, onFilterChange, resetFilters, onSearch, a
                     <Option value="Фумиганты">Фумиганты</Option>
                 </Select>
             ),
-        },
+        },        
         {
             key: '3',
-            label: 'Цена',
-            children: (
-                <Slider
-                    range
-                    min={minPrice}
-                    max={maxPrice}
-                    defaultValue={filters.priceRange}
-                    onChange={handlePriceChange}
-                />
-            ),
-        },
-        {
-            key: '4',
             label: 'Применимые Культуры',
             children: (
                 <Select
@@ -84,6 +72,22 @@ const SidebarForProducts = ({ filters, onFilterChange, resetFilters, onSearch, a
                         </Option>
                     ))}
                 </Select>
+            ),
+        },
+        {
+            key: '4',
+            label: 'Вся продукция',
+            children: (
+                // <Slider
+                //     range
+                //     min={minPrice}
+                //     max={maxPrice}
+                //     defaultValue={filters.priceRange}
+                //     onChange={handlePriceChange}
+                // />
+                <Link href="../../public/assets/pdf/dogal.pdf" download="dogal.pdf">
+                <button className="px-4 py-1 m-1 text-xs bg-green-500 hover:bg-green-600 text-white rounded">Получить полный список препоратов</button>
+            </Link>
             ),
         },
     ];
@@ -105,7 +109,7 @@ const SidebarForProducts = ({ filters, onFilterChange, resetFilters, onSearch, a
                     Сбросить фильтры
                 </Button> */}
                 <button onClick={resetFilters} className="px-4 py-1 m-1 bg-green-500 hover:bg-green-600 text-white rounded">Сбросить фильтры</button>
-            </div>
+            </div>                       
         </div>
     );
 };

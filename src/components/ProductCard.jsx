@@ -19,7 +19,7 @@ const ProductCard = ({ product }) => {
           <a href="../../public/assets/pdf/dogal.pdf" download="dogal.pdf">
           <button className="px-4 py-1 m-1 bg-orange-400 hover:bg-orange-500 text-white rounded">Подробнее</button>
           </a>
-          <a href="https://web.telegram.org/k/#@growthhungrypublic" target='_blank' >
+          <a href="https://wa.me/c/996501675970" target='_blank' >
             <button className="px-4 py-1 m-1 bg-green-500 hover:bg-green-600 text-white rounded">Купить</button>
           </a>
         </div>

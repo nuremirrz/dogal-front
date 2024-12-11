@@ -78,7 +78,7 @@ const ProductSection = () => {
             filtered = filtered.filter(product => {
                 const nameMatch = product.name.toLowerCase().includes(lowerCaseSearchTerm);
                 const descriptionMatch = product.description && product.description.toLowerCase().includes(lowerCaseSearchTerm);
-                const cropsMatch = product.aplicableCrops && product.aplicableCrops.some(crop => 
+                const cropsMatch = product.aplicableCrops && product.aplicableCrops.some(crop =>
                     crop.toLowerCase().includes(lowerCaseSearchTerm)
                 );
                 return nameMatch || descriptionMatch || cropsMatch;
@@ -121,7 +121,7 @@ const ProductSection = () => {
             <div className="flex-grow p-4">
                 {loading ? (
                     <div className="flex justify-center items-center min-h-screen">
-                        <Spin size="large"/>
+                        <Spin size="large" />
                     </div>
                 ) : (
                     <>
@@ -129,7 +129,7 @@ const ProductSection = () => {
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <p className="text-gray-500">Количество Товаров: {filteredProducts.length}</p>
                         </div>
-                        
+
                         <Pagination
                             current={currentPage}
                             pageSize={itemsPerPage}
@@ -148,8 +148,7 @@ const ProductSection = () => {
                             <p className="text-center text-gray-500 mt-8">Продукты не найдены</p>
                         ) : (
                             <ProductList products={paginatedProducts} />
-                        )}
-
+                        )}                      
                         <Pagination
                             current={currentPage}
                             pageSize={itemsPerPage}
