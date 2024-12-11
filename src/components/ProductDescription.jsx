@@ -17,14 +17,14 @@ const ProductDescription = ({ product, isOpen, onClose }) => {
     >
       <p><strong>Категория:</strong> {product.category}</p>
       <p><strong>Описание:</strong> {product.description}</p>
+      {product.activeIngredients && (
+        <p>
+          <strong>Активные ингредиенты:</strong> {product.activeIngredients}
+        </p>
+      )}
       {product.aplicableCrops && (
         <p>
           <strong>Применимые культуры:</strong> {product.aplicableCrops.join(', ')}
-        </p>
-      )}
-      {product.activeIngredients && (
-        <p>
-          <strong>Активные ингредиенты:</strong> {product.activeIngredients.join(', ')}
         </p>
       )}
     </Modal>

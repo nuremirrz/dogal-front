@@ -181,13 +181,20 @@ const ProductSection = () => {
                 >
                     {selectedProduct && (
                         <div>
+                            <img className='h-56' src={selectedProduct.image} alt="photo" />
                             <p><strong>Категория:</strong> {selectedProduct.category}</p>
+                            {selectedProduct.activeIngredients && (
+                                <p>
+                                    <strong>Активные ингредиенты:</strong> {selectedProduct.activeIngredients.join(', ')}
+                                </p>
+                            )}
                             <p><strong>Описание:</strong> {selectedProduct.description}</p>
                             {selectedProduct.aplicableCrops && (
                                 <p>
                                     <strong>Применимые культуры:</strong> {selectedProduct.aplicableCrops.join(', ')}
                                 </p>
                             )}
+
                         </div>
                     )}
                 </Modal>
