@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Typography, Pagination, Spin } from 'antd';
+import { Typography, Pagination, Spin, Modal } from 'antd';
 import ProductList from './ProductList';
 import Sidebar from './SidebarForProducts';
 import axios from 'axios';
@@ -18,9 +18,10 @@ const ProductSection = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
     const [loading, setLoading] = useState(true);
-    const [itemsPerPage, setItemsPerPage] = useState(8); // Количество элементов на странице
+    const [itemsPerPage, setItemsPerPage] = useState(8);
+    const [selectedProduct, setSelectedProduct] = useState(null); // Состояние для выбранного продукта
+    const [isModalOpen, setIsModalOpen] = useState(false); // Состояние для модального окна
 
-    // Загрузка продуктов
     const fetchProducts = useCallback(async () => {
         setLoading(true);
         try {
@@ -38,13 +39,10 @@ const ProductSection = () => {
         fetchProducts();
     }, [fetchProducts]);
 
-    // Уникальные культуры (для фильтров)
     const uniqueCrops = [...new Set(products.flatMap(product => product.aplicableCrops))].sort((a, b) => a.localeCompare(b));
-
     const minPrice = Math.min(...products.map(product => product.price));
     const maxPrice = Math.max(...products.map(product => product.price));
 
-    // Обработка фильтров
     const handleFilterChange = (newFilters) => {
         const updatedFilters = { ...filters, ...newFilters };
         setFilters(updatedFilters);
@@ -101,7 +99,17 @@ const ProductSection = () => {
     };
 
     const handlePageChange = (page) => {
-        setCurrentPage(page); // Обновляем текущую страницу
+        setCurrentPage(page);
+    };
+
+    const handleProductClick = (product) => {
+        setSelectedProduct(product); // Устанавливаем выбранный продукт
+        setIsModalOpen(true); // Открываем модальное окно
+    };
+
+    const handleCloseModal = () => {
+        setSelectedProduct(null); // Сбрасываем выбранный продукт
+        setIsModalOpen(false); // Закрываем модальное окно
     };
 
     const paginatedProducts = filteredProducts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
@@ -134,12 +142,12 @@ const ProductSection = () => {
                             current={currentPage}
                             pageSize={itemsPerPage}
                             total={filteredProducts.length}
-                            onChange={handlePageChange} // Обновляем текущую страницу
-                            showSizeChanger // Включаем встроенный выбор количества элементов
-                            pageSizeOptions={['8', '10', '20', '50', '100']} // Опции для выбора
+                            onChange={handlePageChange}
+                            showSizeChanger
+                            pageSizeOptions={['8', '10', '20', '50', '100']}
                             onShowSizeChange={(current, size) => {
-                                setItemsPerPage(size); // Обновляем количество элементов на странице
-                                setCurrentPage(1); // Сбрасываем текущую страницу на первую
+                                setItemsPerPage(size);
+                                setCurrentPage(1);
                             }}
                             style={{ marginBottom: '20px', textAlign: 'center' }}
                         />
@@ -147,8 +155,9 @@ const ProductSection = () => {
                         {filteredProducts.length === 0 ? (
                             <p className="text-center text-gray-500 mt-8">Продукты не найдены</p>
                         ) : (
-                            <ProductList products={paginatedProducts} />
-                        )}                      
+                            <ProductList products={paginatedProducts} onProductClick={handleProductClick} />
+                        )}
+
                         <Pagination
                             current={currentPage}
                             pageSize={itemsPerPage}
@@ -164,6 +173,24 @@ const ProductSection = () => {
                         />
                     </>
                 )}
+                <Modal
+                    title={selectedProduct?.name}
+                    open={isModalOpen}
+                    onCancel={handleCloseModal}
+                    footer={null}
+                >
+                    {selectedProduct && (
+                        <div>
+                            <p><strong>Категория:</strong> {selectedProduct.category}</p>
+                            <p><strong>Описание:</strong> {selectedProduct.description}</p>
+                            {selectedProduct.aplicableCrops && (
+                                <p>
+                                    <strong>Применимые культуры:</strong> {selectedProduct.aplicableCrops.join(', ')}
+                                </p>
+                            )}
+                        </div>
+                    )}
+                </Modal>
             </div>
         </div>
     );

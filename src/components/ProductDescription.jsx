@@ -1,9 +1,34 @@
-import React from 'react'
+import React from 'react';
+import { Modal, Button } from 'antd';
 
-const ProductDescription = () => {
+const ProductDescription = ({ product, isOpen, onClose }) => {
+  if (!product) return null;
+    
   return (
-    <div>ProductDescription</div>
-  )
-}
+    <Modal
+      title={product.name}
+      open={isOpen}
+      onCancel={onClose}
+      footer={[
+        <Button key="close" type="primary" danger onClick={onClose}>
+          Закрыть
+        </Button>,
+      ]}
+    >
+      <p><strong>Категория:</strong> {product.category}</p>
+      <p><strong>Описание:</strong> {product.description}</p>
+      {product.aplicableCrops && (
+        <p>
+          <strong>Применимые культуры:</strong> {product.aplicableCrops.join(', ')}
+        </p>
+      )}
+      {product.activeIngredients && (
+        <p>
+          <strong>Активные ингредиенты:</strong> {product.activeIngredients.join(', ')}
+        </p>
+      )}
+    </Modal>
+  );
+};
 
-export default ProductDescription
+export default ProductDescription;
