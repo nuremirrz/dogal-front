@@ -86,7 +86,7 @@ const SidebarForProducts = ({ filters, onFilterChange, resetFilters, onSearch, a
                 //     onChange={handlePriceChange}
                 // />
                 <Link href="../../public/assets/pdf/dogal.pdf" download="dogal.pdf">
-                <button className="px-4 py-1 m-1 text-xs bg-green-500 hover:bg-green-600 text-white rounded">Получить полный список препоратов</button>
+                <button className="px-4 py-1 m-1 text-xs bg-green-500 hover:bg-green-600 text-white rounded">Получить полный список препаратов</button>
             </Link>
             ),
         },

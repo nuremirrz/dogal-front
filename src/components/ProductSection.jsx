@@ -133,7 +133,7 @@ const ProductSection = () => {
                     </div>
                 ) : (
                     <>
-                        <Title className='text-4xl text-center m-8 font-semibold text-green-600' level={2}>Список Продукции</Title>
+                        <Title className='text-4xl text-center m-8 font-semibold text-green-600' level={2}>Список Продуктов</Title>
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                             <p className="text-gray-500">Количество Товаров: {filteredProducts.length}</p>
                         </div>
