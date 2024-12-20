@@ -15,7 +15,7 @@ const AdminPage = () => {
             navigate('/admin/login'); // Перенаправление на страницу логина
         }, 180000); // 3 минуты
     }, [navigate]);
-// алту
+
     useEffect(() => {
         window.addEventListener('mousemove', resetTimer);
         window.addEventListener('click', resetTimer);
