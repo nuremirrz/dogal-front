@@ -13,7 +13,7 @@ const AdminPage = () => {
         logoutTimer.current = setTimeout(() => {
             alert('Вы вышли из админки из-за бездействия.');
             navigate('/admin/login'); // Перенаправление на страницу логина
-        }, 180000); // 3 минуты
+        }, 1800000); // 3 минуты
     }, [navigate]);
 
     useEffect(() => {
