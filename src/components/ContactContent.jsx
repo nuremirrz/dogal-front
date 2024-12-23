@@ -26,6 +26,14 @@ const ContactContent = () => {
               <Title level={4}>{item.name}</Title>
               <Text>{item.description}</Text>
               <p>{item.address}</p>
+              {item.number && (
+                <i>
+                  {item.number.split('\n').map((number, index) => (
+                    <p key={index}>{number}</p>
+                  ))}
+                </i>
+              )}
+
             </Card>
           </List.Item>
         )}

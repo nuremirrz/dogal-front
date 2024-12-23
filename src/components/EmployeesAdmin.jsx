@@ -116,7 +116,7 @@ const EmployeesAdmin = () => {
             title: 'Фото',
             dataIndex: 'image',
             key: 'image',
-            render: (text) => text ? <img src={text} alt="Фото" style={{ width: 50, height: 50, borderRadius: '50%' }} /> : 'Нет фото',
+            render: (text) => text ? <img src={text} alt="Фото" style={{ width: 'auto', height: 150, borderRadius: '10%' }} /> : 'Нет фото',
         },
         {
             title: 'Действия',
