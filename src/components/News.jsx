@@ -48,6 +48,14 @@ const News = () => {
         }
     };
 
+    const incrementViews = async (id) => {
+        try {
+            await axios.put(`http://localhost:5000/api/news/${id}/increment-views`);
+        } catch (error) {
+            console.error('Ошибка при увеличении просмотров:', error);
+        }
+    };
+
     return (
         <>
             <h2 className='text-4xl text-center m-8 font-semibold max-[480px]:text-2xl max-[480px]:mb-6'>
@@ -67,6 +75,10 @@ const News = () => {
                 loop={true}
                 slidesPerView={1}
                 className="w-3/4 m-auto my-14 max-[480px]:my-8"
+                onSlideChange={(swiper) => {
+                    const currentSlideId = news[swiper.realIndex]._id; // Получаем ID текущего слайда
+                    incrementViews(currentSlideId);
+                }}
             >
                 {news.map(item => (
                     <SwiperSlide key={item._id}>
@@ -88,7 +100,7 @@ const News = () => {
                                 <h3 className="text-xl font-bold max-[768px]:text-base my-4 text-center">
                                     {item.title}
                                 </h3>
-                                
+
                                 <div className="text-sm text-gray-500 flex items-center justify-between mb-2">
                                     <span>{moment(item.publishedAt).format('DD MMMM YYYY')}</span>
                                     <span className="bg-green-200 text-green-800 px-2 py-1 rounded">
@@ -137,6 +149,7 @@ const News = () => {
                     </SwiperSlide>
                 ))}
             </Swiper>
+
         </>
     );
 };
