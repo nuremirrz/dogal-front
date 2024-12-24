@@ -35,7 +35,8 @@
 body {
   margin: 0;
   padding: 0 !important;
-  font-family: 'Open Sans', sans-serif; 
+  font-family: 'Montserrat', sans-serif; 
+  /* font-family: 'Montserr'; */
   background-color: #f5f5f5; /* Фоновый цвет */
   color: #333; /* Цвет текста */
   line-height: 1.6; /* Высота строки */

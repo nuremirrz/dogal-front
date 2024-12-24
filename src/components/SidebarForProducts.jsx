@@ -27,7 +27,7 @@ const SidebarForProducts = ({ filters, onFilterChange, resetFilters, onSearch, a
                     placeholder="Поиск по названию"
                     onSearch={onSearch}
                     enterButton="Поиск"
-                    style={{ width: '100%' }}
+                    style={{ width: '100%', borderRadius: '0.75rem' }}
                 />
             ),
         },
@@ -86,7 +86,7 @@ const SidebarForProducts = ({ filters, onFilterChange, resetFilters, onSearch, a
                 //     onChange={handlePriceChange}
                 // />
                 <Link href="../../public/assets/pdf/dogal.pdf" download="dogal.pdf">
-                <button className="px-4 py-1 m-1 text-xs bg-green-500 hover:bg-green-600 text-white rounded">Получить полный список препаратов</button>
+                <button className="px-4 py-1 m-1 text-xs bg-green-500 hover:bg-green-600 text-white rounded">Полный список препаратов</button>
             </Link>
             ),
         },
@@ -108,7 +108,7 @@ const SidebarForProducts = ({ filters, onFilterChange, resetFilters, onSearch, a
                 >
                     Сбросить фильтры
                 </Button> */}
-                <button onClick={resetFilters} className="px-4 py-1 m-1 bg-green-500 hover:bg-green-600 text-white rounded">Сбросить фильтры</button>
+                <button onClick={resetFilters} className="px-4 py-1 m-1 bg-green-500 hover:bg-green-600 text-white rounded-xl">Сбросить фильтры</button>
             </div>                       
         </div>
     );

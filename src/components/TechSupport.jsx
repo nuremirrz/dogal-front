@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import '../styles/TechSupport.css';
+import defaultImg from '../assets/images/no-photo.jpg'
 
 const TechSupport = () => {
     const { country, slug } = useParams(); // Получаем country и slug из URL
@@ -57,7 +58,7 @@ const TechSupport = () => {
                 {staff.map((member, index) => (
                     <div key={index} className="staff-card">
                         <img
-                            src={member.image || 'default_image_url.png'} // Установка изображения по умолчанию
+                            src={member.image || defaultImg} // Установка изображения по умолчанию
                             alt={member.name}
                             className="staff-photo"
                         />
