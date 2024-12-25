@@ -31,19 +31,31 @@ h1, h2, h3, h4, h5, h6 {
 }
 /* carousel end */
 /* map cusmomization start */
+
 .leaflet-container {
-    /* width: 90%; */
     margin: 0 auto;
-    padding-left: 0;
     height: 500px !important;
-    border: 2px solid #b9b3b3;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
 }
-.leaflet-control-attribution {
+
+.leaflet-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.map__container {
+    margin: 40px;
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.leaflet-control-attribution{
     display: none;
 }
-.map__container{
-    margin: 40px;
-}  
+
 /* map cusmomization end */
 /* Адаптивные стили */
 @media (max-width: 768px) {

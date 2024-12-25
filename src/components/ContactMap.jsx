@@ -19,7 +19,7 @@ const ContactMap = () => {
       <MapContainer center={[42.44898219069362, 77.12837773897982]} zoom={7} >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+          // attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
         {locations.map((location) => (
           <Marker key={location.id} position={location.position}>
