@@ -3,14 +3,14 @@ import 'swiper/css';
 import { useEffect, useState, useCallback } from "react";
 import axios from 'axios';
 import moment from 'moment';
-import { HeartOutlined, HeartFilled } from '@ant-design/icons';
+import { HeartOutlined, HeartFilled, LeftOutlined, RightOutlined } from '@ant-design/icons';
 
 const News = () => {
     const [news, setNews] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [likedItems, setLikedItems] = useState({});
-    const [viewedItems, setViewedItems] = useState(new Set()); // Список просмотренных слайдов
+    const [viewedItems, setViewedItems] = useState(new Set());
 
     const fetchNews = useCallback(async () => {
         setLoading(true);
@@ -58,104 +58,140 @@ const News = () => {
     };
 
     const handleSlideChange = (swiper) => {
-        const currentSlideId = news[swiper.realIndex]?._id; // Получаем ID текущего слайда
+        const currentSlideId = news[swiper.realIndex]?._id;
         if (currentSlideId && !viewedItems.has(currentSlideId)) {
             incrementViews(currentSlideId);
             setViewedItems((prevViewed) => new Set(prevViewed).add(currentSlideId));
         }
     };
 
+    const handlePrevSlide = () => {
+        const swiper = document.querySelector('.swiper').swiper;
+        swiper.slidePrev();
+    };
+
+    const handleNextSlide = () => {
+        const swiper = document.querySelector('.swiper').swiper;
+        swiper.slideNext();
+    };
+
     return (
         <>
             <h2 className="text-4xl text-center m-8 font-semibold max-[480px]:text-2xl max-[480px]:mb-6 relative">
-        <span
-          className="text-green-50 rounded-xl px-5 py-2 font-custom bg-green-600 max-[480px]:px-4 transform transition-transform duration-500 hover:scale-110 hover:translate-y-1"
-          style={{ display: 'inline-block', boxShadow: '0 4px 10px rgba(0,0,0,0.3)', borderRadius: '10px' }}
-        >
-          Новости
-        </span>
-      </h2>
-            
+                <span
+                    className="text-green-50 rounded-xl px-5 py-2 font-custom bg-green-600 max-[480px]:px-4 transform transition-transform duration-500 hover:scale-110 hover:translate-y-1"
+                    style={{ display: 'inline-block', boxShadow: '0 4px 10px rgba(0,0,0,0.3)', borderRadius: '10px' }}
+                >
+                    Новости
+                </span>
+            </h2>
+
             {loading && <p className="text-center">Загрузка новостей...</p>}
             {error && <p className="text-center text-3xl font-semibold text-red-500">{error}</p>}
 
             {!loading && news.length > 0 ? (
-                <Swiper
-                    spaceBetween={50}
-                    loop={true}
-                    slidesPerView={1}
-                    className="w-3/4 m-auto my-14 max-[480px]:my-8"
-                    onSlideChange={handleSlideChange} // Обработка смены слайдов
-                >
-                    {news.map(item => (
-                        <SwiperSlide key={item._id}>
-                            <div className="h-auto grid grid-cols-2 max-[768px]:grid-cols-1 news-card hover:shadow-lg transition-transform duration-300 ease-in-out">
-                                <div className="flex items-center overflow-hidden">
-                                    {item.image ? (
-                                        <img
-                                            alt={item.title}
-                                            src={item.image}
-                                            loading="lazy"
-                                            className="h-full w-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-105"
-                                        />
-                                    ) : (
-                                        <h1>NO News</h1>
-                                    )}
-                                </div>
+                <div className="relative w-3/4 m-auto my-14 max-[480px]:my-8">
+                    {/* Левая стрелка */}
+                    <div
+                        className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer"
+                        onClick={handlePrevSlide}
+                        style={{
+                            fontSize: 'calc(1.5rem + 0.5vw)', // Адаптивный размер стрелок
+                            color: '#65a30d',
+                        }}
+                    >
+                        <LeftOutlined />
+                    </div>
 
-                                <div className="flex flex-col justify-center p-4 max-[768px]:p-2">
-                                    <h3 className="text-xl font-bold max-[768px]:text-base my-4 text-center">
-                                        {item.title}
-                                    </h3>
-
-                                    <div className="text-sm text-gray-500 flex items-center justify-between mb-2">
-                                        <span>{moment(item.publishedAt).format('DD MMMM YYYY')}</span>
-                                        <span className="bg-green-200 text-green-800 px-2 py-1 rounded">
-                                            {item.category}
-                                        </span>
+                    <Swiper
+                        spaceBetween={50}
+                        loop={true}
+                        slidesPerView={1}
+                        className="swiper"
+                        onSlideChange={handleSlideChange}
+                    >
+                        {news.map(item => (
+                            <SwiperSlide key={item._id}>
+                                <div className="h-auto grid grid-cols-2 max-[768px]:grid-cols-1 news-card hover:shadow-lg transition-transform duration-300 ease-in-out">
+                                    <div className="flex items-center overflow-hidden">
+                                        {item.image ? (
+                                            <img
+                                                alt={item.title}
+                                                src={item.image}
+                                                loading="lazy"
+                                                className="h-full w-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-105"
+                                            />
+                                        ) : (
+                                            <h1>NO News</h1>
+                                        )}
                                     </div>
 
-                                    {item.tags && item.tags.length > 0 && (
-                                        <div className="flex flex-wrap mb-3">
-                                            {item.tags.map((tag, index) => (
-                                                <span
-                                                    key={index}
-                                                    className="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full mr-2 mb-1"
-                                                >
-                                                    #{tag}
-                                                </span>
-                                            ))}
-                                        </div>
-                                    )}
+                                    <div className="flex flex-col justify-center p-4 max-[768px]:p-2">
+                                        <h3 className="text-xl font-bold max-[768px]:text-base my-4 text-center">
+                                            {item.title}
+                                        </h3>
 
-                                    <p className="mt-2 pl-4 text-gray-700 max-[768px]:text-sm max-[768px]:pl-0">
-                                        &nbsp;&nbsp;&nbsp;&nbsp;{item.content}
-                                    </p>
-
-                                    <div className="flex items-center justify-between mt-4 text-gray-500 text-sm">
-                                        <span>Просмотры: {item.views}</span>
-                                        <div className="flex items-center">
-                                            {likedItems[item._id] ? (
-                                                <HeartFilled
-                                                    onClick={() => toggleLike(item._id)}
-                                                    style={{ color: '#ff6b00', fontSize: '24px', cursor: 'pointer' }}
-                                                />
-                                            ) : (
-                                                <HeartOutlined
-                                                    onClick={() => toggleLike(item._id)}
-                                                    style={{ color: '#65a30d', fontSize: '24px', cursor: 'pointer' }}
-                                                />
-                                            )}
-                                            <span className="ml-2 text-lg text-green-700 font-semibold">
-                                                {item.likes}
+                                        <div className="text-sm text-gray-500 flex items-center justify-between mb-2">
+                                            <span>{moment(item.publishedAt).format('DD MMMM YYYY')}</span>
+                                            <span className="bg-green-200 text-green-800 px-2 py-1 rounded">
+                                                {item.category}
                                             </span>
                                         </div>
+
+                                        {item.tags && item.tags.length > 0 && (
+                                            <div className="flex flex-wrap mb-3">
+                                                {item.tags.map((tag, index) => (
+                                                    <span
+                                                        key={index}
+                                                        className="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full mr-2 mb-1"
+                                                    >
+                                                        #{tag}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        )}
+
+                                        <p className="mt-2 pl-4 text-gray-700 max-[768px]:text-sm max-[768px]:pl-0">
+                                            &nbsp;&nbsp;&nbsp;&nbsp;{item.content}
+                                        </p>
+
+                                        <div className="flex items-center justify-between mt-4 text-gray-500 text-sm">
+                                            <span>Просмотры: {item.views}</span>
+                                            <div className="flex items-center">
+                                                {likedItems[item._id] ? (
+                                                    <HeartFilled
+                                                        onClick={() => toggleLike(item._id)}
+                                                        style={{ color: '#ff6b00', fontSize: '24px', cursor: 'pointer' }}
+                                                    />
+                                                ) : (
+                                                    <HeartOutlined
+                                                        onClick={() => toggleLike(item._id)}
+                                                        style={{ color: '#65a30d', fontSize: '24px', cursor: 'pointer' }}
+                                                    />
+                                                )}
+                                                <span className="ml-2 text-lg text-green-700 font-semibold">
+                                                    {item.likes}
+                                                </span>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        </SwiperSlide>
-                    ))}
-                </Swiper>
+                            </SwiperSlide>
+                        ))}
+                    </Swiper>
+
+                    {/* Правая стрелка */}
+                    <div
+                        className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer"
+                        onClick={handleNextSlide}
+                        style={{
+                            fontSize: 'calc(1.5rem + 0.5vw)', // Адаптивный размер стрелок
+                            color: '#65a30d',
+                        }}
+                    >
+                        <RightOutlined />
+                    </div>
+                </div>
             ) : (
                 !loading && <p className="text-center">Нет доступных новостей для отображения.</p>
             )}

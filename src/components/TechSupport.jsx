@@ -56,7 +56,7 @@ const TechSupport = () => {
             <h1 className="page-title">Сотрудники технической поддержки в {slugPlace}</h1>
             <div className="staff-list">
                 {staff.map((member, index) => (
-                    <div key={index} className="staff-card">
+                    <div key={index} className="staff-card border-2 border-orange-500">
                         <img
                             src={member.image || defaultImg} // Установка изображения по умолчанию
                             alt={member.name}

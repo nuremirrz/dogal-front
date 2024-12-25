@@ -22,7 +22,7 @@ const ContactContent = () => {
         dataSource={addresses}
         renderItem={(item) => (
           <List.Item>
-            <Card className="address-card">
+            <Card className="address-card border-2 border-customOrange-600">
               <Title level={4}>{item.name}</Title>
               <Text>{item.description}</Text>
               <p>{item.address}</p>

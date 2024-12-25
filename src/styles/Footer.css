@@ -25,9 +25,9 @@
 }
 
 .footer__btn:hover {
-    background-color: #ff9f00; /* Изменение цвета кнопки при наведении */
-    border-color: #ff9f00; /* Смена цвета границы */
-    /* transform: translateY(-10px); Легкий подъем кнопки при наведении */
+    /* background-color: #ff9f00; Изменение цвета кнопки при наведении */
+    /* border-color: #ff9f00; Смена цвета границы */
+    transform: scale(1.05); 
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Добавление тени при наведении */
 }
 
