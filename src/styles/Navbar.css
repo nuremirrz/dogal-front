@@ -7,6 +7,13 @@
     color: white;
     position: relative;
     z-index: 1001;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+    
+}
+/* Эффект при наведении на карточку */
+.navbar:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 .no-underline{
     text-decoration: none !important;

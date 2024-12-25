@@ -42,28 +42,40 @@ const NewsAdmin = () => {
     const handleFormSubmit = async (values) => {
         try {
             const method = currentNews ? 'put' : 'post';
-            const url = currentNews ? `/api/news/${currentNews._id}` : '/api/news';
-            await axios[method](url, values);
-            fetchNews();
-            handleCancel();
+            const url = currentNews ? `/api/news/${currentNews._id}` : `/api/news`;
+            const { data } = await axios[method](url, values);
+    
+            setNews((prevNews) =>
+                currentNews
+                    ? prevNews.map((item) =>
+                          item._id === data._id ? data : item // Обновляем изменённую новость
+                      )
+                    : [...prevNews, data] // Добавляем новую новость
+            );
+    
+            handleCancel(); // Закрытие модального окна
             message.success('Новость успешно сохранена!');
         } catch (error) {
             console.error('Ошибка при сохранении новости:', error);
             message.error('Ошибка при сохранении данных новости!');
         }
     };
+    
+    
+    
 
     // Удаление новости
     const handleDelete = async (id) => {
         try {
             await axios.delete(`/api/news/${id}`);
-            fetchNews();
+            setNews(prevNews => prevNews.filter(item => item._id !== id)); // Удаление новости из состояния
             message.success('Новость удалена!');
         } catch (error) {
             console.error('Ошибка при удалении новости:', error);
             message.error('Ошибка при удалении новости!');
         }
     };
+    
 
     // Таблица для отображения новостей
     const columns = [
@@ -84,9 +96,11 @@ const NewsAdmin = () => {
             render: (published) => (published ? 'Да' : 'Нет'),
         },
         {
-            title: 'Просмотры',
-            dataIndex: 'views',
-            key: 'views',
+            title: 'Дата публикации',
+            dataIndex: 'publishedAt',
+            key: 'publishedAt',
+            render: (publishedAt) =>
+                publishedAt ? moment(publishedAt).format('DD.MM.YYYY HH:mm') : 'Не опубликовано',
         },
         {
             title: 'Лайки',

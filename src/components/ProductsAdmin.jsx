@@ -106,10 +106,9 @@ const ProductsAdmin = () => {
             key: 'description',
         },
         {
-            title: 'Цена',
-            dataIndex: 'price',
-            key: 'price',
-            render: (text) => `${text} сом`,
+            title: 'Активные ингредиенты',
+            dataIndex: 'activeIngredients',
+            key: 'activeIngredients',            
         },
         {
             title: 'Действия',

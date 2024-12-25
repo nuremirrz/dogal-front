@@ -10,6 +10,7 @@ const News = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [likedItems, setLikedItems] = useState({});
+    const [viewedItems, setViewedItems] = useState(new Set()); // Список просмотренных слайдов
 
     const fetchNews = useCallback(async () => {
         setLoading(true);
@@ -56,6 +57,14 @@ const News = () => {
         }
     };
 
+    const handleSlideChange = (swiper) => {
+        const currentSlideId = news[swiper.realIndex]?._id; // Получаем ID текущего слайда
+        if (currentSlideId && !viewedItems.has(currentSlideId)) {
+            incrementViews(currentSlideId);
+            setViewedItems((prevViewed) => new Set(prevViewed).add(currentSlideId));
+        }
+    };
+
     return (
         <>
             <h2 className='text-4xl text-center m-8 font-semibold max-[480px]:text-2xl max-[480px]:mb-6'>
@@ -70,86 +79,86 @@ const News = () => {
             {loading && <p className="text-center">Загрузка новостей...</p>}
             {error && <p className="text-center text-red-500">{error}</p>}
 
-            <Swiper
-                spaceBetween={50}
-                loop={true}
-                slidesPerView={1}
-                className="w-3/4 m-auto my-14 max-[480px]:my-8"
-                onSlideChange={(swiper) => {
-                    const currentSlideId = news[swiper.realIndex]._id; // Получаем ID текущего слайда
-                    incrementViews(currentSlideId);
-                }}
-            >
-                {news.map(item => (
-                    <SwiperSlide key={item._id}>
-                        <div className="h-auto grid grid-cols-2 max-[768px]:grid-cols-1 news-card hover:shadow-lg transition-transform duration-300 ease-in-out">
-                            <div className="flex items-center overflow-hidden">
-                                {item.image ? (
-                                    <img
-                                        alt={item.title}
-                                        src={item.image}
-                                        loading="lazy"
-                                        className="h-full w-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-105"
-                                    />
-                                ) : (
-                                    <h1>NO News</h1>
-                                )}
-                            </div>
-
-                            <div className="flex flex-col justify-center p-4 max-[768px]:p-2">
-                                <h3 className="text-xl font-bold max-[768px]:text-base my-4 text-center">
-                                    {item.title}
-                                </h3>
-
-                                <div className="text-sm text-gray-500 flex items-center justify-between mb-2">
-                                    <span>{moment(item.publishedAt).format('DD MMMM YYYY')}</span>
-                                    <span className="bg-green-200 text-green-800 px-2 py-1 rounded">
-                                        {item.category}
-                                    </span>
+            {!loading && news.length > 0 ? (
+                <Swiper
+                    spaceBetween={50}
+                    loop={true}
+                    slidesPerView={1}
+                    className="w-3/4 m-auto my-14 max-[480px]:my-8"
+                    onSlideChange={handleSlideChange} // Обработка смены слайдов
+                >
+                    {news.map(item => (
+                        <SwiperSlide key={item._id}>
+                            <div className="h-auto grid grid-cols-2 max-[768px]:grid-cols-1 news-card hover:shadow-lg transition-transform duration-300 ease-in-out">
+                                <div className="flex items-center overflow-hidden">
+                                    {item.image ? (
+                                        <img
+                                            alt={item.title}
+                                            src={item.image}
+                                            loading="lazy"
+                                            className="h-full w-full object-cover transition-transform duration-300 ease-in-out transform hover:scale-105"
+                                        />
+                                    ) : (
+                                        <h1>NO News</h1>
+                                    )}
                                 </div>
 
-                                {item.tags && item.tags.length > 0 && (
-                                    <div className="flex flex-wrap mb-3">
-                                        {item.tags.map((tag, index) => (
-                                            <span
-                                                key={index}
-                                                className="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full mr-2 mb-1"
-                                            >
-                                                #{tag}
-                                            </span>
-                                        ))}
-                                    </div>
-                                )}
+                                <div className="flex flex-col justify-center p-4 max-[768px]:p-2">
+                                    <h3 className="text-xl font-bold max-[768px]:text-base my-4 text-center">
+                                        {item.title}
+                                    </h3>
 
-                                <p className="mt-2 pl-4 text-gray-700 max-[768px]:text-sm max-[768px]:pl-0">
-                                    &nbsp;&nbsp;&nbsp;&nbsp;{item.content}
-                                </p>
-
-                                <div className="flex items-center justify-between mt-4 text-gray-500 text-sm">
-                                    <span>Просмотры: {item.views}</span>
-                                    <div className="flex items-center">
-                                        {likedItems[item._id] ? (
-                                            <HeartFilled
-                                                onClick={() => toggleLike(item._id)}
-                                                style={{ color: '#ff6b00', fontSize: '24px', cursor: 'pointer' }}
-                                            />
-                                        ) : (
-                                            <HeartOutlined
-                                                onClick={() => toggleLike(item._id)}
-                                                style={{ color: '#65a30d', fontSize: '24px', cursor: 'pointer' }}
-                                            />
-                                        )}
-                                        <span className="ml-2 text-lg text-green-700 font-semibold">
-                                            {item.likes}
+                                    <div className="text-sm text-gray-500 flex items-center justify-between mb-2">
+                                        <span>{moment(item.publishedAt).format('DD MMMM YYYY')}</span>
+                                        <span className="bg-green-200 text-green-800 px-2 py-1 rounded">
+                                            {item.category}
                                         </span>
                                     </div>
+
+                                    {item.tags && item.tags.length > 0 && (
+                                        <div className="flex flex-wrap mb-3">
+                                            {item.tags.map((tag, index) => (
+                                                <span
+                                                    key={index}
+                                                    className="bg-gray-200 text-gray-700 text-xs px-2 py-1 rounded-full mr-2 mb-1"
+                                                >
+                                                    #{tag}
+                                                </span>
+                                            ))}
+                                        </div>
+                                    )}
+
+                                    <p className="mt-2 pl-4 text-gray-700 max-[768px]:text-sm max-[768px]:pl-0">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;{item.content}
+                                    </p>
+
+                                    <div className="flex items-center justify-between mt-4 text-gray-500 text-sm">
+                                        <span>Просмотры: {item.views}</span>
+                                        <div className="flex items-center">
+                                            {likedItems[item._id] ? (
+                                                <HeartFilled
+                                                    onClick={() => toggleLike(item._id)}
+                                                    style={{ color: '#ff6b00', fontSize: '24px', cursor: 'pointer' }}
+                                                />
+                                            ) : (
+                                                <HeartOutlined
+                                                    onClick={() => toggleLike(item._id)}
+                                                    style={{ color: '#65a30d', fontSize: '24px', cursor: 'pointer' }}
+                                                />
+                                            )}
+                                            <span className="ml-2 text-lg text-green-700 font-semibold">
+                                                {item.likes}
+                                            </span>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </SwiperSlide>
-                ))}
-            </Swiper>
-
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            ) : (
+                !loading && <p className="text-center">Нет новостей для отображения.</p>
+            )}
         </>
     );
 };

@@ -85,7 +85,7 @@ const MyFooter = () => {
                                 placeholder="Введите email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                style={{ width: '200px' }}
+                                style={{ width: '200px', borderRadius: '0.75rem'}}
                             />
                         </Form.Item>
                         <Form.Item>
@@ -93,7 +93,7 @@ const MyFooter = () => {
                                 className="footer__btn"
                                 type="primary"
                                 loading={loading} // Индикатор загрузки
-                                style={{ backgroundColor: '#026a00', borderColor: '#ff6b00' }}
+                                style={{ backgroundColor: '#026a00', borderColor: '#ff6b00', borderRadius: '0.75rem'}}
                                 onClick={handleSubscribe}
                             >
                                 Подписаться

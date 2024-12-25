@@ -3,8 +3,12 @@
     color: #FFFFFF;
     display: flex;
     justify-content: space-between;
+    box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
 }
-
+.footer:hover {
+    box-shadow: 0 -8px 16px rgba(0, 0, 0, 0.2);
+}
 .footer__links .anticon {
     font-size: 24px;
     transition: color 0.3s, transform 0.3s; /* Плавный переход цвета и масштаба */
