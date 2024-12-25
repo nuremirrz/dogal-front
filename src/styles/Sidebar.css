@@ -1,0 +1,47 @@
+.sidebar h3 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: #333333; /* Тёмный текст */
+}
+
+.sidebar .ant-collapse {
+    border: none; /* Убираем стандартные границы */
+}
+
+.sidebar .ant-collapse-item {
+    border-radius: 0.5rem; /* Скруглённые углы у секций */
+    margin-bottom: 10px;
+    overflow: hidden;
+}
+
+.sidebar .ant-collapse-header {
+    font-size: 1rem;
+    font-weight: 500;
+    background-color: #f5f5f5; /* Светлый фон заголовков */
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar .ant-collapse-header:hover {
+    background-color: #e5e5e5; /* Более тёмный фон при наведении */
+}
+
+.sidebar .ant-select {
+    border-radius: 0.5rem; /* Скругление у выпадающего списка */
+}
+
+.sidebar .ant-btn {
+    background-color: #4caf50; /* Зелёный цвет кнопки */
+    color: #ffffff;
+    border-radius: 0.75rem;
+    padding: 10px 15px;
+    font-weight: bold;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.sidebar .ant-btn:hover {
+    background-color: #45a049; /* Более тёмный зелёный при наведении */
+    transform: scale(1.05); /* Лёгкое увеличение */
+}

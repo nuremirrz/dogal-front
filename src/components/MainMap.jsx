@@ -16,10 +16,12 @@ const locations = [
 const MainMap = () => {
   return (
     <div className='map__container'>
-      <h2 className='text-4xl text-center m-8 font-semibold max-[480px]:text-2xl max-[480px]:mb-6'>
-        <span 
-          className='text-green-50 px-5 italic font-custom bg-green-600 max-[480px]:px-4' 
-          style={{clipPath: 'polygon(5% 0, 100% 0, 95% 100%, 0 100%)'}}>Наши Адреса
+      <h2 className="text-4xl text-center m-8 mb-12 font-semibold max-[480px]:text-2xl max-[480px]:mb-6 relative">
+        <span
+          className="text-green-50 rounded-xl px-5 py-2 font-custom bg-green-600 max-[480px]:px-4 transform transition-transform duration-500 hover:scale-110 hover:translate-y-1"
+          style={{ display: 'inline-block', boxShadow: '0 4px 10px rgba(0,0,0,0.3)', borderRadius: '10px' }}
+        >
+          Наши Адреса
         </span>
       </h2>
       <MapContainer center={[42.44898219069362, 77.12837773897982]} zoom={7} className='max-[480px]:mx-0' style={{ height: '100vh', width: '90%' }}>
