@@ -16,13 +16,6 @@
   font-weight: 700;
   font-style: normal;
 }
-/* @font-face {
-  font-family: 'RevueBT'; 
- src: url('./assets/fonts/RevueBT-Regular.woff2') format('woff2'), 
- url('./assets/fonts/RevueBT-Regular.woff') format('woff');   
- font-weight: 700;
-  font-style: normal; 
-}   */
 /* fonts end */
 /* Сброс стилей для всех элементов */
 * {
@@ -36,8 +29,8 @@ body {
   margin: 0;
   padding: 0 !important;
   font-family: 'Montserrat', sans-serif; 
-  /* font-family: 'Montserr'; */
   background-color: #bcfabb; /* Фоновый цвет */
+  background-color: #f5f5f5;
   color: #333; /* Цвет текста */
   line-height: 1.6; /* Высота строки */
 }
