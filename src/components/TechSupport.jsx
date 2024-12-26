@@ -30,7 +30,7 @@ const TechSupport = () => {
         const fetchStaff = async () => {
             setLoading(true);
             try {
-                const url = slug 
+                const url = slug
                     ? `/tech-sup/country/${country}/region/${slug}`  // Если указан регион
                     : `/tech-sup/country/${country}`;               // Если указан только страна
 
@@ -53,7 +53,16 @@ const TechSupport = () => {
 
     return (
         <div className="container tech-sup-container">
-            <h1 className="page-title">Сотрудники технической поддержки в {slugPlace}</h1>
+            {/* <h1 className="page-title">Сотрудники технической поддержки в {slugPlace}</h1> */}
+            <h2 className="text-4xl text-center m-8 font-semibold max-[480px]:text-2xl max-[480px]:mb-6 relative">
+                <span
+                    // className="text-green-50 rounded-xl px-5 py-2 font-custom bg-green-600 max-[480px]:px-4 transform transition-transform duration-500 hover:scale-110 hover:translate-y-1"
+                    className="text-green-50 rounded-xl px-5 py-2 font-custom bg-green-600 max-[480px]:px-4 transform transition-transform duration-500 hover:scale-110"
+                    style={{ display: 'inline-block', boxShadow: '0 4px 10px rgba(0,0,0,0.3)', borderRadius: '10px' }}
+                >
+                    Сотрудники технической поддержки в {slugPlace}
+                </span>
+            </h2>
             <div className="staff-list">
                 {staff.map((member, index) => (
                     <div key={index} className="staff-card border-2 border-orange-500">

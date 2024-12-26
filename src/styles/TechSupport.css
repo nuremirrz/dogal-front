@@ -6,6 +6,7 @@
 }
 .tech-sup-container {
     min-height: calc(100vh - 180px);
+    margin: 0 auto;
 }
 /* Стили для заголовка страницы */
 .page-title {

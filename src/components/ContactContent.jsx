@@ -6,8 +6,8 @@ const { Title, Text } = Typography;
 
 const ContactContent = () => {
   return (
-    <div className="contact-content">
-      <h3 className="text-center contact-subtitle">
+    <div className="contact-content py-8 px-4 bg-white rounded-lg shadow-lg">
+      <h3 className="text-center contact-subtitle text-green-800 font-bold text-3xl mb-8">
         Наши офисы и адреса
       </h3>
       <List
@@ -23,15 +23,17 @@ const ContactContent = () => {
         renderItem={(item) => (
           <List.Item>
             <Card className="address-card border-2 border-customOrange-600">
-              <Title level={4}>{item.name}</Title>
-              <Text>{item.description}</Text>
-              <p>{item.address}</p>
+              <h4 className="text-xl text-orange-600 font-bold">{item.name}</h4>
+              <Text className='text-gray-700'>{item.description}</Text>
+              <p className='text-gray-600 mt-2 font-medium'>{item.address}</p>
               {item.number && (
-                <i>
+                <div className="mt-3">
                   {item.number.split('\n').map((number, index) => (
-                    <p key={index}>{number}</p>
+                    <p key={index} className="text-green-800 font-bold">
+                      {number}
+                    </p>
                   ))}
-                </i>
+                </div>
               )}
 
             </Card>

@@ -1,7 +1,7 @@
 /* Основной контейнер страницы */
 .contact-container {
     padding: 40px 20px;
-    background-color: #f9f9f9;
+    background-color: #dafeda;
     min-height: calc(100vh - 160px); /* Учитываем высоту Navbar и Footer */
     display: flex;
     flex-direction: column;
@@ -15,8 +15,8 @@
 /* Заголовок страницы */
 .contact-title {
     font-size: 2.5rem;
-    color: #FF6B00;
-    color: #000;
+    /* color: #FF6B00;
+    color: #000; */
     color: #17a34a;
     margin-bottom: 40px;
     font-weight: bold;

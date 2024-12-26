@@ -1,5 +1,7 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
 import 'swiper/css';
+import 'swiper/css/autoplay';
 import { useEffect, useState, useCallback } from "react";
 import axios from 'axios';
 import moment from 'moment';
@@ -104,15 +106,21 @@ const News = () => {
                     </div>
 
                     <Swiper
+                    modules={[Autoplay]} // Подключаем модуль Autoplay
+                    autoplay={{
+                     delay: 1, // Интервал между переключениями (минимальный)
+                     disableOnInteraction: false, // Продолжает после взаимодействия
+                   }}
+                   speed={15000}
                         spaceBetween={50}
                         loop={true}
                         slidesPerView={1}
-                        className="swiper"
+                        className="swiper news-swiper bg-[#faf9f5] p-10 rounded-xl"
                         onSlideChange={handleSlideChange}
                     >
                         {news.map(item => (
                             <SwiperSlide key={item._id}>
-                                <div className="h-auto grid grid-cols-2 max-[768px]:grid-cols-1 news-card hover:shadow-lg transition-transform duration-300 ease-in-out">
+                                <div className="news-slide h-auto grid grid-cols-2 max-[768px]:grid-cols-1 news-card hover:shadow-lg transition-transform duration-300 ease-in-out">
                                     <div className="flex items-center overflow-hidden">
                                         {item.image ? (
                                             <img
@@ -166,6 +174,7 @@ const News = () => {
                                                 ) : (
                                                     <HeartOutlined
                                                         onClick={() => toggleLike(item._id)}
+                                                        className='heart'
                                                         style={{ color: '#65a30d', fontSize: '24px', cursor: 'pointer' }}
                                                     />
                                                 )}

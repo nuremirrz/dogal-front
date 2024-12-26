@@ -1,7 +1,9 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'; // Иконки из Ant Design
 import 'swiper/css';
+import 'swiper/css/autoplay';
 import certificateImg1 from '../assets/images/cert1.png';
 import certificateImg2 from '../assets/images/cert2.png';
 import certificateImg3 from '../assets/images/cert3.png';
@@ -48,6 +50,12 @@ const Sertificate = () => {
         </div>
 
         <Swiper
+         modules={[Autoplay]} // Подключаем модуль Autoplay
+         autoplay={{
+          delay: 1, // Интервал между переключениями (минимальный)
+          disableOnInteraction: false, // Продолжает после взаимодействия
+        }}
+        speed={5000} // Скорость перехода между слайдами (3 секунды)
           slidesPerView={3}
           spaceBetween={30}
           loop={true}
