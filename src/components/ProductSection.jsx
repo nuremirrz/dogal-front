@@ -141,11 +141,11 @@ const ProductSection = () => {
                                 Список Продуктов
                             </span>
                         </h2>
-                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-                            <p className="text-gray-500">Количество Товаров: {filteredProducts.length}</p>
+                        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+                            <p className="text-customGreen-800 font-semibold">Количество Товаров: {filteredProducts.length}</p>
                         </div>
 
-                        <Pagination
+                        {/* <Pagination
                             current={currentPage}
                             pageSize={itemsPerPage}
                             total={filteredProducts.length}
@@ -157,7 +157,7 @@ const ProductSection = () => {
                                 setCurrentPage(1);
                             }}
                             style={{ marginBottom: '20px', textAlign: 'center' }}
-                        />
+                        /> */}
 
                         {filteredProducts.length === 0 ? (
                             <p className="text-center text-gray-500 mt-8">Продукты не найдены</p>

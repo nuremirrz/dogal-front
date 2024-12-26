@@ -14,6 +14,7 @@ const TechSupport = () => {
     const regionNames = {
         kazakhstan: 'Казахстане',
         russia: 'России',
+        uzbekistan: 'Узбекистане',
         batken: 'Баткенской области',
         chuy: 'Чуйской области',
         osh: 'Ошской области',
@@ -54,7 +55,7 @@ const TechSupport = () => {
     return (
         <div className="container tech-sup-container">
             {/* <h1 className="page-title">Сотрудники технической поддержки в {slugPlace}</h1> */}
-            <h2 className="text-4xl text-center m-8 font-semibold max-[480px]:text-2xl max-[480px]:mb-6 relative">
+            <h2 className="text-3xl text-center m-8 font-semibold max-[480px]:text-2xl max-[480px]:mb-6 relative">
                 <span
                     // className="text-green-50 rounded-xl px-5 py-2 font-custom bg-green-600 max-[480px]:px-4 transform transition-transform duration-500 hover:scale-110 hover:translate-y-1"
                     className="text-green-50 rounded-xl px-5 py-2 font-custom bg-green-600 max-[480px]:px-4 transform transition-transform duration-500 hover:scale-110"
