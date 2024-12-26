@@ -1,25 +1,23 @@
 import React from 'react'
-import { Carousel } from 'antd'
 import Navbar from '../components/Navbar'
-import sliderLogo from '../assets/images/slider.png'
-import sliderLogo1 from '../assets/images/slider1.png'
-import sliderLogo2 from '../assets/images/slider2.png'
-import MainMap from '../components/MainMap'
-import MyFooter from '../components/MyFooter'
+import CustomCarousel from '../components/CustomCarousel'
 import About from '../components/About'
 import News from '../components/News'
 import Sertificate from '../components/Sertificate'
+import MainMap from '../components/MainMap'
+import MyFooter from '../components/MyFooter'
 
 const MainPage = () => {
 
   return (
     <>
-      <Navbar />      
-      <Carousel autoplay autoplaySpeed={5000} draggable>
+      <Navbar /> 
+      <CustomCarousel />     
+      {/* <Carousel autoplay autoplaySpeed={5000} draggable>
         <div><img src={sliderLogo} alt="sliderLogo" /></div>
         <div><img src={sliderLogo1} alt="sliderLogo1" /></div>
         <div><img src={sliderLogo2} alt="sliderLogo2" /></div>        
-      </Carousel>
+      </Carousel> */}
       <About/>
       <News/>
       <Sertificate/>
