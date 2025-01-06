@@ -3,7 +3,7 @@ import { Carousel } from 'antd';
 import sliderLogo from '../assets/images/slider.png';
 import sliderLogo2 from '../assets/images/slider2.png'
 import sliderLogo3 from '../assets/images/slider3.png'
-import sliderLogo4 from '../assets/images/doal_agro_cover.jpg'
+import sliderLogo4 from '../assets/images/slider4.jpg'
 import '../styles/CustomCarousel.css'; // Создадим файл для стилей
 
 const CustomCarousel = () => {
