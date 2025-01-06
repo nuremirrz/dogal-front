@@ -14,5 +14,5 @@ export default defineConfig({
       },
     },
   },
-  assetsInclude: ['**/*.jpg', '**/*.jpeg', '**/*.png'], // Расширения, которые Vite должен обрабатывать как ассеты
+  assetsInclude: ['**/*.jpg', '**/*.JPG', '**/*.jpeg', '**/*.JPEG'],
 });
