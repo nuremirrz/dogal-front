@@ -1,10 +1,33 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
+import { gsap } from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import famLogo from '../assets/images/dogalFam.JPG'; // Ваше изображение
 import "../styles/About.css"; // Подключаем стили
 
+gsap.registerPlugin(ScrollTrigger);
 const About = () => {
+  const aboutRef = useRef(null);
+
+  useEffect(() => {
+    const el = aboutRef.current;
+
+   // GSAP + ScrollTrigger
+   gsap.from(el, {
+    x: -200, // Элемент появляется с левой стороны
+    opacity: 0, // Начальная прозрачность
+    duration: 1.5, // Длительность анимации
+    ease: "power2.out", // Плавность движения
+    scrollTrigger: {
+      trigger: el, // Элемент, за которым будет следить ScrollTrigger
+      start: "top 80%", // Анимация начнется, когда элемент войдет в 80% высоты окна
+      end: "bottom 60%", // Анимация завершится, когда элемент достигнет 60% высоты окна
+      toggleActions: "play none none none", // Анимация запускается только при входе в область
+    },
+  });
+}, []);
+
   return (
-    <>
+    <div className='about' ref={aboutRef}>
       <h2 className="text-4xl text-center m-8 font-semibold max-[480px]:text-2xl max-[480px]:mb-6 relative">
         <span
           className="text-green-50 rounded-xl px-5 py-2 font-custom bg-green-600 max-[480px]:px-4 transform transition-transform duration-500 hover:scale-110 hover:translate-y-1"
@@ -27,7 +50,7 @@ const About = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
 
   );
 }
