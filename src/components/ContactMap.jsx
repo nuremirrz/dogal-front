@@ -1,6 +1,11 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import "leaflet/dist/leaflet.css";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+// Регистрация плагина ScrollTrigger
+gsap.registerPlugin(ScrollTrigger);
 
 const locations = [
   { id: 1, name: 'Улица Куренкеева, 89', position: [42.890771839421966, 74.6151901670461] },
@@ -12,8 +17,27 @@ const locations = [
 ];
 
 const ContactMap = () => {
+  const mapRef = useRef(null);
+
+  useEffect(() => {
+    const el = mapRef.current;
+
+    // GSAP-анимация с ScrollTrigger
+    gsap.from(el, {
+      y: 100, // Начальная позиция снизу
+      opacity: 0, // Прозрачность
+      duration: 1.5, // Длительность анимации
+      ease: "power2.out", // Плавное движение
+      scrollTrigger: {
+        trigger: el, // Элемент, который наблюдается
+        start: "top 80%", // Когда верх элемента достигает 80% окна
+        end: "bottom 60%", // Когда нижняя часть элемента достигает 60% окна
+        toggleActions: "play none none none", // Анимация запускается при входе
+      },
+    });
+  }, []);
   return (
-    <div className='contact-map__container'>      
+    <div className='contact-map__container' ref={mapRef}>      
       <MapContainer center={[42.44898219069362, 77.12837773897982]} zoom={7} >
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
