@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import axios from 'axios';
-import { Table, Button, Modal, Form, Input, InputNumber, Select, message } from 'antd';
+import { Table, Button, Modal, Form, Input, InputNumber, Select, message, Spin } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
@@ -16,10 +16,12 @@ const ProductsAdmin = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [currentProduct, setCurrentProduct] = useState(null);
+    const [loading, setLoading] = useState(false);
     const [form] = Form.useForm();
 
     // Загрузка данных продуктов
-    const fetchProducts = async () => {
+    const fetchProducts = useCallback(async () => {
+        setLoading(true);
         try {
             const { data } = await axios.get('/api/products');
             setProducts(data);
@@ -27,12 +29,14 @@ const ProductsAdmin = () => {
         } catch (error) {
             console.error('Ошибка при получении данных продуктов:', error);
             message.error('Ошибка при загрузке продуктов');
+        } finally {
+            setLoading(false);
         }
-    };
+    },[]);
 
     useEffect(() => {
         fetchProducts();
-    }, []);
+    }, [fetchProducts]);
 
     // Фильтрация продуктов на основе поиска
     useEffect(() => {
@@ -49,20 +53,20 @@ const ProductsAdmin = () => {
     }, [searchTerm, products]);
 
     // Открытие и закрытие модального окна
-    const showModal = (product = null) => {
+    const showModal = useCallback((product = null) => {
         form.resetFields();
         setCurrentProduct(product);
         if (product) form.setFieldsValue(product);
         setIsModalVisible(true);
-    };
+    },[form]);
 
-    const handleCancel = () => {
+    const handleCancel = useCallback(() => {
         setIsModalVisible(false);
         setCurrentProduct(null);
-    };
+    },[]);
 
     // Создание или обновление продукта
-    const handleFormSubmit = async (values) => {
+    const handleFormSubmit = useCallback(async (values) => {
         try {
             const method = currentProduct ? 'put' : 'post';
             const url = currentProduct ? `/api/products/${currentProduct._id}` : '/api/products';
@@ -74,10 +78,10 @@ const ProductsAdmin = () => {
             console.error('Ошибка при сохранении продукта:', error);
             message.error('Ошибка при сохранении данных продукта!');
         }
-    };
+    },[currentProduct, fetchProducts, handleCancel]);
 
     // Удаление продукта
-    const handleDelete = async (id) => {
+    const handleDelete = useCallback(async (id) => {
         try {
             await axios.delete(`/api/products/${id}`);
             fetchProducts();
@@ -86,10 +90,10 @@ const ProductsAdmin = () => {
             console.error('Ошибка при удалении продукта:', error);
             message.error('Ошибка при удалении продукта!');
         }
-    };
+    },[fetchProducts]);
 
     // Таблица для отображения продуктов
-    const columns = [
+    const columns = useMemo(() => [
         {
             title: 'Название',
             dataIndex: 'name',
@@ -120,7 +124,11 @@ const ProductsAdmin = () => {
                 </>
             ),
         },
-    ];
+    ],[showModal, handleDelete]);
+    
+    if (loading) {
+      	return <Spin size="large" style={{ display: 'block', margin: 'auto', marginTop: '20%' }} />;
+   	}
 
     return (
         <>

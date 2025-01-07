@@ -1,17 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import axios from 'axios';
-import { Table, Button, Modal, Form, Input, Select, message } from 'antd';
-import {DeleteOutlined, EditOutlined} from '@ant-design/icons'
+import { Table, Button, Modal, Form, Input, Select, message, Spin } from 'antd';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
 
 const { Option } = Select;
-
 const countries = [
     { label: "Кыргызстан", value: "Кыргызстан" },
     { label: "Казахстан", value: "Казахстан" },
     { label: "Россия", value: "Россия" },
     { label: "Узбекистан", value: "Узбекистан" },
-];
-
+]
 const kyrgyzstanRegions = [
     "Чуйская область",
     "Иссык-Кульская область",
@@ -20,7 +18,7 @@ const kyrgyzstanRegions = [
     "Джалал-Абадская область",
     "Нарынская область",
     "Баткенская область",
-];
+]
 
 const EmployeesAdmin = () => {
     const [employees, setEmployees] = useState([]);
@@ -28,25 +26,31 @@ const EmployeesAdmin = () => {
     const [currentEmployee, setCurrentEmployee] = useState(null);
     const [selectedCountries, setSelectedCountries] = useState([]);
     const [imageUrl, setImageUrl] = useState('');
+    const [loading, setLoading] = useState(false);
     const [form] = Form.useForm(); // Создаем референс для формы
 
+
+
     // Загрузка данных сотрудников
-    const fetchEmployees = async () => {
+    const fetchEmployees = useCallback(async () => {
+        setLoading(true);
         try {
             const { data } = await axios.get('/tech-sup');
             setEmployees(data);
         } catch (error) {
             console.error('Ошибка при получении данных сотрудников:', error);
             message.error('Ошибка при загрузке сотрудников');
+        } finally {
+            setLoading(false);
         }
-    };
+    }, [])
 
     useEffect(() => {
         fetchEmployees();
-    }, []);
+    }, [fetchEmployees]);
 
     // Открытие и закрытие модального окна
-    const showModal = (employee = null) => {
+    const showModal = useCallback((employee = null) => {
         form.resetFields(); // Сбрасываем поля формы
         setCurrentEmployee(employee);
         setSelectedCountries(employee ? employee.countries : []);
@@ -57,16 +61,16 @@ const EmployeesAdmin = () => {
             // Устанавливаем значения формы для выбранного сотрудника
             form.setFieldsValue(employee);
         }
-    };
+    }, [form]);
 
-    const handleCancel = () => {
+    const handleCancel = useCallback(() => {
         setIsModalVisible(false);
         setCurrentEmployee(null);
         setImageUrl('');
-    };
+    }, []);
 
     // Создание или обновление данных сотрудника
-    const handleFormSubmit = async (values) => {
+    const handleFormSubmit = useCallback(async (values) => {
         try {
             const payload = {
                 ...values,
@@ -88,10 +92,10 @@ const EmployeesAdmin = () => {
             console.error('Ошибка при сохранении сотрудника:', error);
             message.error('Ошибка при сохранении данных сотрудника!');
         }
-    };
+    }, [currentEmployee, fetchEmployees, handleCancel]);
 
     // Удаление сотрудника
-    const handleDelete = async (id) => {
+    const handleDelete = useCallback(async (id) => {
         try {
             await axios.delete(`/tech-sup/${id}`);
             fetchEmployees();
@@ -100,7 +104,7 @@ const EmployeesAdmin = () => {
             console.error('Ошибка при удалении сотрудника:', error);
             message.error('Ошибка при удалении сотрудника!');
         }
-    };
+    }, [fetchEmployees]);
 
     // Обработчик для обновления URL изображения
     const handleImageChange = (e) => {
@@ -108,7 +112,7 @@ const EmployeesAdmin = () => {
     };
 
     // Таблица для отображения сотрудников
-    const columns = [
+    const columns = useMemo(() => [
         { title: 'Имя', dataIndex: 'name', key: 'name' },
         { title: 'Должность', dataIndex: 'position', key: 'position' },
         { title: 'Контакт', dataIndex: 'contact', key: 'contact' },
@@ -128,12 +132,15 @@ const EmployeesAdmin = () => {
                 </>
             ),
         },
-    ];
+    ], [showModal, handleDelete]); // зависимости
+    if (loading) {
+        return <Spin size="large" style={{ display: 'block', margin: 'auto', marginTop: '20%' }} />;
+    }
 
     return (
         <>
             <Button type="primary" onClick={() => showModal()}>Добавить сотрудника</Button>
-            <Table dataSource={employees} columns={columns} rowKey="_id" pagination={{pageSize: 6}} />
+            <Table dataSource={employees} columns={columns} rowKey="_id" pagination={{ pageSize: 6 }} />
             <Modal
                 title={currentEmployee ? 'Изменить сотрудника' : 'Добавить сотрудника'}
                 open={isModalVisible}
@@ -176,9 +183,9 @@ const EmployeesAdmin = () => {
                         </Form.Item>
                     )}
                     <Form.Item name="image" label="URL фото">
-                        <Input 
-                            placeholder="Введите ссылку на изображение" 
-                            onChange={handleImageChange} 
+                        <Input
+                            placeholder="Введите ссылку на изображение"
+                            onChange={handleImageChange}
                         />
                     </Form.Item>
 
@@ -186,10 +193,10 @@ const EmployeesAdmin = () => {
                     {imageUrl && (
                         <div style={{ marginBottom: '20px' }}>
                             <p>Предварительный просмотр:</p>
-                            <img 
-                                src={imageUrl} 
-                                alt="Предварительный просмотр" 
-                                style={{ width: '100%', maxHeight: '200px', objectFit: 'cover', borderRadius: '8px' }} 
+                            <img
+                                src={imageUrl}
+                                alt="Предварительный просмотр"
+                                style={{ width: '100%', maxHeight: '200px', objectFit: 'cover', borderRadius: '8px' }}
                             />
                         </div>
                     )}
