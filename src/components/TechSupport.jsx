@@ -12,6 +12,7 @@ const TechSupport = () => {
     const [error, setError] = useState(null);
 
     const containerRef = useRef(null); // Ссылка на контейнер всех карточек
+    const cardRefs = useRef([]); // Массив ссылок для каждой карточки
 
     // Словарь для отображения наименований регионов/стран на русском
     const regionNames = {
@@ -50,15 +51,20 @@ const TechSupport = () => {
         fetchStaff();
     }, [country, slug]);
 
-    // GSAP-анимация
+    // GSAP-анимация появления карточек
     useEffect(() => {
         if (staff.length > 0) {
-            gsap.from(containerRef.current, {
-                opacity: 0,
-                y: 50, // Смещение снизу
-                duration: 1, // Длительность анимации
-                ease: "power2.out",
-            });
+            gsap.fromTo(
+                cardRefs.current,
+                { opacity: 0, y: 50 }, // Начальная позиция и прозрачность
+                {
+                    opacity: 1,
+                    y: 0, // Конечная позиция
+                    duration: 1, // Длительность анимации
+                    ease: "power2.out",
+                    stagger: 0.2, // Интервал между анимацией карточек
+                }
+            );
         }
     }, [staff]);
 
@@ -79,7 +85,11 @@ const TechSupport = () => {
             </h2>
             <div className="staff-list">
                 {staff.map((member, index) => (
-                    <div key={index} className="staff-card border-2 border-orange-500">
+                    <div
+                        key={index}
+                        className="staff-card border-2 border-orange-500"
+                        ref={(el) => (cardRefs.current[index] = el)} // Добавляем ссылку на карточку
+                    >
                         <img
                             src={member.image || defaultImg} // Установка изображения по умолчанию
                             alt={member.name}
