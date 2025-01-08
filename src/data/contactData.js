@@ -27,7 +27,7 @@ const addresses = [
   {
     name: "Agroman",
     description: "Ветеринарная аптека",
-    address: "Труда проспект, 117а",
+    address: "Проспект Труда, 117а",
     number: "+996 706 101 873 \n+996 702 667 773",
   },
   {
