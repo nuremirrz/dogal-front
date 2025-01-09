@@ -5,7 +5,8 @@ import MainPage from '../pages/MainPage';
 import ContactPage from '../pages/ContactPage';
 import ProductsPage from '../pages/ProductsPage';
 import TechSupportPage from '../pages/TechSupportPage';
+import StructurePage from '../pages/StructurePage';
 import ErrorPage from '../pages/ErrorPage';
 
 
-export {Router, Routes, Route, AdminPage, AdminLogin, MainPage, ContactPage, ProductsPage, TechSupportPage, ErrorPage}
+export {Router, Routes, Route, AdminPage, AdminLogin, MainPage, ContactPage, ProductsPage, TechSupportPage, StructurePage, ErrorPage}

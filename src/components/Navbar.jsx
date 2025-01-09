@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { DownOutlined, MenuOutlined, UserOutlined } from '@ant-design/icons';
 import { Dropdown, Space, Menu, Tooltip } from 'antd';
 import { Link } from 'react-router-dom';
+import Kg from '../assets/images/kg.svg'
+import Kz from '../assets/images/kz.svg'
+import Uz from '../assets/images/uz.svg'
+import Ru from '../assets/images/ru.svg'
 import '../styles/Navbar.css';
 
 const Navbar = () => {
@@ -20,6 +24,61 @@ const Navbar = () => {
     const handleDropdownVisibleChange = (flag) => {
         setDropdownVisible(flag);
     };
+
+    const countriesMenuItems = [
+        {
+            key: 'kg',
+            label: (
+                <>
+                    <img
+                        src={Kg}
+                        alt="Кыргызстан"
+                        style={{ width: '15px', marginRight: '8px' }}
+                    />
+                    Кыргызстан
+                </>
+            ),
+        },
+        {
+            key: 'kz',
+            label: (
+                <>
+                    <img
+                        src={Kz}
+                        alt="Казахстан"
+                        style={{ width: '15px', marginRight: '8px' }}
+                    />
+                    Казахстан
+                </>
+            ),
+        },
+        {
+            key: 'uz',
+            label: (
+                <>
+                    <img
+                        src={Uz}
+                        alt="Узбекистан"
+                        style={{ width: '15px', marginRight: '8px' }}
+                    />
+                    Узбекистан
+                </>
+            ),
+        },
+        {
+            key: 'ru',
+            label: (
+                <>
+                    <img
+                        src={Ru}
+                        alt="Россия"
+                        style={{ width: '15px', marginRight: '8px' }}
+                    />
+                    Россия
+                </>
+            ),
+        },
+    ];
 
     const menu = (
         <Menu>
@@ -91,6 +150,16 @@ const Navbar = () => {
                         <a onClick={(e) => e.preventDefault()}>
                             <Space>
                                 Техническая поддержка
+                                <DownOutlined />
+                            </Space>
+                        </a>
+                    </Dropdown>
+                </li>
+                <li>
+                    <Dropdown overlay={<Menu items={countriesMenuItems} />} trigger={['click']}>
+                        <a onClick={(e) => e.preventDefault()}>
+                            <Space>
+                                Выберите страну
                                 <DownOutlined />
                             </Space>
                         </a>
