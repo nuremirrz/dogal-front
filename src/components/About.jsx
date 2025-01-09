@@ -2,6 +2,8 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import famLogo from '../assets/images/dogalFam.JPG'; // Ваше изображение
+import grape from '../assets/images/enjoy-2.png'
+import stick2 from '../assets/images/branch-2.png'
 import "../styles/About.css"; // Подключаем стили
 
 gsap.registerPlugin(ScrollTrigger);
@@ -50,6 +52,8 @@ const About = () => {
           </div>
         </div>
       </div>
+      <img src={grape} className='grape' alt="grape" />
+      <img src={stick2} className='stick' alt="stick" />
     </div>
 
   );

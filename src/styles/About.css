@@ -43,7 +43,22 @@
   font-size: 1rem;
   line-height: 1.6;
 }
+.grape {
+  position: absolute;
+  height: 130px;
+  top: 90px;
+  right: 50px;
+  rotate: 26deg;
+}
 
+.stick{
+  position: absolute;
+  height: 330px;
+  top: -30px;
+  left: 25px;
+  rotate: 91deg;
+  filter: invert(1);
+}
 /* Стили для больших экранов */
 @media (min-width: 768px) {
   .about-card {
