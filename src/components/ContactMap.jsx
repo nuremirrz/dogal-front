@@ -47,7 +47,7 @@ const ContactMap = () => {
 
   return (
     <div className="contact-map__container" ref={mapRef}>
-      <MapContainer center={[42.44898219069362, 77.12837773897982]} zoom={7} style={{ height: "500px", width: "100%" }}>
+      <MapContainer center={[42.8749796868701, 74.60552137941633]} zoom={13} style={{ height: "500px", width: "100%" }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           // attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

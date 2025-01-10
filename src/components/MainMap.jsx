@@ -52,7 +52,7 @@ const MainMap = () => {
       <h3 className="text-xl font-bold max-[768px]:text-base mb-8 text-center">
         Местоположение наших представительств
       </h3>
-      <MapContainer center={[42.867190852717385, 74.60399355957482]} zoom={13} className='max-[480px]:mx-0' style={{ height: '100vh', width: '90%' }}>
+      <MapContainer center={[42.8749796868701, 74.60552137941633]} zoom={13} className='max-[480px]:mx-0' style={{ height: '100vh', width: '90%' }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
