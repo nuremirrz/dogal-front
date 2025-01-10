@@ -3,6 +3,7 @@ import { Typography, Pagination, Spin, Modal } from 'antd';
 import ProductList from './ProductList';
 import Sidebar from './SidebarForProducts';
 import axios from 'axios';
+// import agro from '../assets/images/agro.png'
 import "../styles/ProductSection.css";
 
 const { Title } = Typography;
@@ -115,7 +116,7 @@ const ProductSection = () => {
     const paginatedProducts = filteredProducts.slice((currentPage - 1) * itemsPerPage, currentPage * itemsPerPage);
 
     return (
-        <div className="flex">
+        <div className="flex agro">
             <Sidebar
                 filters={filters}
                 onFilterChange={handleFilterChange}
@@ -141,24 +142,13 @@ const ProductSection = () => {
                                 Список Продуктов
                             </span>
                         </h2>
-                        <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+                        {/* <img src={agro} alt="agro" className="agro" /> */}
+                        {/* <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
                             <p className="text-customGreen-800 font-semibold">Количество Товаров: {filteredProducts.length}</p>
+                        </div> */}
+                          <div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+                            <p className="text-green-50 rounded-xl px-5 py-1 mb-2 bg-orange-400">Количество Товаров: {filteredProducts.length}</p>
                         </div>
-
-                        {/* <Pagination
-                            current={currentPage}
-                            pageSize={itemsPerPage}
-                            total={filteredProducts.length}
-                            onChange={handlePageChange}
-                            showSizeChanger
-                            pageSizeOptions={['8', '10', '20', '50', '100']}
-                            onShowSizeChange={(current, size) => {
-                                setItemsPerPage(size);
-                                setCurrentPage(1);
-                            }}
-                            style={{ marginBottom: '20px', textAlign: 'center' }}
-                        /> */}
-
                         {filteredProducts.length === 0 ? (
                             <p className="text-center text-gray-500 mt-8">Продукты не найдены</p>
                         ) : (

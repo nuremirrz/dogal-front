@@ -25,7 +25,7 @@ const ContactPage = () => {
 
                 {/* Подзаголовок перед картой */}
                 <h3 className="contact-subtitle text-center mt-8 text-green-800 font-bold text-3xl mb-8">
-                    Наше расположение
+                    Наше Местоположение
                 </h3>
 
                 {/* Карта с индикатором загрузки */}

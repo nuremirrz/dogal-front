@@ -4,6 +4,7 @@ import "leaflet/dist/leaflet.css";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import branch from '../assets/images/branch-1.png'
+import branch2 from '../assets/images/branch-2.png'
 
 // Регистрация плагина ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
@@ -52,6 +53,7 @@ const MainMap = () => {
       <h3 className="text-xl font-bold max-[768px]:text-base mb-8 text-center">
         Местоположение наших представительств
       </h3>
+      <img src={branch2} alt="branch" className="branch2" />
       <MapContainer center={[42.8749796868701, 74.60552137941633]} zoom={13} className='max-[480px]:mx-0' style={{ height: '100vh', width: '90%' }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

@@ -45,6 +45,11 @@
 .ant-slider-handle:hover {
   border-color: #60a15f !important; /* Темнее при наведении */
 }
+.agro {
+  background-image: url('../assets/images/agro.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 @media (max-width: 768px) {
   .truncate-text {
     -webkit-line-clamp: 2; /* Ограничение на 2 строки для мобильных */
