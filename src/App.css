@@ -55,12 +55,28 @@ h1, h2, h3, h4, h5, h6 {
 .leaflet-control-attribution{
     display: none;
 }
+.branch {
+    position: absolute;
+    filter: invert(0.2);
+    height: 200px;
+    z-index: 100;
+    right: 2px;
+    top: -10px;
+}
 
 /* map cusmomization end */
 /* Адаптивные стили */
 @media (max-width: 768px) {
     .container {
         padding: 10px; /* Уменьшение отступов на мобильных устройствах */
+    }
+
+    .branch {
+        height: 260px;
+        right: -60px;
+        rotate: 1deg;
+        top: -135px;
+        z-index: 1;
     }
 }
 
@@ -75,4 +91,11 @@ h1, h2, h3, h4, h5, h6 {
     .map__container{
         margin: 10px 10px 20px 10px;
     } 
+    .branch {
+        height: 160px;
+        right: -60px;
+        rotate: 1deg;
+        top: -45px;
+        z-index: 1;
+    }
 }

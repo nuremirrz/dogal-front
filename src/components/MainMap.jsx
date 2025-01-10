@@ -3,6 +3,7 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import "leaflet/dist/leaflet.css";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import branch from '../assets/images/branch-1.png'
 
 // Регистрация плагина ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
@@ -13,7 +14,7 @@ const locations = [
   { id: 3, name: 'Буденного, 181', position: [42.88746505367479, 74.64175917116445] },
   { id: 4, name: 'Кулиева 1/4', position: [42.86986765104979, 74.56930809918723] },
   { id: 5, name: 'Проспект Труда, 117а', position: [42.82348880919286, 73.84270332795619] },
-  { id: 6, name: 'Кокум-Бий, 34', position: [40.518643126304895, 72.74844830740308] },  
+  { id: 6, name: 'Кокум-Бий, 34', position: [40.518643126304895, 72.74844830740308] },
 ];
 
 const MainMap = () => {
@@ -47,7 +48,11 @@ const MainMap = () => {
           Наши Адреса
         </span>
       </h2>
-      <MapContainer center={[42.44898219069362, 77.12837773897982]} zoom={7} className='max-[480px]:mx-0' style={{ height: '100vh', width: '90%' }}>
+      <img src={branch} alt="branch" className="branch" />
+      <h3 className="text-xl font-bold max-[768px]:text-base mb-8 text-center">
+        Местоположение наших представительств
+      </h3>
+      <MapContainer center={[42.867190852717385, 74.60399355957482]} zoom={13} className='max-[480px]:mx-0' style={{ height: '100vh', width: '90%' }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

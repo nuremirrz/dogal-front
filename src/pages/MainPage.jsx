@@ -13,11 +13,6 @@ const MainPage = () => {
     <>
       <Navbar /> 
       <CustomCarousel />     
-      {/* <Carousel autoplay autoplaySpeed={5000} draggable>
-        <div><img src={sliderLogo} alt="sliderLogo" /></div>
-        <div><img src={sliderLogo1} alt="sliderLogo1" /></div>
-        <div><img src={sliderLogo2} alt="sliderLogo2" /></div>        
-      </Carousel> */}
       <About/>
       <News/>
       <Sertificate/>
