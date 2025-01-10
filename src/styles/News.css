@@ -1,0 +1,45 @@
+.stick1, .stick2 {
+    position: absolute;
+    filter: invert(1);
+    height: 200px;
+    z-index: 10;
+}
+
+.stick1 {
+    right: -155px;
+    rotate: 270deg;
+    bottom: -45px;
+}
+.stick2 {
+    left: -170px;
+    rotate: 145deg;
+    top: -135px;
+}
+
+@media (max-width: 768px) {
+    .stick1 {
+        height: 150px;
+        right: -80px;
+        rotate: 270deg;
+        bottom: -45px;
+    }
+    .stick2 {
+        left: -105px;
+        rotate: 145deg;
+        top: -135px;
+        z-index: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    .stick1 {
+        right: -95px;
+        rotate: 270deg;
+        bottom: -45px;
+    }
+    .stick2 {
+        left: -130px;
+        rotate: 145deg;
+        top: -135px;
+    }
+}

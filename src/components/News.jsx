@@ -5,6 +5,9 @@ import 'swiper/css/autoplay';
 import { useEffect, useState, useCallback } from "react";
 import axios from 'axios';
 import moment from 'moment';
+import stick1 from '../assets/images/branch-1.png'
+import stick2 from '../assets/images/branch-2.png'
+import '../styles/News.css'
 import { HeartOutlined, HeartFilled, LeftOutlined, RightOutlined } from '@ant-design/icons';
 
 const News = () => {
@@ -86,8 +89,7 @@ const News = () => {
                 >
                     Новости
                 </span>
-            </h2>
-
+            </h2>            
             {loading && <p className="text-center">Загрузка новостей...</p>}
             {error && <p className="text-center text-3xl font-semibold text-red-500">{error}</p>}
 
@@ -188,7 +190,8 @@ const News = () => {
                             </SwiperSlide>
                         ))}
                     </Swiper>
-
+                    <img src={stick1} alt="stick" className="stick1" />
+                    <img src={stick2} alt="stick" className="stick2" />
                     {/* Правая стрелка */}
                     <div
                         className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer"

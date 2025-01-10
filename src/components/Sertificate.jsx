@@ -4,11 +4,13 @@ import { Autoplay } from 'swiper/modules';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'; // Иконки из Ant Design
 import 'swiper/css';
 import 'swiper/css/autoplay';
+import '../styles/Sertificate.css'
 import certificateImg1 from '../assets/images/cert1.png';
 import certificateImg2 from '../assets/images/cert2.png';
 import certificateImg3 from '../assets/images/cert3.png';
 import certificateImg4 from '../assets/images/cert4.png';
 import certificateImg5 from '../assets/images/cert5.png';
+import seeds from '../assets/images/branch-2.png'
 
 const Sertificate = () => {
   // Массив с изображениями сертификатов
@@ -48,7 +50,7 @@ const Sertificate = () => {
         >
           <LeftOutlined />
         </div>
-
+        <img src={seeds} alt="seeds" className="seeds" />
         <Swiper
          modules={[Autoplay]} // Подключаем модуль Autoplay
          autoplay={{

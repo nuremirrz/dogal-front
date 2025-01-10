@@ -1,0 +1,30 @@
+.seeds {
+    position: absolute;
+    filter: invert(0.2);
+    height: 400px;
+    z-index: 1;
+    left: -170px;
+    rotate: 145deg;
+    top: -135px;
+}
+
+@media (max-width: 768px) {
+    
+    .seeds {
+        height: 260px;
+        left: -105px;
+        rotate: 145deg;
+        top: -135px;
+        z-index: 1;
+    }
+}
+
+@media (max-width: 480px) {
+    
+    .seeds {
+        left: -130px;
+        rotate: 145deg;
+        top: -135px;
+        z-index: -1;
+    }
+}

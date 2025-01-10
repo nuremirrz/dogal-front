@@ -45,19 +45,24 @@
 }
 .grape {
   position: absolute;
-  height: 130px;
-  top: 90px;
-  right: 50px;
+  height: 80px;
+  top: 110px;
+  right: 30px;
   rotate: 26deg;
+  transition: transform .7s ease;
+}
+.grape:hover{
+  transform: scale(1.1);
 }
 
 .stick{
   position: absolute;
-  height: 330px;
-  top: -30px;
-  left: 25px;
+  height: 220px;
+  top: 10px;
+  left: 15px;
   rotate: 91deg;
   filter: invert(1);
+  z-index: -1;
 }
 /* Стили для больших экранов */
 @media (min-width: 768px) {
@@ -71,5 +76,48 @@
 
   .about-content {
     width: 60%; /* Контент занимает оставшиеся 60% */
+  }
+  .grape {
+    position: absolute;
+    height: 125px;
+    top: 60px;
+    right: 30px;
+    rotate: 26deg;
+    transition: transform .7s ease;
+  }
+  .grape:hover{
+    transform: scale(1.1);
+  }
+  
+  .stick{
+    position: absolute;
+    height: 330px;
+    top: -50px;
+    left: 25px;
+    rotate: 91deg;
+    filter: invert(1);
+  }
+}
+
+@media (max-width: 480px) {
+  .grape {
+    position: absolute;
+    height: 75px;
+    top: 85px;
+    right: 5px;
+    rotate: 26deg;
+    transition: transform .7s ease;
+  }
+  .grape:hover{
+    transform: scale(1.1);
+  }
+  
+  .stick{
+    position: absolute;
+    height: 120px;
+    top: 10px;
+    left: 5px;
+    rotate: 91deg;
+    filter: invert(1);
   }
 }
