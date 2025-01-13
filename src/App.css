@@ -65,7 +65,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 .branch2 {
     position: absolute;
-    filter: invert(1);
+    filter: invert(0.5);
     height: 500px;
     rotate: 80deg;
     z-index: -1;

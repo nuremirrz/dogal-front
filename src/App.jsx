@@ -1,5 +1,5 @@
 import './App.css'
-import { Route, Router, Routes, MainPage, AdminPage, AdminLogin, ContactPage, TechSupportPage, StructurePage, ProductsPage, ErrorPage } from './routes/page.js'
+import { Route, Router, Routes, MainPage, AdminPage, AdminLogin, ContactPage, TechSupportPage, StructureKgPage, StructureKzPage, StructureUzPage, StructureRuPage, ProductsPage, ErrorPage } from './routes/page.js'
 import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
@@ -20,8 +20,10 @@ function App() {
           <Route path='/products' element={<ProductsPage />} />
           <Route path="/tech-sup/:country/:slug" element={<TechSupportPage />} />
           <Route path="/tech-sup/:country" element={<TechSupportPage />} />
-          <Route path='/structure/:country' element={<StructurePage />} />
-          <Route path='/structure' element={<StructurePage />} />
+          <Route path="/structure/kyrgyzstan" element={<StructureKgPage />} />
+          <Route path="/structure/kazakhstan" element={<StructureKzPage />} />
+          <Route path="/structure/uzbekistan" element={<StructureUzPage />} />
+          <Route path="/structure/russia" element={<StructureRuPage />} />
           <Route path='/contact' element={<ContactPage />} />
           <Route path='*' element={<ErrorPage />} />
         </Routes>

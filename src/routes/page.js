@@ -5,8 +5,12 @@ import MainPage from '../pages/MainPage';
 import ContactPage from '../pages/ContactPage';
 import ProductsPage from '../pages/ProductsPage';
 import TechSupportPage from '../pages/TechSupportPage';
-import StructurePage from '../pages/StructurePage';
+import StructureKgPage from '../pages/StructureKgPage';
+import StructureKzPage from '../pages/StructureKzPage';
+import StructureRuPage from '../pages/StructureRuPage';
+import StructureUzPage from '../pages/StructureUzPage';
+
 import ErrorPage from '../pages/ErrorPage';
 
 
-export {Router, Routes, Route, AdminPage, AdminLogin, MainPage, ContactPage, ProductsPage, TechSupportPage, StructurePage, ErrorPage}
+export {Router, Routes, Route, AdminPage, AdminLogin, MainPage, ContactPage, ProductsPage, TechSupportPage, StructureKgPage, StructureKzPage, StructureRuPage, StructureUzPage, ErrorPage}
