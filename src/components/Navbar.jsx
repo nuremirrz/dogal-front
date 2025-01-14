@@ -83,7 +83,7 @@ const Navbar = () => {
             path: '/structure/russia',
         },
     ];
-    
+
 
     const menu = (
         <Menu>
@@ -161,40 +161,27 @@ const Navbar = () => {
                     </Dropdown>
                 </li>
                 <li>
-                    {/* <Dropdown overlay={<Menu items={countriesMenuItems} />} trigger={['click']}>
-                        <a onClick={(e) => e.preventDefault()}>
-                            <Space>
-                                Выберите страну
-                                <DownOutlined />
-                            </Space>
-                        </a>
-                    </Dropdown> */}
-                    <Dropdown
-                        overlay={
-                            <Menu>
-                                {countriesMenuItems.map((item) => (
-                                    <Menu.Item
-                                        key={item.key}
-                                        onClick={() => {
-                                            handleLinkClick();
-                                            window.location.href = item.path; // Перенаправление на маршрут
-                                        }}
-                                    >
-                                        {item.label}
-                                    </Menu.Item>
-                                ))}
-                            </Menu>
-                        }
-                        trigger={['click']}
-                        className='cursor-pointer'
-                    >
-                        <a onClick={(e) => e.preventDefault()}>
-                            <Space>
-                                Выберите страну
-                                <DownOutlined />
-                            </Space>
-                        </a>
-                    </Dropdown>
+                <Dropdown
+    menu={{
+        items: countriesMenuItems.map((item) => ({
+            key: item.key,
+            label: (
+                <div onClick={() => window.location.href = item.path}>
+                    {item.label}
+                </div>
+            ),
+        })),
+    }}
+    trigger={['click']}
+>
+    <a onClick={(e) => e.preventDefault()}>
+        <Space>
+            Выберите страну
+            <DownOutlined />
+        </Space>
+    </a>
+</Dropdown>
+
 
                 </li>
                 <li><Link className='no-underline' to="/contact" onClick={handleLinkClick}>Контакты</Link></li>
