@@ -120,7 +120,7 @@ const StructureKgPage = () => {
                 {(section.employees || []).map((employee, employeeIndex) => (
                   <Card
                   key={employeeIndex}
-                  className="employee-card border-2 border-customOrange-600 shadow-md hover:shadow-lg transform hover:-translate-y-2 transition duration-300"
+                  className="employee-card border-2 bg-customOrange-200 border-customOrange-600 shadow-md hover:shadow-lg transform hover:-translate-y-2 transition duration-300"
                   >
                     <img
                       src={employee.image}
@@ -141,7 +141,7 @@ const StructureKgPage = () => {
                 {section.subDepartments &&
                   section.subDepartments.map((department, deptIndex) => (
                     <div key={deptIndex} className="mb-8">
-                      <h5 className="text-center text-orange-500 font-bold text-lg mb-4">
+                      <h5 className="text-centertext-orange-500 font-bold text-lg mb-4">
                         {department.title}
                       </h5>
                       <div
@@ -154,7 +154,7 @@ const StructureKgPage = () => {
                         {department.employees.map((employee, empIndex) => (
                           <Card
                             key={empIndex}
-                            className="employee-card border-2 border-customOrange-600 shadow-md hover:shadow-lg transform hover:-translate-y-2 transition duration-300"
+                            className="employee-card border-2  bg-customOrange-500 border-customOrange-600 shadow-md hover:shadow-lg transform hover:-translate-y-2 transition duration-300"
                           >
                             <img
                               src={employee.image}
