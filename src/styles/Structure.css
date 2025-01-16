@@ -1,124 +1,114 @@
+.back {
+  background-image: url('../assets//images/agro.png');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
 .hierarchy-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 24px;
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.hierarchy-level {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  margin-bottom: 32px;
+  flex-wrap: wrap; /* Позволяет переносить карточки на новые строки */
+}
+
+.hierarchy-card {
+  background: #fff;
+  border: 2px solid #ff8500; /* Яркий оранжевый */
+  border-radius: 12px;
+  padding: 20px;
+  width: 240px; /* Фиксированная ширина для всех карточек */
+  height: 350px; /* Фиксированная высота для всех карточек */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Равномерное распределение содержимого */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.hierarchy-card:hover {
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+  transform: translateY(-5px); /* Лёгкий подъем при наведении */
+}
+
+.employee-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0 auto 12px;
+  object-fit: cover;
+}
+
+.department-container h4 {
+  text-align: center;
+  color: #ff8500; /* Оранжевый цвет для заголовков отделов */
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.text-gray-700 {
+  color: #555; /* Тёмно-серый */
+}
+
+.text-gray-600 {
+  color: #666; /* Средне-серый */
+}
+
+.text-green-800 {
+  color: #007b33; /* Зелёный */
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+/* ==== Адаптивные стили для планшетов ==== */
+@media (max-width: 768px) {
   .hierarchy-level {
-    display: flex;
-    justify-content: center;
-    gap: 32px;
-    margin-bottom: 32px;
-    flex-wrap: wrap; /* Позволяет переносить карточки на новые строки */
+    gap: 24px; /* Уменьшение расстояния между карточками */
   }
-  
+
   .hierarchy-card {
-    background: #fff;
-    border: 2px solid #ff8500; /* Яркий оранжевый */
-    border-radius: 12px;
-    padding: 20px;
-    width: 240px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    transition: transform 0.3s, box-shadow 0.3s;
+    width: 200px; /* Уменьшение ширины карточек */
+    height: 320px; /* Пропорциональное уменьшение высоты */
+    padding: 16px; /* Уменьшение отступов */
   }
-  
-  .hierarchy-card:hover {
-    
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s, box-shadow 0.3s;
-  }
- 
-  
+
   .employee-image {
-    width: 60px;
+    width: 60px; /* Уменьшение размера изображения */
     height: 60px;
-    border-radius: 50%;
-    margin-bottom: 12px;
-    object-fit: cover;
   }
-  
-  .arrow {
-    width: 24px;
-    height: 40px;
+}
+
+/* ==== Адаптивные стили для мобильных устройств ==== */
+@media (max-width: 480px) {
+  .hierarchy-level {
+    flex-direction: column; /* Карточки в колонку */
+    align-items: center;
+    gap: 16px;
   }
-  
-  .arrow path {
-    stroke: #ff8500; /* Оранжевый цвет для стрелок */
-    stroke-width: 2;
+
+  .hierarchy-card {
+    width: 90%; /* Растянуть карточки на ширину экрана */
+    height: auto; /* Убираем фиксированную высоту для мобильных устройств */
+    padding: 12px;
   }
-  
+
   .department-container h4 {
-    text-align: center;
-    color: #ff8500; /* Оранжевый цвет для заголовков отделов */
-    font-size: 1.25rem;
-    font-weight: bold;
-    margin-bottom: 12px;
+    font-size: 1rem; /* Уменьшение размера заголовка */
   }
-  
-  .text-gray-700 {
-    color: #555; /* Тёмно-серый */
+
+  .employee-image {
+    width: 50px; /* Уменьшение размера изображения */
+    height: 50px;
   }
-  
-  .text-gray-600 {
-    color: #666; /* Средне-серый */
-  }
-  
-  .text-green-800 {
-    color: #007b33; /* Зелёный */
-  }
-  
-  .font-bold {
-    font-weight: bold;
-  }
-  
-  /* ==== Адаптивные стили для планшетов ==== */
-  @media (max-width: 768px) {
-    .hierarchy-level {
-      gap: 24px; /* Уменьшение расстояния между карточками */
-    }
-  
-    .hierarchy-card {
-      width: 200px; /* Уменьшение ширины карточек */
-      padding: 16px; /* Уменьшение отступов */
-    }
-  
-    .arrow {
-      width: 20px;
-      height: 32px;
-    }
-  
-    .employee-image {
-      width: 50px; /* Уменьшение размера изображения */
-      height: 50px;
-    }
-  }
-  
-  /* ==== Адаптивные стили для мобильных устройств ==== */
-  @media (max-width: 480px) {
-    .hierarchy-level {
-      flex-direction: column; /* Карточки в колонку */
-      align-items: center;
-      gap: 16px;
-    }
-  
-    .hierarchy-card {
-      width: 90%; /* Растянуть карточки на ширину экрана */
-      padding: 12px;
-    }
-  
-    .arrow {
-      display: none; /* Убираем стрелки для мобильных устройств */
-    }
-  
-    .department-container h4 {
-      font-size: 1rem; /* Уменьшение размера заголовка */
-    }
-  
-    .employee-image {
-      width: 40px; /* Уменьшение размера изображения */
-      height: 40px;
-    }
-  }
-  
+}

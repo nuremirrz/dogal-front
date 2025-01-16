@@ -1,60 +1,33 @@
-import React, { useEffect, useRef } from "react";
-import { Typography, Card } from "antd";
+import React from "react";
+import { Card } from "antd";
 import Navbar from "../components/Navbar";
 import MyFooter from "../components/MyFooter";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import "../styles/Structure.css";
-import no from '../assets/images/no-photo.jpg'
-
-gsap.registerPlugin(ScrollTrigger);
-
-const { Text } = Typography;
+import no from "../assets/images/no-photo.jpg";
 
 const StructureKgPage = () => {
-  const cardsRef = useRef([]); // Массив для хранения рефов карточек
-
-  useEffect(() => {
-    // GSAP-анимация появления карточек
-    gsap.fromTo(
-      cardsRef.current,
-      { opacity: 0, y: 50 },
-      {
-        opacity: 1,
-        y: 0,
-        duration: 1,
-        ease: "power2.out",
-        stagger: 0.2,
-        scrollTrigger: {
-          trigger: ".contact-content",
-          start: "top 80%",
-        },
-      }
-    );
-  }, []);
-
   const structureData = [
     {
-      title: "Главный директор",
+      title: "Руководитель по странам СНГ",
       employees: [
         {
-          name: "Айбек К.",
+          name: "Аскералиева Бактыгул",
           position: "CEO",
-          email: "aibek@example.com",
-          phone: "+996 555 123 456",
+          email: "a@example.com",
+          phone: "-",
           image: no,
         },
       ],
     },
     {
-      title: "Управляющий",
+      title: "Исполнительный директор",
       employees: [
         {
-          name: "Жанар А.",
+          name: "Бегимбаева Назгуль",
           position: "COO",
-          email: "zhanar@example.com",
-          phone: "+996 555 654 321",
-          image: "/images/coo.jpg",
+          email: "z@example.com",
+          phone: "+996 706 779 949",
+          image: no,
         },
       ],
     },
@@ -65,18 +38,25 @@ const StructureKgPage = () => {
           title: "Отдел продаж",
           employees: [
             {
-              name: "Алмаз Б.",
-              position: "Менеджер по продажам",
-              email: "almaz@example.com",
-              phone: "+996 555 111 222",
-              image: "/images/sales1.jpg",
+              name: "Бактыбеков Азат",
+              position: "Менеджер",
+              email: "az@example.com",
+              phone: "+996 508 675 970",
+              image: no,
             },
             {
-              name: "Асель Т.",
-              position: "Специалист по продажам",
-              email: "assel@example.com",
-              phone: "+996 555 333 444",
-              image: "/images/sales2.jpg",
+              name: "Шашпорин Максат",
+              position: "Менеджер",
+              email: "az@example.com",
+              phone: "+996 702 675 970",
+              image: no,
+            },
+            {
+              name: "Мурзабелеков Азамат",
+              position: "Менеджер",
+              email: "az@example.com",
+              phone: "+996 504 675 970",
+              image: no,
             },
           ],
         },
@@ -84,11 +64,18 @@ const StructureKgPage = () => {
           title: "Отдел маркетинга",
           employees: [
             {
-              name: "Эльмира С.",
+              name: "Догдурбаева Жайна",
               position: "Маркетолог",
-              email: "elmir@example.com",
-              phone: "+996 555 555 666",
-              image: "/images/marketing.jpg",
+              email: "l@example.com",
+              phone: "+996 779 187 686",
+              image: no,
+            },
+            {
+              name: "Бейшебекова Азема",
+              position: "Ассистент & Маркетолог",
+              email: "lr@example.com",
+              phone: "+996 708 505 282",
+              image: no,
             },
           ],
         },
@@ -96,11 +83,11 @@ const StructureKgPage = () => {
           title: "Отдел R&D и новых технологий",
           employees: [
             {
-              name: "Талант М.",
+              name: "Содалиев Абай",
               position: "Инженер R&D",
               email: "talant@example.com",
               phone: "+996 555 777 888",
-              image: "/images/rd.jpg",
+              image: no,
             },
           ],
         },
@@ -111,88 +98,84 @@ const StructureKgPage = () => {
   return (
     <>
       <Navbar />
-      <div className="contact-content py-8 px-4 bg-white rounded-lg shadow-lg">
-        <h3 className="text-center contact-subtitle text-green-800 font-bold text-3xl mb-8">
+      <div className="contact-content back py-8 px-4 bg-white rounded-lg shadow-lg">
+        <h3 className="text-center text-green-800 font-bold text-3xl mb-8">
           Наша структура в Кыргызстане
         </h3>
-        <div className="hierarchy-container">
-          {/* Главный директор */}
-          <div className="hierarchy-level">
-            {structureData[0].employees.map((employee, index) => (
-              <Card
-                key={index}
-                className="address-card border-2 border-customOrange-600 shadow-md"
-                ref={(el) => (cardsRef.current[index] = el)}
+        <div className="grid gap-8">
+          {structureData.map((section, sectionIndex) => (
+            <div key={sectionIndex} className="section">
+              <h4 className="text-center text-orange-600 font-bold text-2xl mb-4">
+                {section.title}
+              </h4>
+              <div
+                className={
+                  section.employees?.length === 1
+                    ? "flex justify-center"
+                    : "grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
+                }
               >
-                <img
-                  src={employee.image}
-                  alt={employee.name}
-                  className="w-12 h-12 rounded-full mb-4 object-cover"
-                />
-                <h4 className="text-xl text-orange-600 font-bold">{employee.name}</h4>
-                <Text className="text-gray-700">{employee.position}</Text>
-                <p className="text-gray-600 mt-2 font-medium">{employee.email}</p>
-                <p className="text-green-800 font-bold">{employee.phone}</p>
-              </Card>
-            ))}
-          </div>
-
-          {/* Стрелка */}
-          <svg className="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M12 2v20m0 0l-5-5m5 5l5-5" stroke="orange" strokeWidth="2" fill="none" />
-          </svg>
-
-          {/* Управляющий */}
-          <div className="hierarchy-level">
-            {structureData[1].employees.map((employee, index) => (
-              <Card
-                key={index}
-                className="address-card border-2 border-customOrange-600 shadow-md"
-                ref={(el) => (cardsRef.current[index] = el)}
-              >
-                <img
-                  src={employee.image}
-                  alt={employee.name}
-                  className="w-12 h-12 rounded-full mb-4 object-cover"
-                />
-                <h4 className="text-xl text-orange-600 font-bold">{employee.name}</h4>
-                <Text className="text-gray-700">{employee.position}</Text>
-                <p className="text-gray-600 mt-2 font-medium">{employee.email}</p>
-                <p className="text-green-800 font-bold">{employee.phone}</p>
-              </Card>
-            ))}
-          </div>
-
-          {/* Стрелка */}
-          <svg className="arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            <path d="M12 2v20m0 0l-5-5m5 5l5-5" stroke="orange" strokeWidth="2" fill="none" />
-          </svg>
-
-          {/* Отделы */}
-          <div className="hierarchy-level">
-            {structureData[2].subDepartments.map((department, index) => (
-              <div key={index} className="department-container">
-                <h4 className="text-xl text-orange-600 font-bold mb-4">{department.title}</h4>
-                {department.employees.map((employee, empIndex) => (
+                {(section.employees || []).map((employee, employeeIndex) => (
                   <Card
-                    key={empIndex}
-                    className="address-card border-2 border-customOrange-600 shadow-md"
-                    ref={(el) => (cardsRef.current[empIndex] = el)}
+                    key={employeeIndex}
+                    className="employee-card border-2 border-customOrange-600 shadow-md hover:shadow-lg transform hover:-translate-y-2 transition duration-300"
                   >
                     <img
                       src={employee.image}
                       alt={employee.name}
-                      className="w-12 h-12 rounded-full mb-4 object-cover"
+                      className="w-24 h-24 rounded-full my-0 mx-auto object-cover"
                     />
-                    <h4 className="text-xl text-orange-600 font-bold">{employee.name}</h4>
-                    <Text className="text-gray-700">{employee.position}</Text>
-                    <p className="text-gray-600 mt-2 font-medium">{employee.email}</p>
-                    <p className="text-green-800 font-bold">{employee.phone}</p>
+                    <h4 className="text-xl text-center text-orange-600 font-bold">
+                      {employee.name}
+                    </h4>
+                    <p className="text-center text-gray-700">{employee.position}</p>
+                    <p className="text-center text-gray-600">{employee.email}</p>
+                    <p className="text-center text-green-800 font-bold">
+                      {employee.phone}
+                    </p>
                   </Card>
                 ))}
+                {section.subDepartments &&
+                  section.subDepartments.map((department, deptIndex) => (
+                    <div key={deptIndex} className="mb-8">
+                      <h5 className="text-center text-orange-500 font-bold text-lg mb-4">
+                        {department.title}
+                      </h5>
+                      <div
+                        className={
+                          department.employees.length === 1
+                            ? "flex justify-center"
+                            : "grid gap-6 grid-cols-1 sm:grid-cols-2"
+                        }
+                      >
+                        {department.employees.map((employee, empIndex) => (
+                          <Card
+                            key={empIndex}
+                            className="employee-card border-2 border-customOrange-600 shadow-md hover:shadow-lg transform hover:-translate-y-2 transition duration-300"
+                          >
+                            <img
+                              src={employee.image}
+                              alt={employee.name}
+                              className="w-24 h-24 rounded-full my-0 mx-auto object-cover"
+                            />
+                            <h4 className="text-center text-orange-600 font-bold">
+                              {employee.name}
+                            </h4>
+                            <p className="text-center text-gray-700">
+                              {employee.position}
+                            </p>
+                            <p className="text-center text-gray-600">{employee.email}</p>
+                            <p className="text-center text-green-800 font-bold">
+                              {employee.phone}
+                            </p>
+                          </Card>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
       <MyFooter />
