@@ -98,27 +98,29 @@ const StructureKgPage = () => {
   return (
     <>
       <Navbar />
-      <div className="contact-content back py-8 px-4 bg-white rounded-lg shadow-lg">
+      <div className="contact-content py-8 px-4 bg-white rounded-lg shadow-lg">
         <h3 className="text-center text-green-800 font-bold text-3xl mb-8">
           Наша структура в Кыргызстане
-        </h3>
+        </h3>          
         <div className="grid gap-8">
           {structureData.map((section, sectionIndex) => (
             <div key={sectionIndex} className="section">
+              {/* Заголовок секции */}
               <h4 className="text-center text-orange-600 font-bold text-2xl mb-4">
                 {section.title}
               </h4>
+              {/* Сотрудники секции */}
               <div
                 className={
                   section.employees?.length === 1
-                    ? "flex justify-center"
-                    : "grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
+                  ? "flex justify-center"
+                  : "grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
                 }
               >
                 {(section.employees || []).map((employee, employeeIndex) => (
                   <Card
-                    key={employeeIndex}
-                    className="employee-card border-2 border-customOrange-600 shadow-md hover:shadow-lg transform hover:-translate-y-2 transition duration-300"
+                  key={employeeIndex}
+                  className="employee-card border-2 border-customOrange-600 shadow-md hover:shadow-lg transform hover:-translate-y-2 transition duration-300"
                   >
                     <img
                       src={employee.image}
@@ -135,6 +137,7 @@ const StructureKgPage = () => {
                     </p>
                   </Card>
                 ))}
+                {/* Подотделы секции */}
                 {section.subDepartments &&
                   section.subDepartments.map((department, deptIndex) => (
                     <div key={deptIndex} className="mb-8">
@@ -164,7 +167,9 @@ const StructureKgPage = () => {
                             <p className="text-center text-gray-700">
                               {employee.position}
                             </p>
-                            <p className="text-center text-gray-600">{employee.email}</p>
+                            <p className="text-center text-gray-600">
+                              {employee.email}
+                            </p>
                             <p className="text-center text-green-800 font-bold">
                               {employee.phone}
                             </p>
@@ -174,10 +179,28 @@ const StructureKgPage = () => {
                     </div>
                   ))}
               </div>
+              {/* Разделитель между уровнями */}
+              {sectionIndex !== structureData.length - 1 && (
+                <div className="section-divider">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    className="w-8 h-8 mx-auto"
+                  >
+                    <path
+                      d="M12 2v20m0 0l-5-5m5 5l5-5"
+                      stroke="#ff8500"
+                      strokeWidth="2"
+                      fill="none"
+                    />
+                  </svg>
+                </div>
+              )}
             </div>
           ))}
         </div>
       </div>
+
       <MyFooter />
     </>
   );
