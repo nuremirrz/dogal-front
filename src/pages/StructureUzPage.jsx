@@ -13,8 +13,8 @@ const StructureUzPage = () => {
         {
           name: "Аскералиева Бактыгул",
           position: "CEO",
-          email: "a@example.com",
-          phone: "+996 555 123 456",
+          email: "b.askeralieva@dogaltrm.kg",
+          phone: "",
           image: no,
         },
       ],
@@ -25,8 +25,8 @@ const StructureUzPage = () => {
         {
           name: "Медетбек уулу Бактыяр",
           position: "COO",
-          email: "z@example.com",
-          phone: "+998 908 307 181",
+          email: "b.medetbek@dogaltrm.uz",
+          phone: "+998 90 830 7181",
           image: no,
         },
       ],
@@ -38,10 +38,10 @@ const StructureUzPage = () => {
           title: "Отдел продаж",
           employees: [
             {
-              name: "Каршибоев Орозмурат",
+              name: "Каршибаев Орозмурат",
               position: "Менеджер",
-              email: "az@example.com",
-              phone: "+998 908 307 180",
+              email: "u.karshiboev@dogaltrm.uz",
+              phone: "+998 90 830 71 80",
               image: no,
             },
           ],
@@ -52,14 +52,14 @@ const StructureUzPage = () => {
             {
               name: "Догдурбаева Жайна",
               position: "Маркетолог",
-              email: "l@example.com",
+              email: "dogdurbaevajaina@gmail.com",
               phone: "+996 779 187 686",
               image: no,
             },
             {
-              name: "Бейшебекова Азема",
+              name: "Бейшебекова Азима",
               position: "Ассистент & Маркетолог",
-              email: "lr@example.com",
+              email: "azima131127@gmail.com",
               phone: "+996 708 505 282",
               image: no,
             },
@@ -71,7 +71,7 @@ const StructureUzPage = () => {
             {
               name: "Содалиев Абай",
               position: "Инженер R&D",
-              email: "talant@example.com",
+              email: "abaisodaliev@dogaltrm.kg",
               phone: "+996 555 777 888",
               image: no,
             },

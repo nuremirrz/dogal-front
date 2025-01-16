@@ -13,8 +13,8 @@ const StructureRuPage = () => {
         {
           name: "Аскералиева Бактыгул",
           position: "CEO",
-          email: "a@example.com",
-          phone: "-",
+          email: "b.askeralieva@dogaltrm.kg",
+          phone: "",
           image: no,
         },
       ],
@@ -28,7 +28,7 @@ const StructureRuPage = () => {
             {
               name: "Качинов Тимур",
               position: "Менеджер",
-              email: "az@example.com",
+              email: "t.kachinov@dogaltrm.kg",
               phone: "+7 771 317 3022",
               image: no,
             },            
@@ -40,14 +40,14 @@ const StructureRuPage = () => {
             {
               name: "Догдурбаева Жайна",
               position: "Маркетолог",
-              email: "l@example.com",
+              email: "dogdurbaevajaina@gmail.com",
               phone: "+996 779 187 686",
               image: no,
             },
             {
-              name: "Бейшебекова Азема",
+              name: "Бейшебекова Азима",
               position: "Ассистент & Маркетолог",
-              email: "lr@example.com",
+              email: "azima131127@gmail.com",
               phone: "+996 708 505 282",
               image: no,
             },
@@ -59,7 +59,7 @@ const StructureRuPage = () => {
             {
               name: "Содалиев Абай",
               position: "Инженер R&D",
-              email: "talant@example.com",
+              email: "abaisodaliev@dogaltrm.kg",
               phone: "+996 505 675 970",
               image: no,
             },

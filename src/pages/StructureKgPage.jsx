@@ -8,13 +8,13 @@ import no from "../assets/images/no-photo.jpg";
 const StructureKgPage = () => {
   const structureData = [
     {
-      title: "Руководитель по странам СНГ",
+      title: "Руководители",
       employees: [
         {
           name: "Аскералиева Бактыгул",
-          position: "CEO",
-          email: "a@example.com",
-          phone: "-",
+          position: "Руководитель по странам СНГ",
+          email: "b.askeralieva@dogaltrm.kg",
+          phone: "",
           image: no,
         },
       ],
@@ -24,8 +24,8 @@ const StructureKgPage = () => {
       employees: [
         {
           name: "Бегимбаева Назгуль",
-          position: "COO",
-          email: "z@example.com",
+          position: "Исполнительный директор",
+          email: "nazgulbegimbaeva@dogaltrm.kg",
           phone: "+996 706 779 949",
           image: no,
         },
@@ -40,21 +40,28 @@ const StructureKgPage = () => {
             {
               name: "Бактыбеков Азат",
               position: "Менеджер",
-              email: "az@example.com",
+              email: "azatbaktybekuulu@dogaltrm.kg",
               phone: "+996 508 675 970",
               image: no,
             },
             {
               name: "Шашпорин Максат",
               position: "Менеджер",
-              email: "az@example.com",
+              email: "shashporin@dogaltrm.kg",
               phone: "+996 702 675 970",
+              image: no,
+            },
+            {
+              name: "Абдумомунов Азамат",
+              position: "Менеджер",
+              email: "a.abdumomunov@dogaltrm.kg",
+              phone: "+996 701 670 065",
               image: no,
             },
             {
               name: "Мурзабелеков Азамат",
               position: "Менеджер",
-              email: "az@example.com",
+              email: "a.murzabelekov@dogaltrm.kg",
               phone: "+996 504 675 970",
               image: no,
             },
@@ -66,14 +73,14 @@ const StructureKgPage = () => {
             {
               name: "Догдурбаева Жайна",
               position: "Маркетолог",
-              email: "l@example.com",
+              email: "dogdurbaevajaina@gmail.com",
               phone: "+996 779 187 686",
               image: no,
             },
             {
-              name: "Бейшебекова Азема",
+              name: "Бейшебекова Азима",
               position: "Ассистент & Маркетолог",
-              email: "lr@example.com",
+              email: "azima131127@gmail.com",
               phone: "+996 708 505 282",
               image: no,
             },
@@ -85,7 +92,7 @@ const StructureKgPage = () => {
             {
               name: "Содалиев Абай",
               position: "Инженер R&D",
-              email: "talant@example.com",
+              email: "abaisodaliev@dogaltrm.kg",
               phone: "+996 555 777 888",
               image: no,
             },
@@ -154,7 +161,7 @@ const StructureKgPage = () => {
                         {department.employees.map((employee, empIndex) => (
                           <Card
                             key={empIndex}
-                            className="employee-card border-2  bg-customOrange-500 border-customOrange-600 shadow-md hover:shadow-lg transform hover:-translate-y-2 transition duration-300"
+                            className="employee-card border-2 border-customOrange-600 shadow-md hover:shadow-lg transform hover:-translate-y-2 transition duration-300"
                           >
                             <img
                               src={employee.image}

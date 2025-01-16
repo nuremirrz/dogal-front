@@ -13,8 +13,8 @@ const StructureKzPage = () => {
         {
           name: "Аскералиева Бактыгул",
           position: "CEO",
-          email: "a@example.com",
-          phone: "+996 555 123 456",
+          email: "b.askeralieva@dogaltrm.kg",
+          phone: "",
           image: no,
         },
       ],
@@ -28,14 +28,14 @@ const StructureKzPage = () => {
             {
               name: "Качинов Тимур",
               position: "Менеджер",
-              email: "az@example.com",
+              email: "t.kachinov@dogaltrm.kg",
               phone: "+996 502 675 970",
               image: no,
             },
             {
               name: "Нуралиев Улук",
               position: "Менеджер",
-              email: "az@example.com",
+              email: "nuraliev@dogaltrm.kg",
               phone: "+996 507 675 970",
               image: no,
             },
@@ -47,14 +47,14 @@ const StructureKzPage = () => {
             {
               name: "Догдурбаева Жайна",
               position: "Маркетолог",
-              email: "l@example.com",
+              email: "dogdurbaevajaina@gmail.com",
               phone: "+996 779 187 686",
               image: no,
             },
             {
-              name: "Бейшебекова Азема",
+              name: "Бейшебекова Азима",
               position: "Ассистент & Маркетолог",
-              email: "lr@example.com",
+              email: "azima131127@gmail.com",
               phone: "+996 708 505 282",
               image: no,
             },
@@ -66,7 +66,7 @@ const StructureKzPage = () => {
             {
               name: "Содалиев Абай",
               position: "Инженер R&D",
-              email: "talant@example.com",
+              email: "abaisodaliev@dogaltrm.kg",
               phone: "+996 555 777 888",
               image: no,
             },
@@ -79,13 +79,13 @@ const StructureKzPage = () => {
   return (
     <>
       <Navbar />
-      <div className="contact-content back py-8 px-4 bg-white rounded-lg shadow-lg">
+      <div className="contact-content py-8 px-4 bg-white rounded-lg shadow-lg">
         <h3 className="text-center text-green-800 font-bold text-3xl mb-8">
           Наша структура в Казахстане
         </h3>
         <div className="grid gap-8">
           {structureData.map((section, sectionIndex) => (
-            <div key={sectionIndex} className="section">
+            <div key={sectionIndex} className="section back">
               <h4 className="text-center text-orange-600 font-bold text-2xl mb-4">
                 {section.title}
               </h4>
