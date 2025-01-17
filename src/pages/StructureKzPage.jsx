@@ -35,7 +35,7 @@ const StructureKzPage = () => {
             {
               name: "Нуралиев Улук",
               position: "Менеджер",
-              email: "nuraliev@dogaltrm.kg",
+              email: "uluknuraliev@dogaltrm.kg",
               phone: "+996 507 675 970",
               image: no,
             },

@@ -9,13 +9,13 @@
 }
 
 .section-divider svg {
-  animation: bounce 1.5s infinite; /* Анимация */
+  animation: bounce 1.7s infinite; /* Анимация */
 }
 
 @keyframes bounce {
   0%,
   100% {
-    transform: translateY(0);
+    transform: translateY(8px);
   }
   50% {
     transform: translateY(-10px);

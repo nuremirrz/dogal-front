@@ -8,7 +8,7 @@ import no from "../assets/images/no-photo.jpg";
 const StructureKgPage = () => {
   const structureData = [
     {
-      title: "Руководители",
+      title: "",
       employees: [
         {
           name: "Аскералиева Бактыгул",
@@ -20,7 +20,7 @@ const StructureKgPage = () => {
       ],
     },
     {
-      title: "Исполнительный директор",
+      title: "",
       employees: [
         {
           name: "Бегимбаева Назгуль",
@@ -98,6 +98,25 @@ const StructureKgPage = () => {
             },
           ],
         },
+        {
+          title: "Бухгалтерия",
+          employees: [
+            {
+              name: "Жантаева Чолпон",
+              position: "Бухгалтер",
+              email: "finansist@dogaltrm.kg",
+              phone: "+996 555 777 888",
+              image: no,
+            },
+            {
+              name: "Мусаева Асел",
+              position: "Бухгалтер",
+              email: "aselmusaeva@dogaltrm.kg",
+              phone: "+996 555 777 888",
+              image: no,
+            },
+          ],
+        },
       ],
     },
   ];
@@ -127,7 +146,7 @@ const StructureKgPage = () => {
                 {(section.employees || []).map((employee, employeeIndex) => (
                   <Card
                   key={employeeIndex}
-                  className="employee-card border-2 bg-customOrange-200 border-customOrange-600 shadow-md hover:shadow-lg transform hover:-translate-y-2 transition duration-300"
+                  className="employee-card border-2 border-customOrange-600 shadow-md hover:shadow-lg transform hover:-translate-y-2 transition duration-300"
                   >
                     <img
                       src={employee.image}
@@ -138,7 +157,7 @@ const StructureKgPage = () => {
                       {employee.name}
                     </h4>
                     <p className="text-center text-gray-700">{employee.position}</p>
-                    <p className="text-center text-gray-600">{employee.email}</p>
+                    <p className="text-center text-gray-600 font-semibold">{employee.email}</p>
                     <p className="text-center text-green-800 font-bold">
                       {employee.phone}
                     </p>
@@ -148,7 +167,7 @@ const StructureKgPage = () => {
                 {section.subDepartments &&
                   section.subDepartments.map((department, deptIndex) => (
                     <div key={deptIndex} className="mb-8">
-                      <h5 className="text-centertext-orange-500 font-bold text-lg mb-4">
+                      <h5 className="text-center text-orange-500 font-bold text-lg mb-4">
                         {department.title}
                       </h5>
                       <div
@@ -174,7 +193,7 @@ const StructureKgPage = () => {
                             <p className="text-center text-gray-700">
                               {employee.position}
                             </p>
-                            <p className="text-center text-gray-600">
+                            <p className="text-center text-gray-600 font-semibold">
                               {employee.email}
                             </p>
                             <p className="text-center text-green-800 font-bold">

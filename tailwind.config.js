@@ -46,6 +46,15 @@ export default {
         'text-indent-6': '1.5rem',
         'text-indent-8': '2rem',
       },
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(100%)' },
+          '100%': { transform: 'translateX(-100%)' },
+        }
+      },
+      animation: {
+        marquee: 'marquee 10s linear infinite',
+      }
     },
   },
   plugins: [],
