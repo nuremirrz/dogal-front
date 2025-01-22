@@ -21,6 +21,51 @@
     transform: translateY(-10px);
   }
 }
+.avatar-container {
+  position: relative;
+  width: 120px; /* Размер обертки вокруг аватара */
+  height: 120px;
+  margin: 0 auto; /* Центрирование */
+}
+
+.avatar-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 1px solid #ffa500; /* Цвет кольца */
+  animation: pulse 3s infinite ease-in-out; /* Анимация волны */
+  z-index: -1; /* Чтобы кольцо было под аватаром */
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: scale(1.2); /* Легкое увеличение */
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.6;
+  }
+}
+
+.avatar-image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%; /* Круглый аватар */
+  object-fit: cover;
+  border: 4px solid #fff; /* Внутренний белый контур */
+  position: relative;
+  z-index: 1; /* Аватар над кольцом */
+}
+
 
 .hierarchy-container {
   display: flex;
@@ -39,7 +84,6 @@
 
 .hierarchy-card {
   background: #fff;
-  border: 2px solid #ff8500; /* Яркий оранжевый */
   border-radius: 12px;
   padding: 20px;
   width: 240px; /* Фиксированная ширина для всех карточек */
@@ -61,16 +105,23 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
+  padding: 30px;
+  border: 2px solid #ff8500; /* Добавляем оранжевую рамку */
   margin: 0 auto 12px;
   object-fit: cover;
 }
 
-.department-container h4 {
-  text-align: center;
-  color: #ff8500; /* Оранжевый цвет для заголовков отделов */
+.hierarchy-card h4 {
   font-size: 1.25rem;
   font-weight: bold;
-  margin-bottom: 12px;
+  color: #ff8500; /* Оранжевый цвет имени */
+  margin-bottom: 8px;
+}
+
+.hierarchy-card hr {
+  width: 50px; /* Длина линии */
+  border: 1px solid #ff8500; /* Оранжевый цвет черточки */
+  margin: 0 auto 12px;
 }
 
 .text-gray-700 {
@@ -89,44 +140,79 @@
   font-weight: bold;
 }
 
-/* ==== Адаптивные стили для планшетов ==== */
+/* ==== Адаптивные стили для планшетов (максимум 768px) ==== */
 @media (max-width: 768px) {
   .hierarchy-level {
-    gap: 24px; /* Уменьшение расстояния между карточками */
+    gap: 16px; /* Еще меньше расстояние между карточками */
   }
 
   .hierarchy-card {
-    width: 200px; /* Уменьшение ширины карточек */
-    height: 320px; /* Пропорциональное уменьшение высоты */
-    padding: 16px; /* Уменьшение отступов */
+    width: 220px; /* Немного увеличиваем ширину для лучшей читаемости */
+    height: auto; /* Автоматическая высота для удобного размещения контента */
+    padding: 16px;
   }
 
-  .employee-image {
-    width: 60px; /* Уменьшение размера изображения */
-    height: 60px;
+  .avatar-container {
+    width: 100px; /* Уменьшаем размеры волны и аватара */
+    height: 100px;
+  }
+
+  .avatar-container::before {
+    border-width: 3px; /* Тоньше кольцо */
+  }
+
+  .avatar-image {
+    width: 100%;
+    height: 100%;
+  }
+
+  .employee-card h4 {
+    font-size: 1.1rem; /* Уменьшаем шрифт имени */
+  }
+
+  .employee-card p {
+    font-size: 0.9rem; /* Уменьшаем шрифт для описания */
   }
 }
 
-/* ==== Адаптивные стили для мобильных устройств ==== */
+/* ==== Адаптивные стили для мобильных устройств (максимум 480px) ==== */
 @media (max-width: 480px) {
   .hierarchy-level {
-    flex-direction: column; /* Карточки в колонку */
+    flex-direction: column; /* Карточки располагаются в столбик */
     align-items: center;
-    gap: 16px;
+    gap: 12px; /* Уменьшаем промежутки */
   }
 
   .hierarchy-card {
-    width: 90%; /* Растянуть карточки на ширину экрана */
-    height: auto; /* Убираем фиксированную высоту для мобильных устройств */
+    width: 95%; /* Почти на всю ширину экрана */
+    height: auto; /* Автоматическая высота */
     padding: 12px;
   }
 
-  .department-container h4 {
-    font-size: 1rem; /* Уменьшение размера заголовка */
+  .avatar-container {
+    width: 80px; /* Еще меньше аватар */
+    height: 80px;
   }
 
-  .employee-image {
-    width: 50px; /* Уменьшение размера изображения */
-    height: 50px;
+  .avatar-container::before {
+    border-width: 2px; /* Уменьшаем толщину кольца */
+  }
+
+  .avatar-image {
+    width: 100%;
+    height: 100%;
+  }
+
+  .employee-card h4 {
+    font-size: 1rem; /* Еще меньше шрифт имени */
+  }
+
+  .employee-card p {
+    font-size: 0.8rem; /* Уменьшаем текст описания */
+  }
+
+  hr {
+    margin: 6px auto; /* Уменьшаем отступы вокруг разделительной линии */
+    width: 10%; /* Сужаем линию */
   }
 }

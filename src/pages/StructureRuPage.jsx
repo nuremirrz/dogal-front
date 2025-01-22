@@ -18,7 +18,7 @@ const StructureRuPage = () => {
           image: no,
         },
       ],
-    },    
+    },
     {
       title: "Отделы",
       subDepartments: [
@@ -31,7 +31,7 @@ const StructureRuPage = () => {
               email: "t.kachinov@dogaltrm.kg",
               phone: "+7 771 317 3022",
               image: no,
-            },            
+            },
           ],
         },
         {
@@ -73,35 +73,78 @@ const StructureRuPage = () => {
     <>
       <Navbar />
       <div className="contact-content back py-8 px-4 bg-white rounded-lg shadow-lg">
-        <h3 className="text-center text-green-800 font-bold text-3xl mb-8">
-          Наша структура в России
-        </h3>
-        <div className="grid gap-8">
-          {structureData.map((section, sectionIndex) => (
-            <div key={sectionIndex} className="section">
-              <h4 className="text-center text-orange-600 font-bold text-2xl mb-4">
-                {section.title}
-              </h4>
+  <h3 className="text-center text-green-800 font-bold text-3xl mb-8">
+    Наша команда в России
+  </h3>
+  <div className="grid gap-8">
+    {structureData.map((section, sectionIndex) => (
+      <div key={sectionIndex} className="section">
+        <h4 className="text-center text-orange-600 font-bold text-2xl mb-4">
+          {section.title}
+        </h4>
+        {section.employees && (
+          <div
+            className={
+              section.employees.length === 1
+                ? "flex justify-center"
+                : "grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
+            }
+          >
+            {section.employees.map((employee, employeeIndex) => (
+              <Card
+                key={employeeIndex}
+                className="employee-card shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition duration-300"
+              >
+                {/* Волнообразное кольцо вокруг аватарки */}
+                <div className="avatar-container">
+                  <img
+                    src={employee.image}
+                    alt={employee.name}
+                    className="avatar-image"
+                  />
+                </div>
+                <h4 className="text-xl text-center text-orange-600 font-bold">
+                  {employee.name}
+                </h4>
+                <hr className="w-12 mx-auto border-orange-500 my-2" />
+                <p className="text-center text-gray-700">{employee.position}</p>
+                <p className="text-center text-gray-600">{employee.email}</p>
+                <p className="text-center text-green-800 font-bold">
+                  {employee.phone}
+                </p>
+              </Card>
+            ))}
+          </div>
+        )}
+        {section.subDepartments &&
+          section.subDepartments.map((department, deptIndex) => (
+            <div key={deptIndex} className="department-container mb-8">
+              <h5 className="text-center text-orange-500 font-bold text-lg mb-4">
+                {department.title}
+              </h5>
               <div
                 className={
-                  section.employees?.length === 1
+                  department.employees.length === 1
                     ? "flex justify-center"
                     : "grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
                 }
               >
-                {(section.employees || []).map((employee, employeeIndex) => (
+                {department.employees.map((employee, empIndex) => (
                   <Card
-                    key={employeeIndex}
-                    className="employee-card border-2 border-customOrange-600 shadow-md hover:shadow-lg transform hover:-translate-y-2 transition duration-300"
+                    key={empIndex}
+                    className="employee-card shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition duration-300"
                   >
-                    <img
-                      src={employee.image}
-                      alt={employee.name}
-                      className="w-24 h-24 rounded-full my-0 mx-auto object-cover"
-                    />
+                    <div className="avatar-container">
+                      <img
+                        src={employee.image}
+                        alt={employee.name}
+                        className="avatar-image"
+                      />
+                    </div>
                     <h4 className="text-xl text-center text-orange-600 font-bold">
                       {employee.name}
                     </h4>
+                    <hr className="w-12 mx-auto border-orange-500 my-2" />
                     <p className="text-center text-gray-700">{employee.position}</p>
                     <p className="text-center text-gray-600">{employee.email}</p>
                     <p className="text-center text-green-800 font-bold">
@@ -109,49 +152,14 @@ const StructureRuPage = () => {
                     </p>
                   </Card>
                 ))}
-                {section.subDepartments &&
-                  section.subDepartments.map((department, deptIndex) => (
-                    <div key={deptIndex} className="mb-8">
-                      <h5 className="text-center text-orange-500 font-bold text-lg mb-4">
-                        {department.title}
-                      </h5>
-                      <div
-                        className={
-                          department.employees.length === 1
-                            ? "flex justify-center"
-                            : "grid gap-6 grid-cols-1 sm:grid-cols-2"
-                        }
-                      >
-                        {department.employees.map((employee, empIndex) => (
-                          <Card
-                            key={empIndex}
-                            className="employee-card border-2 border-customOrange-600 shadow-md hover:shadow-lg transform hover:-translate-y-2 transition duration-300"
-                          >
-                            <img
-                              src={employee.image}
-                              alt={employee.name}
-                              className="w-24 h-24 rounded-full my-0 mx-auto object-cover"
-                            />
-                            <h4 className="text-center text-orange-600 font-bold">
-                              {employee.name}
-                            </h4>
-                            <p className="text-center text-gray-700">
-                              {employee.position}
-                            </p>
-                            <p className="text-center text-gray-600">{employee.email}</p>
-                            <p className="text-center text-green-800 font-bold">
-                              {employee.phone}
-                            </p>
-                          </Card>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
               </div>
             </div>
           ))}
-        </div>
       </div>
+    ))}
+  </div>
+</div>
+
       <MyFooter />
     </>
   );
