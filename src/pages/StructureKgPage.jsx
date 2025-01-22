@@ -135,13 +135,7 @@ const StructureKgPage = () => {
                 {section.title}
               </h4>
               {section.employees && (
-                <div
-                  className={
-                    section.employees.length === 1
-                      ? "flex justify-center"
-                      : "grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
-                  }
-                >
+                <div className="employee-grid">
                   {section.employees.map((employee, employeeIndex) => (
                     <Card
                       key={employeeIndex}
@@ -175,13 +169,7 @@ const StructureKgPage = () => {
                     <h5 className="text-center text-orange-500 font-bold text-lg mb-4">
                       {department.title}
                     </h5>
-                    <div
-                      className={
-                        department.employees.length === 1
-                          ? "flex justify-center"
-                          : "grid gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
-                      }
-                    >
+                    <div className="employee-grid">
                       {department.employees.map((employee, empIndex) => (
                         <Card
                           key={empIndex}
@@ -200,11 +188,9 @@ const StructureKgPage = () => {
                           <hr className="w-12 mx-auto border-orange-500 my-2" />
                           <p className="text-center text-gray-700">{employee.position}</p>
                           <p className="text-center text-gray-600 font-semibold">
-                            {employee.email}
-                          </p>
+                            {employee.email}</p>
                           <p className="text-center text-green-800 font-bold">
-                            {employee.phone}
-                          </p>
+                            {employee.phone}</p>
                         </Card>
                       ))}
                     </div>

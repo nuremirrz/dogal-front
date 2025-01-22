@@ -1,26 +1,24 @@
-.section-divider {
-  width: 100%;
-  height: 50px;
+/* Общая сетка */
+.employee-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px; /* Отступы между карточками */
+}
+
+/* Для одного ряда */
+.employee-row {
   display: flex;
   justify-content: center;
-  align-items: center;
-  background: linear-gradient(90deg, #fff 0%, #ff8500 100%); /* Градиент */
-  margin: 32px 0; /* Отступ сверху и снизу */
+  gap: 20px; /* Отступы между карточками */
+  flex-wrap: wrap; /* Позволяет переносить карточки */
 }
 
-.section-divider svg {
-  animation: bounce 1.7s infinite; /* Анимация */
+/* Для центрирования последнего ряда */
+.employee-row:last-child {
+  justify-content: center;
 }
 
-@keyframes bounce {
-  0%,
-  100% {
-    transform: translateY(8px);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
 .avatar-container {
   position: relative;
   width: 120px; /* Размер обертки вокруг аватара */
