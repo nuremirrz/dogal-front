@@ -18,7 +18,7 @@ const NewsAdmin = () => {
     const fetchNews = useCallback(async () => {
         setLoading(true);
         try {
-            const { data } = await axios.get('/api/news');
+            const { data } = await axios.get('/api/news?showAll=true'); // Добавляем параметр
             setNews(data);
         } catch (error) {
             console.error('Ошибка при получении данных новостей:', error);
@@ -26,7 +26,7 @@ const NewsAdmin = () => {
         } finally {
             setLoading(false);
         }
-    }, []);
+    }, []);    
 
     useEffect(() => {
         fetchNews();
