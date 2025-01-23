@@ -4,6 +4,9 @@ import Navbar from "../components/Navbar";
 import MyFooter from "../components/MyFooter";
 import "../styles/Structure.css";
 import no from "../assets/images/no-photo.jpg";
+import sodaliev from '../assets/images/sodaliev.jpg';
+import kachinov from '../assets/images/kachinov.jpg';
+import askeralieva from '../assets/images/askeralieva.jpg';
 
 const StructureRuPage = () => {
   const structureData = [
@@ -15,7 +18,7 @@ const StructureRuPage = () => {
           position: "CEO",
           email: "b.askeralieva@dogaltrm.kg",
           phone: "",
-          image: no,
+          image: askeralieva,
         },
       ],
     },
@@ -30,7 +33,7 @@ const StructureRuPage = () => {
               position: "Менеджер",
               email: "t.kachinov@dogaltrm.kg",
               phone: "+7 771 317 3022",
-              image: no,
+              image: kachinov,
             },
           ],
         },
@@ -61,7 +64,7 @@ const StructureRuPage = () => {
               position: "Инженер R&D",
               email: "abaisodaliev@dogaltrm.kg",
               phone: "+996 505 675 970",
-              image: no,
+              image: sodaliev,
             },
           ],
         },

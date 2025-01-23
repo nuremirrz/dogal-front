@@ -4,6 +4,12 @@ import Navbar from "../components/Navbar";
 import MyFooter from "../components/MyFooter";
 import "../styles/Structure.css";
 import no from "../assets/images/no-photo.jpg";
+import shashporin from '../assets/images/shashporin.jpg'
+import baktybekovAzat from '../assets/images/baktybekovAzat.jpg'
+import myrzabelekov from '../assets/images/myrzabelekov.jpg'
+import abdumomunov from '../assets/images/abdumomunov.jpg'
+import sodaliev from '../assets/images/sodaliev.jpg'
+import askeralieva from '../assets/images/askeralieva.jpg'
 
 const StructureKgPage = () => {
   const structureData = [
@@ -15,7 +21,7 @@ const StructureKgPage = () => {
           position: "Руководитель по странам СНГ",
           email: "b.askeralieva@dogaltrm.kg",
           phone: "",
-          image: no,
+          image: askeralieva,
         },
       ],
     },
@@ -42,28 +48,28 @@ const StructureKgPage = () => {
               position: "Менеджер",
               email: "azatbaktybekuulu@dogaltrm.kg",
               phone: "+996 508 675 970",
-              image: no,
+              image: baktybekovAzat,
             },
             {
               name: "Шашпорин Максат",
               position: "Менеджер",
               email: "shashporin@dogaltrm.kg",
               phone: "+996 702 675 970",
-              image: no,
+              image: shashporin,
             },
             {
               name: "Абдумомунов Азамат",
               position: "Менеджер",
               email: "a.abdumomunov@dogaltrm.kg",
               phone: "+996 701 670 065",
-              image: no,
+              image: abdumomunov,
             },
             {
               name: "Мурзабелеков Азамат",
               position: "Менеджер",
               email: "a.murzabelekov@dogaltrm.kg",
               phone: "+996 504 675 970",
-              image: no,
+              image: myrzabelekov,
             },
           ],
         },
@@ -94,7 +100,7 @@ const StructureKgPage = () => {
               position: "Инженер R&D",
               email: "abaisodaliev@dogaltrm.kg",
               phone: "+996 555 777 888",
-              image: no,
+              image: sodaliev,
             },
           ],
         },

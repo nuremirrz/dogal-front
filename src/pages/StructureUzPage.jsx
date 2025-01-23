@@ -4,6 +4,10 @@ import Navbar from "../components/Navbar";
 import MyFooter from "../components/MyFooter";
 import "../styles/Structure.css";
 import no from "../assets/images/no-photo.jpg";
+import sodaliev from '../assets/images/sodaliev.jpg';
+import askeralieva from '../assets/images/askeralieva.jpg';
+import karshiboev from '../assets/images/karshiboev.jpg';
+import medetbekuulu from '../assets/images/medetbekuulu.jpg';
 
 const StructureUzPage = () => {
   const structureData = [
@@ -15,7 +19,7 @@ const StructureUzPage = () => {
           position: "CEO",
           email: "b.askeralieva@dogaltrm.kg",
           phone: "",
-          image: no,
+          image: askeralieva,
         },
       ],
     },
@@ -27,7 +31,7 @@ const StructureUzPage = () => {
           position: "COO",
           email: "b.medetbek@dogaltrm.uz",
           phone: "+998 90 830 7181",
-          image: no,
+          image: medetbekuulu,
         },
       ],
     },
@@ -42,7 +46,7 @@ const StructureUzPage = () => {
               position: "Менеджер",
               email: "u.karshiboev@dogaltrm.uz",
               phone: "+998 90 830 71 80",
-              image: no,
+              image: karshiboev,
             },
           ],
         },
@@ -73,7 +77,7 @@ const StructureUzPage = () => {
               position: "Инженер R&D",
               email: "abaisodaliev@dogaltrm.kg",
               phone: "+996 555 777 888",
-              image: no,
+              image: sodaliev,
             },
           ],
         },

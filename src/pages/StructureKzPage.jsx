@@ -4,6 +4,10 @@ import Navbar from "../components/Navbar";
 import MyFooter from "../components/MyFooter";
 import "../styles/Structure.css";
 import no from "../assets/images/no-photo.jpg";
+import sodaliev from '../assets/images/sodaliev.jpg'
+import kachinov from '../assets/images/kachinov.jpg'
+import nuraliev from '../assets/images/nuraliev.jpg'
+import askeralieva from '../assets/images/askeralieva.jpg'
 
 const StructureKzPage = () => {
   const structureData = [
@@ -15,7 +19,7 @@ const StructureKzPage = () => {
           position: "CEO",
           email: "b.askeralieva@dogaltrm.kg",
           phone: "",
-          image: no,
+          image: askeralieva,
         },
       ],
     },
@@ -30,14 +34,14 @@ const StructureKzPage = () => {
               position: "Менеджер",
               email: "t.kachinov@dogaltrm.kg",
               phone: "+996 502 675 970",
-              image: no,
+              image: kachinov,
             },
             {
               name: "Нуралиев Улук",
               position: "Менеджер",
               email: "uluknuraliev@dogaltrm.kg",
               phone: "+996 507 675 970",
-              image: no,
+              image: nuraliev,
             },
           ],
         },
@@ -68,7 +72,7 @@ const StructureKzPage = () => {
               position: "Инженер R&D",
               email: "abaisodaliev@dogaltrm.kg",
               phone: "+996 555 777 888",
-              image: no,
+              image: sodaliev,
             },
           ],
         },
