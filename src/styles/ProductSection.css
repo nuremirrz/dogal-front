@@ -56,4 +56,9 @@
   }
 }
 
-  
+@media (max-width: 480px) {
+  .agro{
+    display: flex;
+    flex-direction: column;
+  } 
+}

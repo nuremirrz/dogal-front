@@ -91,7 +91,7 @@ const SidebarForProducts = ({ filters, onFilterChange, resetFilters, onSearch, a
     ];
 
     return (
-        <div className="sidebar p-4 h-3/4 sticky top-14 left-0 right-0 bg-white shadow-md rounded-lg mb-4 w-1/5 max-[768px]:w-1/2">
+        <div className="sidebar p-4 h-3/4 sticky top-14 left-0 right-0 bg-white shadow-md rounded-lg mb-4 w-1/5 max-[768px]:w-1/2 max-[480px]:static max-[480px]:w-full">
              <h3 className="text-lg font-semibold mb-4">Фильтры</h3>
             <Collapse
                 items={items}

@@ -3,7 +3,6 @@ import { Typography, Pagination, Spin, Modal } from 'antd';
 import ProductList from './ProductList';
 import Sidebar from './SidebarForProducts';
 import axios from 'axios';
-// import agro from '../assets/images/agro.png'
 import "../styles/ProductSection.css";
 
 const { Title } = Typography;
