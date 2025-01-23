@@ -8,7 +8,7 @@ import moment from 'moment';
 import stick1 from '../assets/images/branch-1.png'
 import stick2 from '../assets/images/branch-2.png'
 import '../styles/News.css'
-import { HeartOutlined, HeartFilled, LeftOutlined, RightOutlined } from '@ant-design/icons';
+import { HeartOutlined, HeartFilled } from '@ant-design/icons';
 
 const News = () => {
     const [news, setNews] = useState([]);
@@ -69,17 +69,7 @@ const News = () => {
             setViewedItems((prevViewed) => new Set(prevViewed).add(currentSlideId));
         }
     };
-
-    const handlePrevSlide = () => {
-        const swiper = document.querySelector('.swiper').swiper;
-        swiper.slidePrev();
-    };
-
-    const handleNextSlide = () => {
-        const swiper = document.querySelector('.swiper').swiper;
-        swiper.slideNext();
-    };
-
+    
     return (
         <>
             <h2 className="text-4xl text-center m-8 font-semibold max-[480px]:text-2xl max-[480px]:mb-6 relative">
@@ -96,7 +86,7 @@ const News = () => {
             {!loading && news.length > 0 ? (
                 <div className="relative w-3/4 m-auto my-14 max-[480px]:my-8">
                     {/* Левая стрелка */}
-                    <div
+                    {/* <div
                         className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer"
                         onClick={handlePrevSlide}
                         style={{
@@ -105,7 +95,7 @@ const News = () => {
                         }}
                     >
                         <LeftOutlined />
-                    </div>
+                    </div> */}
 
                     <Swiper
                     modules={[Autoplay]} // Подключаем модуль Autoplay
@@ -193,7 +183,7 @@ const News = () => {
                     <img src={stick1} alt="stick" className="stick1" />
                     <img src={stick2} alt="stick" className="stick2" />
                     {/* Правая стрелка */}
-                    <div
+                    {/* <div
                         className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer"
                         onClick={handleNextSlide}
                         style={{
@@ -202,7 +192,7 @@ const News = () => {
                         }}
                     >
                         <RightOutlined />
-                    </div>
+                    </div> */}
                 </div>
             ) : (
                 !loading && <p className="text-center">Нет доступных новостей для отображения.</p>
