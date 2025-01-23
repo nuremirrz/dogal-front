@@ -6,6 +6,13 @@
     height: auto;
   }
   
+  .loading-spinner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px; /* Высота блока под слайдер */
+  }
+
   .carousel-image {
     width: 100%; /* Растягивает изображение на всю ширину */
     height: 500px; /* Фиксированная высота для изображений на больших экранах */

@@ -17,7 +17,7 @@ const About = () => {
    gsap.from(el, {
     x: -200, // Элемент появляется с левой стороны
     opacity: 0, // Начальная прозрачность
-    duration: 1.5, // Длительность анимации
+    duration: 2.5, // Длительность анимации
     ease: "power2.out", // Плавность движения
     scrollTrigger: {
       trigger: el, // Элемент, за которым будет следить ScrollTrigger
