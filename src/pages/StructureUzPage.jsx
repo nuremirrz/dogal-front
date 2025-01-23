@@ -181,7 +181,6 @@ const StructureUzPage = () => {
           ))}
         </div>
       </div>
-
       <MyFooter />
     </>
   );

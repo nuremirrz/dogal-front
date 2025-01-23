@@ -98,25 +98,6 @@ const StructureKgPage = () => {
             },
           ],
         },
-        {
-          title: "Бухгалтерия",
-          employees: [
-            {
-              name: "Жантаева Чолпон",
-              position: "Бухгалтер",
-              email: "finansist@dogaltrm.kg",
-              phone: "+996 555 777 888",
-              image: no,
-            },
-            {
-              name: "Мусаева Асел",
-              position: "Бухгалтер",
-              email: "aselmusaeva@dogaltrm.kg",
-              phone: "+996 555 777 888",
-              image: no,
-            },
-          ],
-        },
       ],
     },
   ];
@@ -136,30 +117,40 @@ const StructureKgPage = () => {
               </h4>
               {section.employees && (
                 <div className="employee-grid">
-                  {section.employees.map((employee, employeeIndex) => (
-                    <Card
-                      key={employeeIndex}
-                      className="employee-card shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition duration-300"
-                    >
-                      <div className="avatar-container">
-                        <img
-                          src={employee.image}
-                          alt={employee.name}
-                          className="avatar-image"
-                        />
-                      </div>
-                      <h4 className="text-xl text-center text-orange-600 font-bold">
-                        {employee.name}
-                      </h4>
-                      <hr className="w-12 mx-auto border-orange-500 my-2" />
-                      <p className="text-center text-gray-700">{employee.position}</p>
-                      <p className="text-center text-gray-600 font-semibold">
-                        {employee.email}
-                      </p>
-                      <p className="text-center text-green-800 font-bold">
-                        {employee.phone}
-                      </p>
-                    </Card>
+                  {Array.from({
+                    length: Math.ceil(section.employees.length / 3),
+                  }).map((_, rowIndex) => (
+                    <div key={rowIndex} className="employee-row">
+                      {section.employees
+                        .slice(rowIndex * 3, rowIndex * 3 + 3)
+                        .map((employee, employeeIndex) => (
+                          <Card
+                            key={employeeIndex}
+                            className="employee-card shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition duration-300"
+                          >
+                            <div className="avatar-container">
+                              <img
+                                src={employee.image}
+                                alt={employee.name}
+                                className="avatar-image"
+                              />
+                            </div>
+                            <h4 className="text-xl text-center text-orange-600 font-bold">
+                              {employee.name}
+                            </h4>
+                            <hr className="w-12 mx-auto border-orange-500 my-2" />
+                            <p className="text-center text-gray-700">
+                              {employee.position}
+                            </p>
+                            <p className="text-center text-gray-600 font-semibold">
+                              {employee.email}
+                            </p>
+                            <p className="text-center text-green-800 font-bold">
+                              {employee.phone}
+                            </p>
+                          </Card>
+                        ))}
+                    </div>
                   ))}
                 </div>
               )}
@@ -170,28 +161,40 @@ const StructureKgPage = () => {
                       {department.title}
                     </h5>
                     <div className="employee-grid">
-                      {department.employees.map((employee, empIndex) => (
-                        <Card
-                          key={empIndex}
-                          className="employee-card shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition duration-300"
-                        >
-                          <div className="avatar-container">
-                            <img
-                              src={employee.image}
-                              alt={employee.name}
-                              className="avatar-image"
-                            />
-                          </div>
-                          <h4 className="text-xl text-center text-orange-600 font-bold">
-                            {employee.name}
-                          </h4>
-                          <hr className="w-12 mx-auto border-orange-500 my-2" />
-                          <p className="text-center text-gray-700">{employee.position}</p>
-                          <p className="text-center text-gray-600 font-semibold">
-                            {employee.email}</p>
-                          <p className="text-center text-green-800 font-bold">
-                            {employee.phone}</p>
-                        </Card>
+                      {Array.from({
+                        length: Math.ceil(department.employees.length / 3),
+                      }).map((_, rowIndex) => (
+                        <div key={rowIndex} className="employee-row">
+                          {department.employees
+                            .slice(rowIndex * 3, rowIndex * 3 + 3)
+                            .map((employee, empIndex) => (
+                              <Card
+                                key={empIndex}
+                                className="employee-card shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition duration-300"
+                              >
+                                <div className="avatar-container">
+                                  <img
+                                    src={employee.image}
+                                    alt={employee.name}
+                                    className="avatar-image"
+                                  />
+                                </div>
+                                <h4 className="text-xl text-center text-orange-600 font-bold">
+                                  {employee.name}
+                                </h4>
+                                <hr className="w-12 mx-auto border-orange-500 my-2" />
+                                <p className="text-center text-gray-700">
+                                  {employee.position}
+                                </p>
+                                <p className="text-center text-gray-600 font-semibold">
+                                  {employee.email}
+                                </p>
+                                <p className="text-center text-green-800 font-bold">
+                                  {employee.phone}
+                                </p>
+                              </Card>
+                            ))}
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -200,6 +203,7 @@ const StructureKgPage = () => {
           ))}
         </div>
       </div>
+
       <MyFooter />
     </>
   );

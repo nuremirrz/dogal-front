@@ -13,7 +13,10 @@
   gap: 20px; /* Отступы между карточками */
   flex-wrap: wrap; /* Позволяет переносить карточки */
 }
-
+.employee-card{
+  height: 320px;
+  width: 260px;
+}
 /* Для центрирования последнего ряда */
 .employee-row:last-child {
   justify-content: center;
@@ -97,6 +100,10 @@
 
 /* ==== Адаптивные стили для планшетов (максимум 768px) ==== */
 @media (max-width: 768px) {
+  .employee-card{
+    height: auto;
+    width: 260px;
+  }  
   .avatar-container {
     width: 100px; /* Уменьшаем размеры волны и аватара */
     height: 100px;
@@ -122,11 +129,15 @@
 
 /* ==== Адаптивные стили для мобильных устройств (максимум 480px) ==== */
 @media (max-width: 480px) {
-  
+  .employee-card{
+    height: 320px;
+    width: auto;
+  }
 
   .avatar-container {
-    width: 80px; /* Еще меньше аватар */
-    height: 80px;
+    width: 110px; /* Еще меньше аватар */
+    height: 110px;
+    margin: 0 30px 30px; 
   }
 
   .avatar-container::before {
