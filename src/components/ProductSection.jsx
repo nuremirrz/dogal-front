@@ -65,38 +65,46 @@ const ProductSection = () => {
     };
 
     const filterProducts = (filters, searchTerm) => {
-        let filtered = products;
-
+        // Убедимся, что products - массив
+        let filtered = Array.isArray(products) ? products : [];
+    
+        // Фильтрация по категории
         if (filters.category && filters.category !== "Не выбрано") {
             filtered = filtered.filter(product => product.category === filters.category);
         }
-
+    
+        // Фильтрация по поисковому запросу
         if (searchTerm) {
             const lowerCaseSearchTerm = searchTerm.toLowerCase();
             filtered = filtered.filter(product => {
-                const nameMatch = product.name.toLowerCase().includes(lowerCaseSearchTerm);
+                const nameMatch = product.name && product.name.toLowerCase().includes(lowerCaseSearchTerm);
                 const descriptionMatch = product.description && product.description.toLowerCase().includes(lowerCaseSearchTerm);
-                const cropsMatch = product.aplicableCrops && product.aplicableCrops.some(crop =>
+                const cropsMatch = Array.isArray(product.aplicableCrops) && product.aplicableCrops.some(crop =>
                     crop.toLowerCase().includes(lowerCaseSearchTerm)
                 );
                 return nameMatch || descriptionMatch || cropsMatch;
             });
         }
-
-        if (filters.priceRange) {
-            filtered = filtered.filter(product => product.price >= filters.priceRange[0] && product.price <= filters.priceRange[1]);
-        }
-
-        if (filters.aplicableCrops.length > 0) {
+    
+        // Фильтрация по диапазону цен
+        if (filters.priceRange && Array.isArray(filters.priceRange)) {
             filtered = filtered.filter(product =>
-                product.aplicableCrops && product.aplicableCrops.some(crop =>
+                product.price >= filters.priceRange[0] && product.price <= filters.priceRange[1]
+            );
+        }
+    
+        // Фильтрация по применимым культурам
+        if (filters.aplicableCrops && filters.aplicableCrops.length > 0) {
+            filtered = filtered.filter(product =>
+                Array.isArray(product.aplicableCrops) && product.aplicableCrops.some(crop =>
                     filters.aplicableCrops.includes(crop)
                 )
             );
         }
-
+    
         setFilteredProducts(filtered);
     };
+    
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
