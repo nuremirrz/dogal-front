@@ -49,7 +49,7 @@ const TechSupport = () => {
             }
         };
         fetchStaff();
-    }, [country, slug]);
+    }, [country, slug]);    
 
     // GSAP-анимация появления карточек
     useEffect(() => {
