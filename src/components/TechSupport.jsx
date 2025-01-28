@@ -4,65 +4,70 @@ import axios from 'axios';
 import { gsap } from 'gsap';
 import '../styles/TechSupport.css';
 import defaultImg from '../assets/images/no-photo.jpg';
+import { regionNames } from '../data/regionNames';
 
 const TechSupport = () => {
-    const { country, slug } = useParams(); // Получаем country и slug из URL
+    const { country, region } = useParams();
     const [staff, setStaff] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    const containerRef = useRef(null); // Ссылка на контейнер всех карточек
-    const cardRefs = useRef([]); // Массив ссылок для каждой карточки
+    const containerRef = useRef(null);
+    const cardRefs = useRef([]);
 
-    // Словарь для отображения наименований регионов/стран на русском
-    const regionNames = {
-        kazakhstan: 'Казахстане',
-        russia: 'России',
-        uzbekistan: 'Узбекистане',
-        batken: 'Баткенской области',
-        chuy: 'Чуйской области',
-        osh: 'Ошской области',
-        'issyk-kul': 'Иссык-Кульской области',
-        talas: 'Таласской области',
-        jalalabad: 'Джалал-Абадской области',
-        naryn: 'Нарынской области',
-    };
+    // Формируем название региона или страны
+    const slugPlace = regionNames[region] || regionNames[country] || 'указанном регионе';
 
-    const slugPlace = regionNames[slug] || regionNames[country] || 'указанном регионе';
-
-    // Получение данных сотрудников из API
     useEffect(() => {
         const fetchStaff = async () => {
+            if (!country) {
+                setError('Страна не указана');
+                setLoading(false);
+                return;
+            }
+
             setLoading(true);
             try {
-                const url = slug
-                    ? `/tech-sup/country/${country}/region/${slug}` // Если указан регион
-                    : `/tech-sup/country/${country}`; // Если указана только страна
+                const url = region
+                    ? `http://localhost:5000/api/employees/country/${country}/region/${region}`
+                    : `http://localhost:5000/api/employees/country/${country}`;
+
+                console.log("Final API Request URL:", url);
+                console.log("Country from useParams:", country);
+                console.log("Region from useParams:", region);
+                console.log("Mapped region name:", regionNames[region]);
 
                 const response = await axios.get(url);
-                setStaff(response.data);
+                console.log("API Response:", response.data);
+
+                if (response.data.length === 0) {
+                    console.log("No staff found for the given region.");
+                    setError(`Сотрудники в ${slugPlace} не найдены`);
+                } else {
+                    console.log("Fetched staff data:", response.data);
+                    setStaff(response.data);
+                }
             } catch (err) {
+                console.error("Ошибка при запросе к API:", err.message);
                 setError('Ошибка при загрузке данных');
-                console.error(err);
             } finally {
                 setLoading(false);
             }
         };
         fetchStaff();
-    }, [country, slug]);    
+    }, [country, region, slugPlace]);
 
-    // GSAP-анимация появления карточек
     useEffect(() => {
-        if (staff.length > 0) {
+        if (staff.length > 0 && cardRefs.current.length > 0) {
             gsap.fromTo(
                 cardRefs.current,
-                { opacity: 0, y: 50 }, // Начальная позиция и прозрачность
+                { opacity: 0, y: 50 },
                 {
                     opacity: 1,
-                    y: 0, // Конечная позиция
-                    duration: 1, // Длительность анимации
-                    ease: "power2.out",
-                    stagger: 0.2, // Интервал между анимацией карточек
+                    y: 0,
+                    duration: 1,
+                    ease: 'power2.out',
+                    stagger: 0.2,
                 }
             );
         }
@@ -84,24 +89,27 @@ const TechSupport = () => {
                 </span>
             </h2>
             <div className="staff-list">
-                {staff.map((member, index) => (
-                    <div
-                        key={index}
-                        className="staff-card border-2 border-orange-500"
-                        ref={(el) => (cardRefs.current[index] = el)} // Добавляем ссылку на карточку
-                    >
-                        <img
-                            src={member.image || defaultImg} // Установка изображения по умолчанию
-                            alt={member.name}
-                            className="staff-photo"
-                        />
-                        <div className="staff-info">
-                            <h2 className="staff-name">{member.name}</h2>
-                            <p className="staff-position">{member.position}</p>
-                            <p className="staff-phone">{member.contact}</p>
+                {staff.map((member, index) => {
+                    console.log("Rendering staff member:", member);
+                    return (
+                        <div
+                            key={index}
+                            className="staff-card border-2 border-orange-500"
+                            ref={(el) => (cardRefs.current[index] = el)}
+                        >
+                            <img
+                                src={member.image || defaultImg}
+                                alt={member.name}
+                                className="staff-photo"
+                            />
+                            <div className="staff-info">
+                                <h2 className="staff-name">{member.name}</h2>
+                                <p className="staff-position">{member.position}</p>
+                                <p className="staff-phone">{member.contact}</p>
+                            </div>
                         </div>
-                    </div>
-                ))}
+                    );
+                })}
             </div>
         </div>
     );

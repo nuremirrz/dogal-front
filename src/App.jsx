@@ -18,8 +18,8 @@ function App() {
             }
           />
           <Route path='/products' element={<ProductsPage />} />
-          <Route path="/tech-sup/:country/:slug" element={<TechSupportPage />} />
           <Route path="/tech-sup/:country" element={<TechSupportPage />} />
+          <Route path="/tech-sup/:country/:region" element={<TechSupportPage />} />
           <Route path="/structure/kyrgyzstan" element={<StructureKgPage />} />
           <Route path="/structure/kazakhstan" element={<StructureKzPage />} />
           <Route path="/structure/uzbekistan" element={<StructureUzPage />} />
