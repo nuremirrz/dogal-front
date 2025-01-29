@@ -136,10 +136,11 @@ const Navbar = () => {
                             })),
                         }}
                         trigger={['click']}
+                        className="cursor-pointer"
                     >
                         <a onClick={(e) => e.preventDefault()}>
                             <Space>
-                                Выберите страну
+                                Наша команда
                                 <DownOutlined />
                             </Space>
                         </a>
