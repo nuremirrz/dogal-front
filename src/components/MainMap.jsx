@@ -3,11 +3,26 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import "leaflet/dist/leaflet.css";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import L from "leaflet";
 import branch from '../assets/images/branch-1.png'
 import branch2 from '../assets/images/branch-2.png'
 
 // Регистрация плагина ScrollTrigger
 gsap.registerPlugin(ScrollTrigger);
+
+// Импорт стандартных иконок Leaflet
+import markerIcon from "leaflet/dist/images/marker-icon.png";
+import markerShadow from "leaflet/dist/images/marker-shadow.png";
+
+// Создание кастомной иконки
+const customIcon = new L.Icon({
+  iconUrl: markerIcon,
+  shadowUrl: markerShadow,
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41]
+});
 
 const locations = [
   { id: 1, name: 'Улица Куренкеева, 89', position: [42.890771839421966, 74.6151901670461] },
@@ -57,10 +72,9 @@ const MainMap = () => {
       <MapContainer center={[42.8749796868701, 74.60552137941633]} zoom={13} className='max-[480px]:mx-0' style={{ height: '100vh', width: '90%' }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
         {locations.map((location) => (
-          <Marker key={location.id} position={location.position}>
+          <Marker key={location.id} position={location.position} icon={customIcon}>
             <Popup>{location.name}</Popup>
           </Marker>
         ))}
