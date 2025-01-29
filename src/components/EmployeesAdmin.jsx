@@ -35,7 +35,7 @@ const EmployeesAdmin = () => {
     const fetchEmployees = useCallback(async () => {
         setLoading(true);
         try {
-            const { data } = await axios.get('/tech-sup');
+            const { data } = await axios.get('/api/employees'); // Исправленный эндпоинт
             setEmployees(data);
         } catch (error) {
             console.error('Ошибка при получении данных сотрудников:', error);
@@ -43,7 +43,7 @@ const EmployeesAdmin = () => {
         } finally {
             setLoading(false);
         }
-    }, [])
+    }, [])    
 
     useEffect(() => {
         fetchEmployees();
@@ -77,14 +77,16 @@ const EmployeesAdmin = () => {
                 countries: values.countries || [],
                 regions: values.regions || [],
             };
-
+    
             const method = currentEmployee ? 'put' : 'post';
-            const url = currentEmployee ? `/tech-sup/${currentEmployee._id}` : `/tech-sup`;
-
+            const url = currentEmployee
+                ? `/api/employees/${currentEmployee._id}` // Исправленный эндпоинт
+                : `/api/employees`; // Исправленный эндпоинт
+    
             await axios[method](url, payload, {
                 headers: { 'Content-Type': 'application/json' },
             });
-
+    
             fetchEmployees();
             handleCancel();
             message.success('Сотрудник успешно сохранен!');
@@ -97,7 +99,7 @@ const EmployeesAdmin = () => {
     // Удаление сотрудника
     const handleDelete = useCallback(async (id) => {
         try {
-            await axios.delete(`/tech-sup/${id}`);
+            await axios.delete(`/api/employees/${id}`); // Исправленный эндпоинт
             fetchEmployees();
             message.success('Сотрудник удален!');
         } catch (error) {
