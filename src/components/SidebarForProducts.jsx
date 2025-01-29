@@ -7,7 +7,7 @@ const { Search } = Input;
 const { Option } = Select;
 
 const SidebarForProducts = ({ filters, onFilterChange, resetFilters, onSearch, activeIngredients }) => {
-    
+
     const handleCropChange = (value) => {
         onFilterChange({ aplicableCrops: value });
     };
@@ -25,8 +25,15 @@ const SidebarForProducts = ({ filters, onFilterChange, resetFilters, onSearch, a
                     placeholder="Поиск по названию"
                     onSearch={onSearch}
                     enterButton="Поиск"
-                    style={{ width: '100%', borderRadius: '0.75rem' }}
+                    style={{
+                        width: '100%',
+                        borderRadius: '0.75rem',
+                        transition: 'all 0.3s ease-out', // Добавляем плавность анимации
+                        boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', // Фиксируем тень
+                    }}
+                    className="hover:shadow-lg hover:scale-105 transform transition-transform duration-300 ease-out"
                 />
+
             ),
         },
         {
@@ -52,7 +59,7 @@ const SidebarForProducts = ({ filters, onFilterChange, resetFilters, onSearch, a
                     <Option value="Фумиганты">Фумиганты</Option>
                 </Select>
             ),
-        },        
+        },
         {
             key: '3',
             label: 'Применимые Культуры',
@@ -84,24 +91,34 @@ const SidebarForProducts = ({ filters, onFilterChange, resetFilters, onSearch, a
                 //     onChange={handlePriceChange}
                 // />
                 <Link href="../../public/assets/pdf/dogal.pdf" download="dogal.pdf">
-                <button className="px-4 py-1 m-1 text-xs bg-green-500 hover:bg-green-600 text-white rounded-xl">Полный список препаратов</button>
-            </Link>
+                    <button
+                        className="px-4 py-1 m-1 text-xs bg-green-500 hover:bg-green-600 text-white rounded-xl transition-transform duration-300 ease-out hover:scale-105 shadow-md hover:shadow-lg"
+                        style={{ willChange: "transform" }}
+                    >
+                        Полный список препаратов
+                    </button>
+                </Link>
             ),
         },
     ];
 
     return (
         <div className="sidebar p-4 h-3/4 sticky top-14 left-0 right-0 bg-white shadow-md rounded-lg mb-4 w-1/5 max-[768px]:w-1/2 max-[480px]:static max-[480px]:w-full">
-             <h3 className="text-lg font-semibold mb-4">Фильтры</h3>
+            <h3 className="text-lg font-semibold mb-4">Фильтры</h3>
             <Collapse
                 items={items}
                 defaultActiveKey={['1', '2']}
                 className="bg-white shadow-md rounded-lg"
             />
             <div className="mt-4 text-center">
-                
-                <button onClick={resetFilters} className="px-4 py-1 m-1 bg-green-500 hover:bg-green-600 transition-transform transform hover:scale-105 hover:shadow-lg text-white rounded-xl">Сбросить фильтры</button>
-            </div>                       
+                <button
+                    onClick={resetFilters}
+                    className="px-4 py-1 m-1 bg-green-500 hover:bg-green-600 transition-transform duration-300 ease-out hover:scale-105 shadow-md hover:shadow-lg text-white rounded-xl"
+                    style={{ willChange: "transform" }}
+                >
+                    Сбросить фильтры
+                </button>
+            </div>
         </div>
     );
 };

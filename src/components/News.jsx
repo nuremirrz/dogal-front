@@ -69,17 +69,22 @@ const News = () => {
             setViewedItems((prevViewed) => new Set(prevViewed).add(currentSlideId));
         }
     };
-    
+
     return (
         <>
             <h2 className="text-4xl text-center m-8 font-semibold max-[480px]:text-2xl max-[480px]:mb-6 relative">
                 <span
-                    className="text-green-50 rounded-xl px-5 py-2 font-custom bg-green-600 max-[480px]:px-4 transform transition-transform duration-500 hover:scale-110 hover:translate-y-1"
-                    style={{ display: 'inline-block', boxShadow: '0 4px 10px rgba(0,0,0,0.3)', borderRadius: '10px' }}
+                    className="text-green-50 rounded-xl px-5 py-2 font-custom bg-green-600 max-[480px]:px-4 transform transition-transform duration-500 hover:scale-110"
+                    style={{
+                        display: 'inline-block',
+                        boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
+                        willChange: 'transform', // Оптимизация анимации
+                        transformOrigin: 'center', // Центр масштабирования
+                    }}
                 >
                     Новости
                 </span>
-            </h2>            
+            </h2>
             {loading && <p className="text-center">Загрузка новостей...</p>}
             {error && <p className="text-center text-3xl font-semibold text-red-500">{error}</p>}
 
@@ -98,12 +103,12 @@ const News = () => {
                     </div> */}
 
                     <Swiper
-                    modules={[Autoplay]} // Подключаем модуль Autoplay
-                    autoplay={{
-                     delay: 1, // Интервал между переключениями (минимальный)
-                     disableOnInteraction: false, // Продолжает после взаимодействия
-                   }}
-                   speed={15000}
+                        modules={[Autoplay]} // Подключаем модуль Autoplay
+                        autoplay={{
+                            delay: 1, // Интервал между переключениями (минимальный)
+                            disableOnInteraction: false, // Продолжает после взаимодействия
+                        }}
+                        speed={15000}
                         spaceBetween={50}
                         loop={true}
                         slidesPerView={1}

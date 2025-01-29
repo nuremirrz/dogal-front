@@ -16,7 +16,7 @@ const Sertificate = () => {
   // Массив с изображениями сертификатов
   const certificates = [certificateImg1, certificateImg2, certificateImg3, certificateImg4, certificateImg5];
 
-  
+
   const handlePrevSlide = () => {
     const swiper = document.querySelector('.swiper').swiper;
     swiper.slidePrev();
@@ -31,12 +31,18 @@ const Sertificate = () => {
     <div>
       <h2 className="text-4xl text-center m-8 font-semibold max-[480px]:text-2xl max-[480px]:mb-6 relative">
         <span
-          className="text-green-50 rounded-xl px-5 py-2 font-custom bg-green-600 max-[480px]:px-4 transform transition-transform duration-500 hover:scale-110 hover:translate-y-1"
-          style={{ display: 'inline-block', boxShadow: '0 4px 10px rgba(0,0,0,0.3)', borderRadius: '10px' }}
+          className="text-green-50 rounded-xl px-5 py-2 font-custom bg-green-600 max-[480px]:px-4 transform transition-transform duration-500 hover:scale-110"
+          style={{
+            display: 'inline-block',
+            boxShadow: '0 4px 10px rgba(0,0,0,0.3)',
+            willChange: 'transform', // Оптимизация анимации
+            transformOrigin: 'center', // Центр масштабирования
+          }}
         >
           Сертификаты
         </span>
       </h2>
+
 
       <div className="relative w-2/3 m-auto my-14 max-[480px]:my-4">
         {/* Левая стрелка */}
@@ -52,12 +58,12 @@ const Sertificate = () => {
         </div>
         <img src={seeds} alt="seeds" className="seeds" />
         <Swiper
-         modules={[Autoplay]} // Подключаем модуль Autoplay
-         autoplay={{
-          delay: 1, // Интервал между переключениями (минимальный)
-          disableOnInteraction: false, // Продолжает после взаимодействия
-        }}
-        speed={5000} // Скорость перехода между слайдами (3 секунды)
+          modules={[Autoplay]} // Подключаем модуль Autoplay
+          autoplay={{
+            delay: 1, // Интервал между переключениями (минимальный)
+            disableOnInteraction: false, // Продолжает после взаимодействия
+          }}
+          speed={5000} // Скорость перехода между слайдами (3 секунды)
           slidesPerView={3}
           spaceBetween={30}
           loop={true}

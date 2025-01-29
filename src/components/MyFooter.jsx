@@ -39,36 +39,36 @@ const MyFooter = () => {
 
                 {/* Социальные сети */}
                 <Col xs={24} sm={12} md={8} className="footer__links text-center mt-4 sm:mt-0">
-  {/* Facebook */}
-  <a href="https://www.facebook.com/share/1Ake2Be9WD/?mibextid=JRoKGi" target="_blank" rel="noopener noreferrer">
-    <FacebookOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
-  </a>
-  
-  {/* X (ранее Twitter) */}
-  {/* <a href="https://x.com" target="_blank" rel="noopener noreferrer">
+                    {/* Facebook */}
+                    <a href="https://www.facebook.com/share/1Ake2Be9WD/?mibextid=JRoKGi" target="_blank" rel="noopener noreferrer">
+                        <FacebookOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
+                    </a>
+
+                    {/* X (ранее Twitter) */}
+                    {/* <a href="https://x.com" target="_blank" rel="noopener noreferrer">
     <XOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
   </a> */}
-  
-  {/* TikTok */}
-  <a href="https://www.tiktok.com/@dogal_kg?_t=8riIft2ZX0S&_r=1" target="_blank" rel="noopener noreferrer">
-    <TikTokOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
-  </a>
 
-  {/* YouTube */}
-  <a href="https://youtube.com/@dogal_cis?si=TzfpMK3_Qk0KopgO" target="_blank" rel="noopener noreferrer">
-    <YoutubeOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
-  </a>
+                    {/* TikTok */}
+                    <a href="https://www.tiktok.com/@dogal_kg?_t=8riIft2ZX0S&_r=1" target="_blank" rel="noopener noreferrer">
+                        <TikTokOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
+                    </a>
 
-  {/* LinkedIn */}
-  {/* <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+                    {/* YouTube */}
+                    <a href="https://youtube.com/@dogal_cis?si=TzfpMK3_Qk0KopgO" target="_blank" rel="noopener noreferrer">
+                        <YoutubeOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
+                    </a>
+
+                    {/* LinkedIn */}
+                    {/* <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
     <LinkedinOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
   </a> */}
 
-  {/* Instagram */}
-  <a href="https://www.instagram.com/dogal_cis/profilecard/?igsh=MXM2M2lxbnBibGI5" target="_blank" rel="noopener noreferrer">
-    <InstagramOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
-  </a>
-</Col>
+                    {/* Instagram */}
+                    <a href="https://www.instagram.com/dogal_cis/profilecard/?igsh=MXM2M2lxbnBibGI5" target="_blank" rel="noopener noreferrer">
+                        <InstagramOutlined style={{ margin: '0 10px', color: '#fff', fontSize: '24px' }} />
+                    </a>
+                </Col>
 
 
                 {/* Форма подписки */}
@@ -85,7 +85,7 @@ const MyFooter = () => {
                                 placeholder="Введите email"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                style={{ width: '200px', borderRadius: '0.75rem'}}
+                                style={{ width: '200px', borderRadius: '0.75rem' }}
                             />
                         </Form.Item>
                         <Form.Item>
@@ -93,7 +93,7 @@ const MyFooter = () => {
                                 className="footer__btn"
                                 type="primary"
                                 loading={loading} // Индикатор загрузки
-                                style={{ backgroundColor: '#026a00', borderColor: '#ff6b00', borderRadius: '0.75rem'}}
+                                style={{ backgroundColor: '#026a00', borderColor: '#ff6b00', borderRadius: '0.75rem' }}
                                 onClick={handleSubscribe}
                             >
                                 Подписаться

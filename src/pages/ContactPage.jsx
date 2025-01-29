@@ -14,9 +14,15 @@ const ContactPage = () => {
             <Navbar />
             <div className="contact-container">
                 {/* Заголовок страницы */}
-                <h1 className="contact-title text-center text-green-50 rounded-xl px-5 py-2 font-custom bg-green-600 max-[480px]:px-4 transform transition-transform duration-500 hover:scale-110 hover:translate-y-1">
+                
+                <h1 className="contact-title text-center text-green-50 rounded-xl px-5 py-2 font-custom bg-green-600 max-[480px]:px-4 transform transition-transform duration-500 hover:scale-110"
+                    style={{
+                        transformOrigin: "center",
+                        willChange: "transform"
+                    }}>
                     Свяжитесь с нами
                 </h1>
+
 
                 {/* Контент страницы с индикатором загрузки */}
                 <Suspense fallback={<Spin size="large" style={{ display: 'block', margin: '50px auto' }} />}>
