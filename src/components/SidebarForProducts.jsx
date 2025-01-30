@@ -90,9 +90,9 @@ const SidebarForProducts = ({ filters, onFilterChange, resetFilters, onSearch, a
                 //     defaultValue={filters.priceRange}
                 //     onChange={handlePriceChange}
                 // />
-                <Link href="../../public/assets/pdf/dogal.pdf" download="dogal.pdf">
+                <Link href="../../public/assets/pdf/dogal.pdf" className='no-underline flex justify-center' download="dogal.pdf">
                     <button
-                        className="px-4 py-1 m-1 text-xs bg-green-500 hover:bg-green-600 text-white rounded-xl transition-transform duration-300 ease-out hover:scale-105 shadow-md hover:shadow-lg"
+                        className="px-4 py-1 m-1 text-sm bg-green-500 hover:bg-green-600 text-white rounded-xl transition-transform duration-300 ease-out hover:scale-105 shadow-md hover:shadow-lg"
                         style={{ willChange: "transform" }}
                     >
                         Полный список препаратов
