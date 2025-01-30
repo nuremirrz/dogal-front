@@ -21,14 +21,13 @@
 
 /* Эффект для кнопки подписки */
 .footer__btn {
-    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Плавный переход для фона, масштаба и тени */
+    transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    will-change: transform; /* Оптимизация анимации */
 }
 
 .footer__btn:hover {
-    /* background-color: #ff9f00; Изменение цвета кнопки при наведении */
-    /* border-color: #ff9f00; Смена цвета границы */
-    transform: scale(1.05); 
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Добавление тени при наведении */
+    transform: scale(1.05);
 }
 
 .footer__input:hover {

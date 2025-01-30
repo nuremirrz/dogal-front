@@ -93,7 +93,7 @@ const MyFooter = () => {
                                 className="footer__btn"
                                 type="primary"
                                 loading={loading} // Индикатор загрузки
-                                style={{ backgroundColor: '#026a00', borderColor: '#ff6b00', borderRadius: '0.75rem' }}
+                                style={{ backgroundColor: '#026a00',  borderRadius: '0.75rem' }}
                                 onClick={handleSubscribe}
                             >
                                 Подписаться
