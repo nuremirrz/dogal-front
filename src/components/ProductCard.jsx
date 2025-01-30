@@ -2,7 +2,7 @@ import React from 'react';
 
 const ProductCard = ({ product, onDetailClick }) => {
   return (
-    <div className="flex border-2 border-customGreen-300 justify-between items-start p-4 bg-white shadow-md rounded-xl mb-4 max-[768px]:flex-wrap transition-transform transform hover:scale-105 hover:shadow-lg">
+    <div className="flex border-2 border-customGreen-300 justify-between items-start p-4 bg-white cursor-pointer shadow-md rounded-xl mb-4 max-[768px]:flex-wrap transition-transform transform  hover:shadow-xl">
       {/* <div className="flex border-2 border-customOrange-800 justify-between items-start p-4 bg-white shadow-md rounded-xl mb-4 max-[768px]:flex-wrap hover:shadow-lg"> */}
       {/* Левая часть - Изображение и информация о продукте */}
       <div className="flex space-x-4">
