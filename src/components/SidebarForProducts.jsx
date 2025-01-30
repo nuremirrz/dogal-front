@@ -30,6 +30,7 @@ const SidebarForProducts = ({ filters, onFilterChange, resetFilters, onSearch, a
                         borderRadius: '0.75rem',
                         transition: 'all 0.3s ease-out', // Добавляем плавность анимации
                         boxShadow: '0 2px 4px rgba(0, 0, 0, 0.1)', // Фиксируем тень
+                        willChange: 'transform',
                     }}
                     className="hover:shadow-lg hover:scale-105 transform transition-transform duration-300 ease-out"
                 />
