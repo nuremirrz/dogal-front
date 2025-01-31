@@ -6,6 +6,7 @@
     left: -170px;
     rotate: 145deg;
     top: -135px;
+    user-select: none;
 }
 
 @media (max-width: 768px) {

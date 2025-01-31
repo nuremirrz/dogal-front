@@ -50,6 +50,7 @@
   right: 30px;
   rotate: 26deg;
   transition: transform .7s ease;
+  user-select: none;
 }
 .grape:hover{
   transform: scale(1.1);
@@ -63,6 +64,7 @@
   rotate: 91deg;
   filter: invert(1);
   z-index: -1;
+  user-select: none;
 }
 /* Стили для больших экранов */
 @media (min-width: 768px) {
