@@ -3,6 +3,7 @@
     filter: invert(1);
     height: 200px;
     z-index: 10;
+    user-select: none;
 }
 
 .stick1 {
