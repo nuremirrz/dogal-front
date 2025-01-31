@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import famLogo from '../assets/images/dogalFam.JPG'; // Ваше изображение
+import famLogo from '../assets/images/dogalFam.jpg'; // Ваше изображение
 import grape from '../assets/images/enjoy-2.png'
 import stick2 from '../assets/images/branch-2.png'
 import "../styles/About.css"; // Подключаем стили
