@@ -18,7 +18,7 @@ const MyFooter = () => {
 
         setLoading(true); // Включаем индикатор загрузки
         try {
-            const response = await axios.post('/api/subscribers/subscribe', { email });
+            const response = await axios.post(`${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/subscribers/subscribe`, { email });
             message.success(response.data.message || 'Вы успешно подписались!');
             setEmail(''); // Очистка поля ввода
         } catch (error) {

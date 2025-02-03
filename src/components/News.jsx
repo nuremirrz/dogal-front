@@ -20,10 +20,10 @@ const News = () => {
     const fetchNews = useCallback(async () => {
         setLoading(true);
         try {
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/news`);
+            const response = await axios.get(`${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/news`);
             setNews(response.data);
         } catch (error) {
-            setError('Ошибка при загрузке новостей.');
+            setError('Ошибка приbbbbbb загрузке новостей.');
             console.error('Ошибка при загрузке новостей:', error);
         } finally {
             setLoading(false);
@@ -39,7 +39,7 @@ const News = () => {
         const action = isLiked ? 'decrement' : 'increment';
 
         try {
-            const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/news/${id}/toggle-likes`, { action });
+            const response = await axios.put(`${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/news/${id}/toggle-likes`, { action });
             setNews(prevNews =>
                 prevNews.map(item =>
                     item._id === id ? { ...item, likes: response.data.likes } : item
@@ -56,7 +56,7 @@ const News = () => {
 
     const incrementViews = async (id) => {
         try {
-            await axios.put(`${import.meta.env.VITE_API_URL}/api/news/${id}/increment-views`);
+            await axios.put(`${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/news/${id}/increment-views`);
         } catch (error) {
             console.error('Ошибка при увеличении просмотров:', error);
         }

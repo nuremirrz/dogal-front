@@ -13,7 +13,7 @@ const NewsletterAdmin = () => {
   const fetchSubscribers = useCallback(async () => {
     setTableLoading(true);
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/subscribers/all`);
+      const response = await fetch(`${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/subscribers/all`);
       const data = await response.json();
       setSubscribers(data);
       setFilteredSubscribers(data); // Изначально показываем всех подписчиков
@@ -48,7 +48,7 @@ const NewsletterAdmin = () => {
       setLoading(true);
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/subscribers/send-newsletter`,
+          `${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/subscribers/send-newsletter`,
           {
             method: "POST",
             headers: {
@@ -79,7 +79,7 @@ const NewsletterAdmin = () => {
     async (email) => {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_API_URL}/api/subscribers/unsubscribe`,
+          `${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/subscribers/unsubscribe`,
           {
             method: "POST",
             headers: {
