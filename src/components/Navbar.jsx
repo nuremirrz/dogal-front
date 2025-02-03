@@ -20,48 +20,23 @@ const Navbar = () => {
         setDropdownVisible(flag);
     };
 
-    const countriesMenuItems = [
-        {
-            key: 'kg',
-            label: (
-                <>
-                    <img src={Kg} alt="Кыргызстан" style={{ width: '15px', marginRight: '8px' }} />
-                    Кыргызстан
-                </>
-            ),
-            path: '/structure/kyrgyzstan',
-        },
-        {
-            key: 'kz',
-            label: (
-                <>
-                    <img src={Kz} alt="Казахстан" style={{ width: '15px', marginRight: '8px' }} />
-                    Казахстан
-                </>
-            ),
-            path: '/structure/kazakhstan',
-        },
-        {
-            key: 'uz',
-            label: (
-                <>
-                    <img src={Uz} alt="Узбекистан" style={{ width: '15px', marginRight: '8px' }} />
-                    Узбекистан
-                </>
-            ),
-            path: '/structure/uzbekistan',
-        },
-        {
-            key: 'ru',
-            label: (
-                <>
-                    <img src={Ru} alt="Россия" style={{ width: '15px', marginRight: '8px' }} />
-                    Россия
-                </>
-            ),
-            path: '/structure/russia',
-        },
-    ];
+    const countriesData = [
+        { key: 'kg', name: 'Кыргызстан', image: Kg, path: '/structure/kyrgyzstan' },
+        { key: 'kz', name: 'Казахстан', image: Kz, path: '/structure/kazakhstan' },
+        { key: 'uz', name: 'Узбекистан', image: Uz, path: '/structure/uzbekistan' },
+        { key: 'ru', name: 'Россия', image: Ru, path: '/structure/russia' },
+      ];
+
+    const countriesMenuItems = countriesData.map((country) => ({
+        key: country.key,
+        label: (
+          <>
+            <img src={country.image} alt={country.name} style={{ width: '15px', marginRight: '8px' }} />
+            {country.name}
+          </>
+        ),
+        path: country.path,
+    }));
 
     const menu = (
         <Menu>
@@ -76,7 +51,7 @@ const Navbar = () => {
                     { key: 'batken', name: 'Баткенская область' },
                 ].map((region) => (
                     <Menu.Item key={region.key}>
-                        <Link to={`/tech-sup/kyrgyzstan/${region.key}`} onClick={() => console.log("Navigating to:", `/tech-sup/kyrgyzstan/${region.key}`)}>
+                        <Link to={`/tech-sup/kyrgyzstan/${region.key}`}>
                             {region.name}
                         </Link>
                     </Menu.Item>
