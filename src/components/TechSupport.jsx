@@ -29,8 +29,8 @@ const TechSupport = () => {
             setLoading(true);
             try {
                 const url = region
-                    ? `${import.meta.env.VITE_API_URL}api/employees/country/${country}/region/${region}`
-                    : `${import.meta.env.VITE_API_URL}api/employees/country/${country}`;
+                    ? `${import.meta.env.VITE_API_URL}/api/employees/country/${country}/region/${region}`
+                    : `${import.meta.env.VITE_API_URL}/api/employees/country/${country}`;
 
                 console.log("Final API Request URL:", url);
                 console.log("Country from useParams:", country);
