@@ -23,7 +23,7 @@ const ProductsAdmin = () => {
     const fetchProducts = useCallback(async () => {
         setLoading(true);
         try {
-            const { data } = await axios.get('/api/products');
+            const { data } = await axios.get(`${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/products`);
             setProducts(data);
             setFilteredProducts(data);
         } catch (error) {
@@ -69,7 +69,7 @@ const ProductsAdmin = () => {
     const handleFormSubmit = useCallback(async (values) => {
         try {
             const method = currentProduct ? 'put' : 'post';
-            const url = currentProduct ? `/api/products/${currentProduct._id}` : '/api/products';
+            const url = currentProduct ? `${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/products/${currentProduct._id}` : '/api/products';
             await axios[method](url, values);
             fetchProducts();
             handleCancel();
@@ -83,7 +83,7 @@ const ProductsAdmin = () => {
     // Удаление продукта
     const handleDelete = useCallback(async (id) => {
         try {
-            await axios.delete(`/api/products/${id}`);
+            await axios.delete(`${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/products/${id}`);
             fetchProducts();
             message.success('Продукт удален!');
         } catch (error) {

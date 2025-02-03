@@ -35,7 +35,7 @@ const EmployeesAdmin = () => {
     const fetchEmployees = useCallback(async () => {
         setLoading(true);
         try {
-            const { data } = await axios.get('/api/employees'); // Исправленный эндпоинт
+            const { data } = await axios.get(`${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/employees`); // Исправленный эндпоинт
             setEmployees(data);
         } catch (error) {
             console.error('Ошибка при получении данных сотрудников:', error);
@@ -80,8 +80,8 @@ const EmployeesAdmin = () => {
     
             const method = currentEmployee ? 'put' : 'post';
             const url = currentEmployee
-                ? `/api/employees/${currentEmployee._id}` // Исправленный эндпоинт
-                : `/api/employees`; // Исправленный эндпоинт
+                ? `${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/employees/${currentEmployee._id}` // Исправленный эндпоинт
+                : `${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/employees`; // Исправленный эндпоинт
     
             await axios[method](url, payload, {
                 headers: { 'Content-Type': 'application/json' },
@@ -99,7 +99,7 @@ const EmployeesAdmin = () => {
     // Удаление сотрудника
     const handleDelete = useCallback(async (id) => {
         try {
-            await axios.delete(`/api/employees/${id}`); // Исправленный эндпоинт
+            await axios.delete(`${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/employees/${id}`); // Исправленный эндпоинт
             fetchEmployees();
             message.success('Сотрудник удален!');
         } catch (error) {
