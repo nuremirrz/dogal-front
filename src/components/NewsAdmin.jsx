@@ -18,7 +18,7 @@ const NewsAdmin = () => {
     const fetchNews = useCallback(async () => {
         setLoading(true);
         try {
-            const { data } = await axios.get('/api/news?showAll=true'); // Добавляем параметр
+            const { data } = await axios.get('api/news?showAll=true'); // Добавляем параметр
             setNews(data);
         } catch (error) {
             console.error('Ошибка при получении данных новостей:', error);
@@ -49,7 +49,7 @@ const NewsAdmin = () => {
     const handleFormSubmit = useCallback(async (values) => {
         try {
             const method = currentNews ? 'put' : 'post';
-            const url = currentNews ? `/api/news/${currentNews._id}` : '/api/news';
+            const url = currentNews ? `api/news/${currentNews._id}` : 'api/news';
             const { data } = await axios[method](url, values);
 
             setNews((prevNews) =>
@@ -69,7 +69,7 @@ const NewsAdmin = () => {
     // Удаление новости
     const handleDelete = useCallback(async (id) => {
         try {
-            await axios.delete(`/api/news/${id}`);
+            await axios.delete(`api/news/${id}`);
             setNews((prevNews) => prevNews.filter((item) => item._id !== id));
             message.success('Новость удалена!');
         } catch (error) {
