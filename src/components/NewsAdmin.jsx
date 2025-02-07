@@ -49,7 +49,10 @@ const NewsAdmin = () => {
     const handleFormSubmit = useCallback(async (values) => {
         try {
             const method = currentNews ? 'put' : 'post';
-            const url = currentNews ? `${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/news/${currentNews._id}` : '/api/news';
+            const url = currentNews 
+            ? `${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/news/${currentNews._id}` 
+            : `${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/news`;
+        
             const { data } = await axios[method](url, values);
 
             setNews((prevNews) =>
