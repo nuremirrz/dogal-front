@@ -44,18 +44,7 @@ const Sertificate = () => {
       </h2>
 
 
-      <div className="relative w-2/3 m-auto my-14 max-[480px]:my-4">
-        {/* Левая стрелка */}
-        <div
-          className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer"
-          onClick={handlePrevSlide}
-          style={{
-            fontSize: 'calc(1.5rem + 0.5vw)', // Адаптивный размер стрелок
-            color: '#16a34a',
-          }}
-        >
-          <LeftOutlined />
-        </div>
+      <div className="relative w-2/3 m-auto my-14 max-[480px]:my-4">        
         <img src={seeds} alt="seeds" className="seeds" />
         <Swiper
           modules={[Autoplay]} // Подключаем модуль Autoplay
@@ -111,19 +100,7 @@ const Sertificate = () => {
               />
             </SwiperSlide>
           ))}
-        </Swiper>
-
-        {/* Правая стрелка */}
-        <div
-          className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer"
-          onClick={handleNextSlide}
-          style={{
-            fontSize: 'calc(1.5rem + 0.5vw)', // Адаптивный размер стрелок
-            color: '#16a34a',
-          }}
-        >
-          <RightOutlined />
-        </div>
+        </Swiper>        
       </div>
     </div>
   );
