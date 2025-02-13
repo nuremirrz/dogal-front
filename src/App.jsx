@@ -22,7 +22,7 @@ function App() {
           <Route path="/tech-sup/:country/:region" element={<TechSupportPage />} />          
           <Route path="/structure/:country" element={<StructurePage />} />
           <Route path='/contact' element={<ContactPage />} />
-          <Route path='*' element={<ErrorPage />} />
+          <Route path="*" element={<ErrorPage />} />
         </Routes>
       </Router>
     </>

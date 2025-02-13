@@ -1,6 +1,8 @@
 {
   "rewrites": [
-    { "source": "/structure/:country", "destination": "/index.html" },
-    { "source": "/tech-sup/:country", "destination": "/index.html" }
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }
