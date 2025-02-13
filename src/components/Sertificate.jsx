@@ -1,7 +1,6 @@
 import React from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
-import { LeftOutlined, RightOutlined } from '@ant-design/icons'; // Иконки из Ant Design
 import 'swiper/css';
 import 'swiper/css/autoplay';
 import '../styles/Sertificate.css'

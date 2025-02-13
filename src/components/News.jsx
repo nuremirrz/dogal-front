@@ -90,18 +90,6 @@ const News = () => {
 
             {!loading && news.length > 0 ? (
                 <div className="relative w-3/4 m-auto my-14 max-[480px]:my-8">
-                    {/* Левая стрелка */}
-                    {/* <div
-                        className="absolute left-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer"
-                        onClick={handlePrevSlide}
-                        style={{
-                            fontSize: 'calc(1.5rem + 0.5vw)', // Адаптивный размер стрелок
-                            color: '#65a30d',
-                        }}
-                    >
-                        <LeftOutlined />
-                    </div> */}
-
                     <Swiper
                         modules={[Autoplay]} // Подключаем модуль Autoplay
                         autoplay={{
@@ -186,18 +174,7 @@ const News = () => {
                         ))}
                     </Swiper>
                     <img src={stick1} alt="stick" className="stick1" />
-                    <img src={stick2} alt="stick" className="stick2" />
-                    {/* Правая стрелка */}
-                    {/* <div
-                        className="absolute right-0 top-1/2 transform -translate-y-1/2 z-10 cursor-pointer"
-                        onClick={handleNextSlide}
-                        style={{
-                            fontSize: 'calc(1.5rem + 0.5vw)', // Адаптивный размер стрелок
-                            color: '#65a30d',
-                        }}
-                    >
-                        <RightOutlined />
-                    </div> */}
+                    <img src={stick2} alt="stick" className="stick2" />                    
                 </div>
             ) : (
                 !loading && <p className="text-center">Нет доступных новостей для отображения.</p>
