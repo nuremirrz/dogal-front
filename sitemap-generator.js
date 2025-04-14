@@ -44,7 +44,7 @@ const links = [
   { url: '/contact', changefreq: 'monthly', priority: 0.7 },
   ...techSupportLinks,
   ...structureLinks,
-  ...kyrgyzstanRegionLinks, 
+  ...kyrgyzstanRegionLinks 
 ];
 
 const stream = new SitemapStream({ hostname: 'https://dogal.vercel.app/' });
