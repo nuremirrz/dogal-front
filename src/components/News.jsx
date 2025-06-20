@@ -23,7 +23,7 @@ const News = () => {
             const response = await axios.get(`${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/news`);
             setNews(response.data);
         } catch (error) {
-            setError('Ошибка приbbbbbb загрузке новостей.');
+            setError('Ошибка при загрузке новостей.');
             console.error('Ошибка при загрузке новостей:', error);
         } finally {
             setLoading(false);
