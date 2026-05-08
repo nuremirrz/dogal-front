@@ -75,7 +75,7 @@ const MainMap = () => {
         Местоположение наших представительств
       </h3>
       <img src={branch2} alt="branch" className="branch2" />
-      <MapContainer center={[42.8749796868701, 74.60552137941633]} zoom={13} className='max-[480px]:mx-0' style={{ height: '100vh', width: '90%' }}>
+      <MapContainer center={[42.8749796868701, 74.60552137941633]} zoom={13} className='max-[480px]:mx-0' style={{ height: 'min(70vh, 600px)', width: '90%' }}>
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />

@@ -1,5 +1,7 @@
 import React from 'react';
 
+const WHATSAPP_URL = import.meta.env.VITE_WHATSAPP_URL || 'https://wa.me/c/996501675970';
+
 const ProductCard = ({ product, onDetailClick }) => {
   return (
     <div className="flex border-2 border-customGreen-300 justify-between items-start p-4 bg-white cursor-pointer shadow-md rounded-xl mb-4 max-[768px]:flex-wrap transition-transform transform  hover:shadow-xl">
@@ -27,7 +29,7 @@ const ProductCard = ({ product, onDetailClick }) => {
           >
             Подробнее
           </button>
-          <a href="https://wa.me/c/996501675970" target="_blank" rel="noopener noreferrer">
+          <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer">
             <button
               className="px-4 py-1 m-1 text-white rounded-xl bg-green-500 hover:bg-green-600 transition-transform duration-300 ease-out hover:scale-105 shadow-md hover:shadow-lg"
               style={{ willChange: "transform" }}

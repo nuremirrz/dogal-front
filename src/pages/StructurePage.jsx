@@ -10,60 +10,56 @@ import countryData from "../data/countryData";
 import ErrorPage from "./ErrorPage";
 
 gsap.registerPlugin(ScrollTrigger);
+
 const StructurePage = () => {
   const { country } = useParams();
-	const sectionRefs = useRef([]);
-	const cardRefs = useRef([]);
-
-  // Если страна не найдена, выводим сообщение
-  if (!countryData[country]) {
-    return <ErrorPage/>
-  }
-
-  const { title, structure } = countryData[country];
+  const rootRef = useRef(null);
+  const data = countryData[country];
 
   useEffect(() => {
-    sectionRefs.current.forEach((section, index) => {
-      gsap.fromTo(
-        section,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1.2,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: section,
-            start: "top 80%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-    });
+    if (!data || !rootRef.current) return;
 
-    cardRefs.current.forEach((card, index) => {
-      gsap.fromTo(
-        card,
-        { opacity: 0, scale: 0.9 },
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 1,
-          ease: "power2.out",
-          scrollTrigger: {
-            trigger: card,
-            start: "top 85%",
-            toggleActions: "play none none none",
-          },
-        }
-      );
-    });
-  }, []);
+    const ctx = gsap.context(() => {
+      gsap.utils.toArray('.section').forEach((section) => {
+        gsap.fromTo(
+          section,
+          { opacity: 0, y: 50 },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1.2,
+            ease: "power2.out",
+            scrollTrigger: { trigger: section, start: "top 80%", toggleActions: "play none none none" },
+          }
+        );
+      });
+
+      gsap.utils.toArray('.employee-card').forEach((card) => {
+        gsap.fromTo(
+          card,
+          { opacity: 0, scale: 0.9 },
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 1,
+            ease: "power2.out",
+            scrollTrigger: { trigger: card, start: "top 85%", toggleActions: "play none none none" },
+          }
+        );
+      });
+    }, rootRef);
+
+    return () => ctx.revert();
+  }, [data]);
+
+  if (!data) return <ErrorPage />;
+
+  const { title, structure } = data;
 
   return (
     <>
       <Navbar />
-      <div className="contact-content back py-8 px-4 bg-white rounded-lg shadow-lg">
+      <div ref={rootRef} className="contact-content back py-8 px-4 bg-white rounded-lg shadow-lg">
         <h2 className="text-4xl text-center mb-8 font-semibold max-[480px]:text-2xl max-[480px]:mb-6 relative">
           <span
             className="text-green-50 rounded-xl px-5 py-2 font-custom bg-green-600 max-[480px]:px-4 transform transition-transform duration-500 hover:scale-110"
@@ -76,13 +72,11 @@ const StructurePage = () => {
 
         <div className="grid gap-8">
           {structure.map((section, sectionIndex) => (
-            <div key={sectionIndex} className="section" ref={(el) => (sectionRefs.current[sectionIndex] = el)}>
-              {/* Общая логика рендеринга секций */}
+            <div key={sectionIndex} className="section">
               <h4 className="text-center text-green-600 font-bold text-2xl mb-4">
                 {section.title}
               </h4>
 
-              {/* Рендеринг сотрудников */}
               {section.employees && (
                 <div className="employee-grid">
                   {Array.from({ length: Math.ceil(section.employees.length / 3) }).map(
@@ -94,9 +88,7 @@ const StructurePage = () => {
                             <Card
                               key={employeeIndex}
                               className="employee-card shadow-lg hover:shadow-xl transform hover:-translate-y-2 transition duration-300"
-                              ref={(el) => (cardRefs.current.push(el))}
                             >
-                              {/* Карточка сотрудника */}
                               <div className="avatar-container">
                                 <img
                                   src={employee.image}
@@ -125,7 +117,6 @@ const StructurePage = () => {
                 </div>
               )}
 
-              {/* Рендеринг подотделов */}
               {section.subDepartments?.map((department, deptIndex) => (
                 <div key={deptIndex} className="department-container mb-8">
                   <h5 className="text-center text-orange-500 font-bold text-lg mb-4">

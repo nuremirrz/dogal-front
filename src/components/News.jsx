@@ -4,11 +4,15 @@ import 'swiper/css';
 import 'swiper/css/autoplay';
 import { useEffect, useState, useCallback } from "react";
 import axios from 'axios';
-import moment from 'moment';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ru';
+import { Button } from 'antd';
 import stick1 from '../assets/images/branch-1.png'
 import stick2 from '../assets/images/branch-2.png'
 import '../styles/News.css'
-import { HeartOutlined, HeartFilled } from '@ant-design/icons';
+import { HeartOutlined, HeartFilled, ReloadOutlined } from '@ant-design/icons';
+
+dayjs.locale('ru');
 
 const News = () => {
     const [news, setNews] = useState([]);
@@ -19,6 +23,7 @@ const News = () => {
 
     const fetchNews = useCallback(async () => {
         setLoading(true);
+        setError(null);
         try {
             const response = await axios.get(`${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/news`);
             setNews(response.data);
@@ -86,7 +91,12 @@ const News = () => {
                 </span>
             </h2>
             {loading && <p className="text-center">Загрузка новостей...</p>}
-            {error && <p className="text-center text-3xl font-semibold text-red-500">{error}</p>}
+            {error && (
+                <div className="text-center my-6">
+                    <p className="text-xl font-semibold text-red-500 mb-3">{error}</p>
+                    <Button icon={<ReloadOutlined />} onClick={fetchNews}>Повторить</Button>
+                </div>
+            )}
 
             {!loading && news.length > 0 ? (
                 <div className="relative w-3/4 m-auto my-14 max-[480px]:my-8">
@@ -125,7 +135,7 @@ const News = () => {
                                         </h3>
 
                                         <div className="text-sm text-gray-500 flex items-center justify-between mb-2">
-                                            <span>{moment(item.publishedAt).format('DD MMMM YYYY')}</span>
+                                            <span>{dayjs(item.publishedAt).format('DD MMMM YYYY')}</span>
                                             <span className="bg-green-200 text-green-800 px-2 py-1 rounded">
                                                 {item.category}
                                             </span>

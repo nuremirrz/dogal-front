@@ -1,35 +1,38 @@
 import React, { useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { message } from 'antd';
 import AdminDashboard from "../components/AdminDashboard";
+import { logout } from '../api/axios';
+
+const IDLE_TIMEOUT_MS = 30 * 60 * 1000;
+const RESET_THROTTLE_MS = 1000;
 
 const AdminPage = () => {
     const navigate = useNavigate();
-    const logoutTimer = useRef(null); // Используем useRef
+    const logoutTimer = useRef(null);
+    const lastResetAt = useRef(0);
 
     const resetTimer = useCallback(() => {
-        if (logoutTimer.current) {
-            clearTimeout(logoutTimer.current); // Очищаем предыдущий таймер
-        }
-        logoutTimer.current = setTimeout(() => {
-            alert('Вы вышли из админки из-за бездействия.');
-            navigate('/admin/login'); // Перенаправление на страницу логина
-        }, 1800000); // 3 минуты
+        const now = Date.now();
+        if (now - lastResetAt.current < RESET_THROTTLE_MS) return;
+        lastResetAt.current = now;
+
+        if (logoutTimer.current) clearTimeout(logoutTimer.current);
+        logoutTimer.current = setTimeout(async () => {
+            await logout();
+            message.info('Вы вышли из админки из-за бездействия.');
+            navigate('/admin/login');
+        }, IDLE_TIMEOUT_MS);
     }, [navigate]);
 
     useEffect(() => {
-        window.addEventListener('mousemove', resetTimer);
-        window.addEventListener('click', resetTimer);
-        window.addEventListener('keypress', resetTimer);
-        window.addEventListener('scroll', resetTimer);
-
-        resetTimer(); // Устанавливаем первый таймер
+        const events = ['mousemove', 'click', 'keypress', 'scroll'];
+        events.forEach((evt) => window.addEventListener(evt, resetTimer, { passive: true }));
+        resetTimer();
 
         return () => {
             clearTimeout(logoutTimer.current);
-            window.removeEventListener('mousemove', resetTimer);
-            window.removeEventListener('click', resetTimer);
-            window.removeEventListener('keypress', resetTimer);
-            window.removeEventListener('scroll', resetTimer);
+            events.forEach((evt) => window.removeEventListener(evt, resetTimer));
         };
     }, [resetTimer]);
 

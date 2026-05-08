@@ -1,7 +1,10 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import { Table, Button, Modal, Form, Input, Select, Checkbox, DatePicker, InputNumber, message, Spin } from 'antd';
-import moment from 'moment';
+import dayjs from 'dayjs';
+import 'dayjs/locale/ru';
+
+dayjs.locale('ru');
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 
 const { TextArea } = Input;
@@ -18,7 +21,7 @@ const NewsAdmin = () => {
     const fetchNews = useCallback(async () => {
         setLoading(true);
         try {
-            const { data } = await axios.get(`${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/news?showAll=true`); // Добавляем параметр
+            const { data } = await api.get('/api/news?showAll=true');
             setNews(data);
         } catch (error) {
             console.error('Ошибка при получении данных новостей:', error);
@@ -36,7 +39,7 @@ const NewsAdmin = () => {
     const showModal = useCallback((newsItem = null) => {
         form.resetFields();
         setCurrentNews(newsItem);
-        if (newsItem) form.setFieldsValue({ ...newsItem, publishedAt: newsItem.publishedAt ? moment(newsItem.publishedAt) : null });
+        if (newsItem) form.setFieldsValue({ ...newsItem, publishedAt: newsItem.publishedAt ? dayjs(newsItem.publishedAt) : null });
         setIsModalVisible(true);
     }, [form]);
 
@@ -49,11 +52,11 @@ const NewsAdmin = () => {
     const handleFormSubmit = useCallback(async (values) => {
         try {
             const method = currentNews ? 'put' : 'post';
-            const url = currentNews 
-            ? `${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/news/${currentNews._id}` 
-            : `${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/news`;
-        
-            const { data } = await axios[method](url, values);
+            const url = currentNews
+                ? `/api/news/${currentNews._id}`
+                : '/api/news';
+
+            const { data } = await api[method](url, values);
 
             setNews((prevNews) =>
                 currentNews
@@ -72,7 +75,7 @@ const NewsAdmin = () => {
     // Удаление новости
     const handleDelete = useCallback(async (id) => {
         try {
-            await axios.delete(`${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/news/${id}`);
+            await api.delete(`/api/news/${id}`);
             setNews((prevNews) => prevNews.filter((item) => item._id !== id));
             message.success('Новость удалена!');
         } catch (error) {
@@ -105,7 +108,7 @@ const NewsAdmin = () => {
                 dataIndex: 'publishedAt',
                 key: 'publishedAt',
                 render: (publishedAt) =>
-                    publishedAt ? moment(publishedAt).format('DD.MM.YYYY HH:mm') : 'Не опубликовано',
+                    publishedAt ? dayjs(publishedAt).format('DD.MM.YYYY HH:mm') : 'Не опубликовано',
             },
             {
                 title: 'Лайки',
@@ -153,8 +156,15 @@ const NewsAdmin = () => {
                     <Form.Item name="content" label="Содержание" rules={[{ required: true }]}>
                         <TextArea rows={4} />
                     </Form.Item>
-                    <Form.Item name="image" label="Ссылка на изображение" rules={[{ required: true }]}>
-                        <Input />
+                    <Form.Item
+                        name="image"
+                        label="Ссылка на изображение"
+                        rules={[
+                            { required: true, message: 'Введите URL изображения' },
+                            { type: 'url', message: 'Введите корректный URL (https://…)' },
+                        ]}
+                    >
+                        <Input placeholder="https://example.com/image.jpg" />
                     </Form.Item>
                     <Form.Item name="category" label="Категория" rules={[{ required: true }]}>
                         <Select>

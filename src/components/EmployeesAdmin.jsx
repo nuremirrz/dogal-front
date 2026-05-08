@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import axios from 'axios';
+import api from '../api/axios';
 import { Table, Button, Modal, Form, Input, Select, message, Spin } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'
+import { kyrgyzstanRegions as kyrgyzstanRegionsData } from '../data/regionNames';
 
 const { Option } = Select;
 const countries = [
@@ -9,16 +10,8 @@ const countries = [
     { label: "Казахстан", value: "Казахстан" },
     { label: "Россия", value: "Россия" },
     { label: "Узбекистан", value: "Узбекистан" },
-]
-const kyrgyzstanRegions = [
-    "Чуйская область",
-    "Иссык-Кульская область",
-    "Ошская область",
-    "Таласская область",
-    "Джалал-Абадская область",
-    "Нарынская область",
-    "Баткенская область",
-]
+];
+const kyrgyzstanRegions = kyrgyzstanRegionsData.map((r) => r.name);
 
 const EmployeesAdmin = () => {
     const [employees, setEmployees] = useState([]);
@@ -35,7 +28,7 @@ const EmployeesAdmin = () => {
     const fetchEmployees = useCallback(async () => {
         setLoading(true);
         try {
-            const { data } = await axios.get(`${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/employees`); // Исправленный эндпоинт
+            const { data } = await api.get('/api/employees');
             setEmployees(data);
         } catch (error) {
             console.error('Ошибка при получении данных сотрудников:', error);
@@ -80,12 +73,10 @@ const EmployeesAdmin = () => {
     
             const method = currentEmployee ? 'put' : 'post';
             const url = currentEmployee
-                ? `${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/employees/${currentEmployee._id}` // Исправленный эндпоинт
-                : `${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/employees`; // Исправленный эндпоинт
-    
-            await axios[method](url, payload, {
-                headers: { 'Content-Type': 'application/json' },
-            });
+                ? `/api/employees/${currentEmployee._id}`
+                : '/api/employees';
+
+            await api[method](url, payload);
     
             fetchEmployees();
             handleCancel();
@@ -99,7 +90,7 @@ const EmployeesAdmin = () => {
     // Удаление сотрудника
     const handleDelete = useCallback(async (id) => {
         try {
-            await axios.delete(`${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/employees/${id}`); // Исправленный эндпоинт
+            await api.delete(`/api/employees/${id}`);
             fetchEmployees();
             message.success('Сотрудник удален!');
         } catch (error) {
@@ -184,9 +175,13 @@ const EmployeesAdmin = () => {
                             </Select>
                         </Form.Item>
                     )}
-                    <Form.Item name="image" label="URL фото">
+                    <Form.Item
+                        name="image"
+                        label="URL фото"
+                        rules={[{ type: 'url', message: 'Введите корректный URL (https://…)' }]}
+                    >
                         <Input
-                            placeholder="Введите ссылку на изображение"
+                            placeholder="https://example.com/photo.jpg"
                             onChange={handleImageChange}
                         />
                     </Form.Item>

@@ -15,7 +15,6 @@ const TechSupport = () => {
     const containerRef = useRef(null);
     const cardRefs = useRef([]);
 
-    // Формируем название региона или страны
     const slugPlace = regionNames[region] || regionNames[country] || 'указанном регионе';
 
     useEffect(() => {
@@ -27,40 +26,36 @@ const TechSupport = () => {
             }
 
             setLoading(true);
+            setError(null);
             try {
+                const base = (import.meta.env.VITE_API_URL || '').replace(/\/$/, '');
                 const url = region
-                    ? `${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/employees/country/${country}/region/${region}`
-                    : `${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/employees/country/${country}`;
-
-                console.log("Final API Request URL:", url);
-                console.log("Country from useParams:", country);
-                console.log("Region from useParams:", region);
-                console.log("Mapped region name:", regionNames[region]);
+                    ? `${base}/api/employees/country/${country}/region/${region}`
+                    : `${base}/api/employees/country/${country}`;
 
                 const response = await axios.get(url);
-                console.log("API Response:", response.data);
 
                 if (response.data.length === 0) {
-                    console.log("No staff found for the given region.");
-                    setError(`Сотрудники в ${slugPlace} не найдены`);
+                    const place = regionNames[region] || regionNames[country] || 'указанном регионе';
+                    setError(`Сотрудники в ${place} не найдены`);
+                    setStaff([]);
                 } else {
-                    console.log("Fetched staff data:", response.data);
                     setStaff(response.data);
                 }
             } catch (err) {
-                console.error("Ошибка при запросе к API:", err.message);
+                console.error('Ошибка при запросе к API:', err.message);
                 setError('Ошибка при загрузке данных');
             } finally {
                 setLoading(false);
             }
         };
         fetchStaff();
-    }, [country, region, slugPlace]);
+    }, [country, region]);
 
     useEffect(() => {
         if (staff.length > 0 && cardRefs.current.length > 0) {
             gsap.fromTo(
-                cardRefs.current,
+                cardRefs.current.filter(Boolean),
                 { opacity: 0, y: 50 },
                 {
                     opacity: 1,
@@ -73,7 +68,6 @@ const TechSupport = () => {
         }
     }, [staff]);
 
-    // Обработка состояния загрузки, ошибки и пустого результата
     if (loading) return <p className="loading-message">Загрузка...</p>;
     if (error) return <p className="error-message">{error}</p>;
     if (staff.length === 0) return <h2 className="page-title">Сотрудники в {slugPlace} не найдены</h2>;
@@ -90,27 +84,24 @@ const TechSupport = () => {
                 </span>
             </h2>
             <div className="staff-list">
-                {staff.map((member, index) => {
-                    console.log("Rendering staff member:", member);
-                    return (
-                        <div
-                            key={index}
-                            className="staff-card border-2 border-orange-500"
-                            ref={(el) => (cardRefs.current[index] = el)}
-                        >
-                            <img
-                                src={member.image || defaultImg}
-                                alt={member.name}
-                                className="staff-photo"
-                            />
-                            <div className="staff-info">
-                                <h2 className="staff-name">{member.name}</h2>
-                                <p className="staff-position">{member.position}</p>
-                                <p className="staff-phone">{member.contact}</p>
-                            </div>
+                {staff.map((member, index) => (
+                    <div
+                        key={member._id || index}
+                        className="staff-card border-2 border-orange-500"
+                        ref={(el) => (cardRefs.current[index] = el)}
+                    >
+                        <img
+                            src={member.image || defaultImg}
+                            alt={member.name}
+                            className="staff-photo"
+                        />
+                        <div className="staff-info">
+                            <h2 className="staff-name">{member.name}</h2>
+                            <p className="staff-position">{member.position}</p>
+                            <p className="staff-phone">{member.contact}</p>
                         </div>
-                    );
-                })}
+                    </div>
+                ))}
             </div>
         </div>
     );

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Form, Input, Button, message, Tooltip } from 'antd';
 import { LogoutOutlined } from '@ant-design/icons';
+import { login, logout } from '../api/axios';
 
 const AdminLogin = () => {
   const [loading, setLoading] = useState(false);
@@ -10,35 +11,21 @@ const AdminLogin = () => {
   const handleLogin = async (values) => {
     setLoading(true);
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/admin/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(values),
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        localStorage.setItem('adminLoggedIn', true); // Сохраняем статус авторизации
-        message.success('Успешный вход в систему!');
-        navigate('/admin'); // Переход в админку
-      } else {
-        message.error('Неверный логин или пароль!');
-      }
+      await login(values);
+      message.success('Успешный вход в систему!');
+      navigate('/admin');
     } catch (error) {
-      message.error('Произошла ошибка. Попробуйте снова.');
+      const msg = error?.response?.data?.message || 'Неверный логин или пароль!';
+      message.error(msg);
     } finally {
       setLoading(false);
     }
   };
 
-
-  // Функция для выхода из админки
-  const handleLogout = () => {
-    localStorage.removeItem('adminLoggedIn'); // Удаляем статус авторизации
+  const handleLogout = async () => {
+    await logout();
     message.success('Вы вышли из админки.');
-    navigate('/'); // Перенаправляем на страницу логина
+    navigate('/');
   };
 
   return (

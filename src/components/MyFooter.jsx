@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Layout, Row, Col, Typography, Form, Input, Button, message } from 'antd';
-import { InstagramOutlined, FacebookOutlined, XOutlined, LinkedinOutlined, TikTokOutlined, SendOutlined, YoutubeOutlined } from '@ant-design/icons';
+import { InstagramOutlined, FacebookOutlined, TikTokOutlined, YoutubeOutlined } from '@ant-design/icons';
 import axios from 'axios';
 import '../styles/Footer.css'; // Импортируем CSS стили
 
@@ -12,20 +12,24 @@ const MyFooter = () => {
     const [loading, setLoading] = useState(false);
 
     const handleSubscribe = async () => {
-        if (!email) {
+        const trimmed = email.trim();
+        if (!trimmed) {
             return message.warning('Введите email');
         }
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+        if (!emailRegex.test(trimmed)) {
+            return message.warning('Введите корректный email');
+        }
 
-        setLoading(true); // Включаем индикатор загрузки
+        setLoading(true);
         try {
-            const response = await axios.post(`${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/subscribers/subscribe`, { email });
+            const response = await axios.post(`${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/subscribers/subscribe`, { email: trimmed });
             message.success(response.data.message || 'Вы успешно подписались!');
-            setEmail(''); // Очистка поля ввода
+            setEmail('');
         } catch (error) {
             message.error(error.response?.data?.message || 'Ошибка при подписке. Попробуйте ещё раз.');
-            setEmail('')
         } finally {
-            setLoading(false); // Выключаем индикатор загрузки
+            setLoading(false);
         }
     };
 

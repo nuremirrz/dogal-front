@@ -12,19 +12,7 @@ import certificateImg5 from '../assets/images/cert5.png';
 import seeds from '../assets/images/branch-2.png'
 
 const Sertificate = () => {
-  // Массив с изображениями сертификатов
   const certificates = [certificateImg1, certificateImg2, certificateImg3, certificateImg4, certificateImg5];
-
-
-  const handlePrevSlide = () => {
-    const swiper = document.querySelector('.swiper').swiper;
-    swiper.slidePrev();
-  };
-
-  const handleNextSlide = () => {
-    const swiper = document.querySelector('.swiper').swiper;
-    swiper.slideNext();
-  };
 
   return (
     <div>

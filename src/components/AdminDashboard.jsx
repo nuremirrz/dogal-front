@@ -3,6 +3,7 @@ import { Layout, Button, Tooltip, message, Spin } from 'antd';
 import { LogoutOutlined } from '@ant-design/icons';
 import Sidebar from './Sidebar.jsx';
 import { useNavigate } from 'react-router-dom';
+import { logout } from '../api/axios';
 
 const { Content, Header } = Layout;
 
@@ -22,10 +23,10 @@ const AdminDashboard = () => {
     }, []);
 
     // Функция для выхода из админки
-    const handleLogout = useCallback(() => {
-        localStorage.removeItem('adminLoggedIn'); // Удаляем статус авторизации
+    const handleLogout = useCallback(async () => {
+        await logout();
         message.success('Вы вышли из админки.');
-        navigate('/'); // Перенаправляем на страницу логина
+        navigate('/admin/login');
     }, [navigate]);
 
     return (

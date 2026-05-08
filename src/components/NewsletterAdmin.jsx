@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { Form, Input, Button, Table, message, Spin } from "antd";
 import { DeleteOutlined } from "@ant-design/icons";
+import dayjs from "dayjs";
+import api from "../api/axios";
 
 const NewsletterAdmin = () => {
   const [loading, setLoading] = useState(false);
@@ -9,14 +11,15 @@ const NewsletterAdmin = () => {
   const [filteredSubscribers, setFilteredSubscribers] = useState([]);
   const [searchValue, setSearchValue] = useState("");
 
-  // Загрузка списка подписчиков
   const fetchSubscribers = useCallback(async () => {
     setTableLoading(true);
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/subscribers/all`);
-      const data = await response.json();
-      setSubscribers(data);
-      setFilteredSubscribers(data); // Изначально показываем всех подписчиков
+      const { data } = await api.get("/api/subscribers/all", {
+        params: { limit: 500, skip: 0 },
+      });
+      const items = Array.isArray(data) ? data : data?.items || [];
+      setSubscribers(items);
+      setFilteredSubscribers(items);
     } catch (error) {
       console.error("Ошибка загрузки подписчиков:", error);
       message.error("Не удалось загрузить подписчиков.");
@@ -29,7 +32,6 @@ const NewsletterAdmin = () => {
     fetchSubscribers();
   }, [fetchSubscribers]);
 
-  // Фильтрация подписчиков по email
   const handleSearch = useCallback(
     (e) => {
       const value = e.target.value.toLowerCase();
@@ -42,68 +44,39 @@ const NewsletterAdmin = () => {
     [subscribers]
   );
 
-  // Отправка рассылки
-  const onFinish = useCallback(
-    async (values) => {
-      setLoading(true);
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/subscribers/send-newsletter`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-              adminToken: "YOUR_ADMIN_TOKEN", // Замените на ваш токен
-            },
-            body: JSON.stringify(values),
-          }
-        );
-
-        if (response.ok) {
-          message.success("Рассылка успешно отправлена!");
-        } else {
-          const errorData = await response.json();
-          message.error(errorData.message || "Ошибка при отправке рассылки.");
-        }
-      } catch (error) {
-        message.error("Ошибка сети. Проверьте соединение.");
-      } finally {
-        setLoading(false);
+  const onFinish = useCallback(async (values) => {
+    setLoading(true);
+    try {
+      const { data } = await api.post("/api/subscribers/send-newsletter", values);
+      const sent = data?.sent ?? 0;
+      const failed = data?.failed ?? 0;
+      if (failed > 0) {
+        message.warning(`Рассылка завершена: доставлено ${sent}, ошибок ${failed}.`);
+      } else {
+        message.success(`Рассылка успешно отправлена (${sent}).`);
       }
-    },
-    []
-  );
+    } catch (error) {
+      const msg = error?.response?.data?.message || "Ошибка при отправке рассылки.";
+      message.error(msg);
+    } finally {
+      setLoading(false);
+    }
+  }, []);
 
-  // Удаление подписчика
   const handleDelete = useCallback(
     async (email) => {
       try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_URL.replace(/\/$/, "")}/api/subscribers/unsubscribe`,
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ email }),
-          }
-        );
-
-        if (response.ok) {
-          message.success("Подписчик успешно удален.");
-          fetchSubscribers(); // Обновляем список
-        } else {
-          const errorData = await response.json();
-          message.error(errorData.message || "Ошибка при удалении подписчика.");
-        }
+        await api.post("/api/subscribers/unsubscribe", { email });
+        message.success("Подписчик успешно удален.");
+        fetchSubscribers();
       } catch (error) {
-        message.error("Ошибка сети. Проверьте соединение.");
+        const msg = error?.response?.data?.message || "Ошибка при удалении подписчика.";
+        message.error(msg);
       }
     },
     [fetchSubscribers]
   );
 
-  // Мемоизация колонок таблицы
   const columns = useMemo(
     () => [
       {
@@ -115,7 +88,7 @@ const NewsletterAdmin = () => {
         title: "Дата подписки",
         dataIndex: "subscribedAt",
         key: "subscribedAt",
-        render: (text) => new Date(text).toLocaleString(),
+        render: (text) => dayjs(text).format('DD.MM.YYYY HH:mm'),
       },
       {
         title: "Действия",

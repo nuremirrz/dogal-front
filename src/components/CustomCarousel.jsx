@@ -10,18 +10,30 @@ const CustomCarousel = () => {
 
   useEffect(() => {
     const images = [sliderLogo2, sliderLogo3, sliderLogo4];
-    const loadImg = (src) => {
-      return new Promise((resolve) => {
-        const img = new Image();
-        img.src = src;
-        img.onload = () => resolve();
-      })
-    }
+    const loadImg = (src) => new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => resolve();
+      img.onerror = () => resolve();
+      img.src = src;
+    });
 
-    Promise.all(images.map(loadImg)).then(()=> {
-      setLoading(false);
-    })
-  }, [])
+    let cancelled = false;
+    const fallback = setTimeout(() => {
+      if (!cancelled) setLoading(false);
+    }, 5000);
+
+    Promise.all(images.map(loadImg)).then(() => {
+      if (!cancelled) {
+        clearTimeout(fallback);
+        setLoading(false);
+      }
+    });
+
+    return () => {
+      cancelled = true;
+      clearTimeout(fallback);
+    };
+  }, []);
     
   return (
     <div className="carousel-container">

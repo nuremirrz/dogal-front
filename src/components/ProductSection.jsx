@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Typography, Pagination, Spin, Modal } from 'antd';
+import { Pagination, Spin, Modal } from 'antd';
 import ProductList from './ProductList';
 import Sidebar from './SidebarForProducts';
 import axios from 'axios';
 import "../styles/ProductSection.css";
-
-const { Title } = Typography;
 
 const ProductSection = () => {
     const [products, setProducts] = useState([]);
@@ -40,8 +38,9 @@ const ProductSection = () => {
     }, [fetchProducts]);
 
     const uniqueCrops = [...new Set(products.flatMap(product => product.aplicableCrops))].sort((a, b) => a.localeCompare(b));
-    const minPrice = Math.min(...products.map(product => product.price));
-    const maxPrice = Math.max(...products.map(product => product.price));
+    const prices = products.map(product => product.price).filter((p) => Number.isFinite(p));
+    const minPrice = prices.length ? Math.min(...prices) : 0;
+    const maxPrice = prices.length ? Math.max(...prices) : 100000;
 
     const handleFilterChange = (newFilters) => {
         const updatedFilters = { ...filters, ...newFilters };
@@ -186,7 +185,9 @@ const ProductSection = () => {
                 >
                     {selectedProduct && (
                         <div>
-                            <img className='h-56' src={selectedProduct.image} alt="photo" />
+                            {selectedProduct.image && (
+                                <img className='h-56' src={selectedProduct.image} alt={selectedProduct.name || 'product'} />
+                            )}
                             <p><strong>Категория:</strong> {selectedProduct.category}</p>
                             {selectedProduct.activeIngredients && (
                                 <p>
