@@ -1,4 +1,3 @@
-import React from "react";
 import { Card } from "antd";
 import Navbar from "../components/Navbar";
 import MyFooter from "../components/MyFooter";
