@@ -240,7 +240,7 @@ const countryData = {
               name: "Мурзабелеков Азамат",
               position: "COO",
               email: "a.murzabelekov@dogaltrm.kg",
-              phone: "+996 504 675 970",
+              phone: "+998 90 830 71 81",
               image: myrzabelekov,
             },
           ],
