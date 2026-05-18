@@ -47,7 +47,7 @@ const links = [
   ...kyrgyzstanRegionLinks 
 ];
 
-const stream = new SitemapStream({ hostname: 'https://dogal.vercel.app/' });
+const stream = new SitemapStream({ hostname: 'https://dogaltrm.kg/' });
 
 const xml = await streamToPromise(Readable.from(links).pipe(stream));
 

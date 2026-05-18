@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://dogaltrm.kg/sitemap.xml
